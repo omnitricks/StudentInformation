@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="">
+        <label for="student-number">Student Number:</label>
+        <!--  May show error in VSCode due to return statement not used within a function body -->
+            <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" required><br>
+
+
+        <label for="student-name">Student Name:</label><br>
+            <div class="tab student-name">
+                <label for="student-surname">Surname:</label>
+                    <input type="text" name="student-surname" id="student-surname" oninput="this.value = this.value.toUpperCase()" required>
+
+                <label for="student-first-name">First Name:</label>
+                    <input type="text" name="student-first-name" id="student-first-name" oninput="this.value = this.value.toUpperCase()" required>
+
+                <label for="student-middle-initial">Middle Initial:</label>
+                    <input type="text" name="student-middle-initial" id="student-middle-initial" oninput="this.value = this.value.toUpperCase()" required>
+            </div><br>
+
+
+        <label for="student-birthdate">Student Birthdate:</label>
+            <input type="date" name="student-birthdate" id="student-birthdate" required><br>
+
+
+        <label for="student-gender">Student Gender:</label>
+            <input type="radio" id="student-gender-male" name="student-gender" value="MALE" required>
+            <label for="student-gender-male">MALE</label> 
+
+            <input type="radio" id="student-gender-female" name="student-gender" value="FEMALE">
+            <label for="student-gender-female">FEMALE</label><br>
+
+
+        <label for="student-address">Student Current Address:</label><br>
+            <div class="tab student-address">
+                <label for="student-street">Street:</label>
+                    <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" required><br>
+
+                <label for="student-town">Town:</label>
+                    <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" required><br>
+
+                <label for="student-district">District:</label>
+                    <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" required>
+            </div><br>
+
+
+        <label for="student-provincial-address">Student Provincial Address:</label><br>
+            <div class="tab student-provincial-address">
+                <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address" id="current-address" value="true">
+                <label for="vehicle1"> Same as Current Address</label><br>
+
+                <div class="hide" id="hide">
+                    <label for="student-provincial-street">Street:</label>
+                        <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" required><br>
+
+                    <label for="student-provincial-town">Town:</label>
+                        <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" required><br>
+
+                    <label for="student-provincial-district">District:</label>
+                        <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" required>
+                </div>
+            </div><br>
+
+
+        <label for="student-phone-number">Student Phone Number:</label>
+            <input type="tel" name="student-phone-number" id="student-phone-number" onkeypress="return isPhone(event);" required>
+
+        <label for="student-telephone-number">Student Telephone Number:</label>
+            <input type="tel" name="student-telephone-number" id="student-telephone-number" onkeypress="return isPhone(event);"><br>
+        
+        
+        <label for="student-email">Student Email Address:</label>
+            <input type="email" name="student-email" id="student-email" required><br>
+        
+
+        <label for="student-guardian">Student Guardian:</label><br>
+            <div class="tab student-guardian">
+                <label for="student-guardian-name">Guardian Name:</label>
+                    <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" required><br>
+
+                <label for="student-guardian-phone-number">Guardian Phone Number:</label>
+                    <input type="tel" name="student-guardian-phone-number" id="student-guardian-phone-number" onkeypress="return isPhone(event);" required>
+                
+                <label for="student-guardian-telephone-number">Guardian Telephone Number:</label>
+                    <input type="tel" name="student-guardian-telephone-number" id="student-guardian-telephone-number" onkeypress="return isPhone(event);"> 
+            </div><br>
+
+
+        <label for="student-remark">Remark:</label>
+            <!-- <input type="text" name="student-remark" id="student-remark" oninput="this.value = this.value.toUpperCase()"><br> -->
+            <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()"></textarea><br>
+
+
+        <label for="student-sponsor">Sponsor:</label>
+            <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()"><br>
+
+            
+        <label for="student-hs-address">Student HighSchool Address:</label>
+            <!-- <input type="text" name="student-hs-address" id="student-hs-address" oninput="this.value = this.value.toUpperCase()"><br> -->
+            <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()"></textarea><br>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
