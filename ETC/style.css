@@ -21,3 +21,7 @@ input{
 .tab{
     padding-left: 2.5em;
 }
+
+.error {
+    color: var(--red-9);
+}
