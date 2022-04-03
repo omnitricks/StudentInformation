@@ -5,8 +5,6 @@
     include('config.php');
 
     $added = false;
-    $Error = "";
-    $studentNumberError = $studentNameError = "";
     $errors = array();
 
     //Add  new student code 
@@ -141,6 +139,7 @@
         
         <link rel="stylesheet" href="https://unpkg.com/open-props"/>
         <link rel="stylesheet" href="../ETC/style.css">
+        <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
 
@@ -175,130 +174,153 @@
         ?>
 
 
-
-        <!-- Registration Form -->
-        <form method="post"  enctype="multipart/form-data" id="studentInformation">
-            <label for="student-number">Student Number:</label>
-            <!--  May show error in VSCode due to return statement not used within a function body -->
-                <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255" value="<?php echo isset($_POST['student-number']) ? $_POST['student-number'] : ''; ?>" require>
-
-                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNumberError']) ? $errors['studentNumberError'] : ''; ?></span><br>
+    <a href="#" id="create" class="create">Create</a>
 
 
-            <label for="student-name">Student Name:</label>
+    <div class="bg-modal">
+        <div class="modal-contents">
 
-            <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNameError']) ? $errors['studentNameError'] : ''; ?></span><br>
-                <div class="tab student-name">
-                    <label for="student-surname">Surname:</label>
-                        <input type="text" name="student-surname" id="student-surname" oninput="this.value = this.value.toUpperCase()" maxlength="50" value="<?php echo isset($_POST['student-surname']) ? $_POST['student-surname'] : ''; ?>">
+            <div class="close"><i class="fa-solid fa-xmark"></i></div>
 
-                    <label for="student-first-name">First Name:</label>
-                        <input type="text" name="student-first-name" id="student-first-name" oninput="this.value = this.value.toUpperCase()" maxlength="50" value="<?php echo isset($_POST['student-first-name']) ? $_POST['student-first-name'] : ''; ?>">
+            <!-- Registration Form -->
+            <form method="post"  enctype="multipart/form-data" id="studentInformation">
+                <label for="student-number">Student Number:</label>
+                <!--  May show error in VSCode due to return statement not used within a function body -->
+                    <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255" value="<?php echo isset($_POST['student-number']) ? $_POST['student-number'] : ''; ?>" require>
 
-                    <label for="student-middle-initial">Middle Initial:</label>
-                        <input type="text" name="student-middle-initial" id="student-middle-initial" oninput="this.value = this.value.toUpperCase()" maxlength="5" value="<?php echo isset($_POST['student-middle-initial']) ? $_POST['student-middle-initial'] : ''; ?>">
-                </div><br>
-
-
-            <label for="student-birthdate">Student Birthdate:</label>
-                <input type="date" name="student-birthdate" id="student-birthdate" value="<?php echo isset($_POST['student-birthdate']) ? $_POST['student-birthdate'] : ''; ?>">
-
-                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentBirthdateError']) ? $errors['studentBirthdateError'] : ''; ?></span><br>
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNumberError']) ? $errors['studentNumberError'] : ''; ?></span><br>
 
 
-            <label for="student-gender">Student Gender:</label>
-                <input type="radio" id="student-gender-male" name="student-gender" value="MALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "MALE") { echo ' checked="checked"'; } ?>/>
-                <label for="student-gender-male">MALE</label> 
+                <label for="student-name">Student Name:</label>
 
-                <input type="radio" id="student-gender-female" name="student-gender" value="FEMALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "FEMALE") { echo ' checked="checked"'; } ?>/>
-                <label for="student-gender-female">FEMALE</label>
+                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNameError']) ? $errors['studentNameError'] : ''; ?></span><br>
+                    <div class="tab student-name">
+                        <label for="student-surname">Surname:</label>
+                            <input type="text" name="student-surname" id="student-surname" oninput="this.value = this.value.toUpperCase()" maxlength="50" value="<?php echo isset($_POST['student-surname']) ? $_POST['student-surname'] : ''; ?>">
 
-                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGenderError']) ? $errors['studentGenderError'] : ''; ?></span><br>
+                        <label for="student-first-name">First Name:</label>
+                            <input type="text" name="student-first-name" id="student-first-name" oninput="this.value = this.value.toUpperCase()" maxlength="50" value="<?php echo isset($_POST['student-first-name']) ? $_POST['student-first-name'] : ''; ?>">
 
-
-            <label for="student-address">Student Current Address:</label>
-
-            <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentAddressError']) ? $errors['studentAddressError'] : ''; ?></span><br>
-                <div class="tab student-address">
-                    <label for="student-street">Street:</label>
-                        <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-street']) ? $_POST['student-street'] : ''; ?>"><br>
-
-                    <label for="student-town">Town:</label>
-                        <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="150" value="<?php echo isset($_POST['student-town']) ? $_POST['student-town'] : ''; ?>"><br>
-
-                    <label for="student-district">District:</label>
-                        <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-district']) ? $_POST['student-district'] : ''; ?>">
-                </div><br>
+                        <label for="student-middle-initial">Middle Initial:</label>
+                            <input type="text" name="student-middle-initial" id="student-middle-initial" oninput="this.value = this.value.toUpperCase()" maxlength="5" value="<?php echo isset($_POST['student-middle-initial']) ? $_POST['student-middle-initial'] : ''; ?>">
+                    </div><br>
 
 
-            <label for="student-provincial-address">Student Provincial Address:</label>
+                <label for="student-birthdate">Student Birthdate:</label>
+                    <input type="date" name="student-birthdate" id="student-birthdate" value="<?php echo isset($_POST['student-birthdate']) ? $_POST['student-birthdate'] : ''; ?>">
 
-            <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentProvincialAddressError']) ? $errors['studentProvincialAddressError'] : ''; ?></span><br>
-                <div class="tab student-provincial-address">
-                    <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address" id="current-address" value="true">
-                    <label for="vehicle1"> Same as Current Address</label><br>
-
-                    <div class="hide" id="hide">
-                        <label for="student-provincial-street">Street:</label>
-                            <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-provincial-street']) ? $_POST['student-provincial-street'] : ''; ?>"><br>
-
-                        <label for="student-provincial-town">Town:</label>
-                            <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="150" value="<?php echo isset($_POST['student-provincial-town']) ? $_POST['student-provincial-town'] : ''; ?>"><br>
-
-                        <label for="student-provincial-district">District:</label>
-                            <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-provincial-district']) ? $_POST['student-provincial-district'] : ''; ?>">
-                    </div>
-                </div><br>
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentBirthdateError']) ? $errors['studentBirthdateError'] : ''; ?></span><br>
 
 
-            <label for="student-phone-number">Student Phone Number:</label>
-                <input type="tel" name="student-phone-number" id="student-phone-number" onkeypress="return isPhone(event);" maxlength="15" value="<?php echo isset($_POST['student-phone-number']) ? $_POST['student-phone-number'] : ''; ?>">
+                <label for="student-gender">Student Gender:</label>
+                    <input type="radio" id="student-gender-male" name="student-gender" value="MALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "MALE") { echo ' checked="checked"'; } ?>/>
+                    <label for="student-gender-male">MALE</label> 
 
-            <label for="student-telephone-number">Student Telephone Number:</label>
-                <input type="tel" name="student-telephone-number" id="student-telephone-number" onkeypress="return isPhone(event);" maxlength="10" value="<?php echo isset($_POST['student-telephone-number']) ? $_POST['student-telephone-number'] : ''; ?>">
+                    <input type="radio" id="student-gender-female" name="student-gender" value="FEMALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "FEMALE") { echo ' checked="checked"'; } ?>/>
+                    <label for="student-gender-female">FEMALE</label>
 
-                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentPhoneNumberError']) ? $errors['studentPhoneNumberError'] : ''; ?></span><br>
-            
-            
-            <label for="student-email">Student Email Address:</label>
-                <input type="email" name="student-email" id="student-email" maxlength="50" value="<?php echo isset($_POST['student-email']) ? $_POST['student-email'] : ''; ?>">
-
-                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentEmailError']) ? $errors['studentEmailError'] : ''; ?></span><br>
-            
-
-            <label for="student-guardian">Student Guardian:</label>
-
-            <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGuardianError']) ? $errors['studentGuardianError'] : ''; ?></span><br>
-                <div class="tab student-guardian">
-                    <label for="guardian-name">Guardian Name:</label>
-                        <input type="text" name="guardian-name" id="guardian-name" oninput="this.value = this.value.toUpperCase()" maxlength="100" value="<?php echo isset($_POST['guardian-name']) ? $_POST['guardian-name'] : ''; ?>"><br>
-
-                    <label for="guardian-phone-number">Guardian Phone Number:</label>
-                        <input type="tel" name="guardian-phone-number" id="guardian-phone-number" onkeypress="return isPhone(event);" maxlength="15" value="<?php echo isset($_POST['guardian-phone-number']) ? $_POST['guardian-phone-number'] : ''; ?>">
-                    
-                    <label for="guardian-telephone-number">Guardian Telephone Number:</label>
-                        <input type="tel" name="guardian-telephone-number" id="guardian-telephone-number" onkeypress="return isPhone(event);" maxlength="10" value="<?php echo isset($_POST['guardian-telephone-number']) ? $_POST['guardian-telephone-number'] : ''; ?>"> 
-                </div><br>
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGenderError']) ? $errors['studentGenderError'] : ''; ?></span><br>
 
 
-            <label for="student-remark">Remark:</label>
-                <!-- <input type="text" name="student-remark" id="student-remark" oninput="this.value = this.value.toUpperCase()"><br> -->
-                <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-remark']) ? $_POST['student-remark'] : ''; ?>"></textarea><br>
+                <label for="student-address">Student Current Address:</label>
+
+                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentAddressError']) ? $errors['studentAddressError'] : ''; ?></span><br>
+                    <div class="tab student-address">
+                        <label for="student-street">Street:</label>
+                            <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-street']) ? $_POST['student-street'] : ''; ?>"><br>
+
+                        <label for="student-town">Town:</label>
+                            <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="150" value="<?php echo isset($_POST['student-town']) ? $_POST['student-town'] : ''; ?>"><br>
+
+                        <label for="student-district">District:</label>
+                            <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-district']) ? $_POST['student-district'] : ''; ?>">
+                    </div><br>
 
 
-            <label for="student-sponsor">Sponsor:</label>
-                <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()" maxlength="100" value="<?php echo isset($_POST['student-sponsor']) ? $_POST['student-sponsor'] : ''; ?>"><br>
+                <label for="student-provincial-address">Student Provincial Address:</label>
 
+                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentProvincialAddressError']) ? $errors['studentProvincialAddressError'] : ''; ?></span><br>
+                    <div class="tab student-provincial-address">
+                        <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address" id="current-address" value="true">
+                        <label for="vehicle1"> Same as Current Address</label><br>
+
+                        <div class="hide" id="hide">
+                            <label for="student-provincial-street">Street:</label>
+                                <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-provincial-street']) ? $_POST['student-provincial-street'] : ''; ?>"><br>
+
+                            <label for="student-provincial-town">Town:</label>
+                                <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="150" value="<?php echo isset($_POST['student-provincial-town']) ? $_POST['student-provincial-town'] : ''; ?>"><br>
+
+                            <label for="student-provincial-district">District:</label>
+                                <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-provincial-district']) ? $_POST['student-provincial-district'] : ''; ?>">
+                        </div>
+                    </div><br>
+
+
+                <label for="student-phone-number">Student Phone Number:</label>
+                    <input type="tel" name="student-phone-number" id="student-phone-number" onkeypress="return isPhone(event);" maxlength="15" value="<?php echo isset($_POST['student-phone-number']) ? $_POST['student-phone-number'] : ''; ?>">
+
+                <label for="student-telephone-number">Student Telephone Number:</label>
+                    <input type="tel" name="student-telephone-number" id="student-telephone-number" onkeypress="return isPhone(event);" maxlength="10" value="<?php echo isset($_POST['student-telephone-number']) ? $_POST['student-telephone-number'] : ''; ?>">
+
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentPhoneNumberError']) ? $errors['studentPhoneNumberError'] : ''; ?></span><br>
                 
-            <label for="student-hs-address">Student HighSchool Address:</label>
-                <!-- <input type="text" name="student-hs-address" id="student-hs-address" oninput="this.value = this.value.toUpperCase()"><br> -->
-                <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-hs-address']) ? $_POST['student-hs-address'] : ''; ?>"></textarea><br>
+                
+                <label for="student-email">Student Email Address:</label>
+                    <input type="email" name="student-email" id="student-email" maxlength="50" value="<?php echo isset($_POST['student-email']) ? $_POST['student-email'] : ''; ?>">
 
-            <input type="submit" name="submit" value="Submit">
-        </form>
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentEmailError']) ? $errors['studentEmailError'] : ''; ?></span><br>
+                
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+                <label for="student-guardian">Student Guardian:</label>
+
+                <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGuardianError']) ? $errors['studentGuardianError'] : ''; ?></span><br>
+                    <div class="tab student-guardian">
+                        <label for="guardian-name">Guardian Name:</label>
+                            <input type="text" name="guardian-name" id="guardian-name" oninput="this.value = this.value.toUpperCase()" maxlength="100" value="<?php echo isset($_POST['guardian-name']) ? $_POST['guardian-name'] : ''; ?>"><br>
+
+                        <label for="guardian-phone-number">Guardian Phone Number:</label>
+                            <input type="tel" name="guardian-phone-number" id="guardian-phone-number" onkeypress="return isPhone(event);" maxlength="15" value="<?php echo isset($_POST['guardian-phone-number']) ? $_POST['guardian-phone-number'] : ''; ?>">
+                        
+                        <label for="guardian-telephone-number">Guardian Telephone Number:</label>
+                            <input type="tel" name="guardian-telephone-number" id="guardian-telephone-number" onkeypress="return isPhone(event);" maxlength="10" value="<?php echo isset($_POST['guardian-telephone-number']) ? $_POST['guardian-telephone-number'] : ''; ?>"> 
+                    </div><br>
+
+
+                <label for="student-remark">Remark:</label>
+                    <!-- <input type="text" name="student-remark" id="student-remark" oninput="this.value = this.value.toUpperCase()"><br> -->
+                    <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-remark']) ? $_POST['student-remark'] : ''; ?>"></textarea><br>
+
+
+                <label for="student-sponsor">Sponsor:</label>
+                    <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()" maxlength="100" value="<?php echo isset($_POST['student-sponsor']) ? $_POST['student-sponsor'] : ''; ?>"><br>
+
+                    
+                <label for="student-hs-address">Student HighSchool Address:</label>
+                    <!-- <input type="text" name="student-hs-address" id="student-hs-address" oninput="this.value = this.value.toUpperCase()"><br> -->
+                    <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255" value="<?php echo isset($_POST['student-hs-address']) ? $_POST['student-hs-address'] : ''; ?>"></textarea><br>
+
+                <input type="submit" name="submit" id="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+        <!-- Prevents Modal from closing, when Error is encountered while creating -->
+        <?php 
+            if ($errors) {
+                echo '<script>
+                    document.querySelector(".bg-modal").style.display = "flex";
+                </script>';
+            } else {
+                echo '<script>
+                    document.querySelector(".bg-modal").style.display = "none";
+                </script>';
+            }
+        ?>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="../ETC/script.js"></script>
+        <!-- Prevents resubmission of form data when refreshing -->
         <script>
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );

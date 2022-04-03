@@ -39,3 +39,13 @@ function isPhone(evt){
 
     return true;
 }
+
+
+
+document.getElementById('create').addEventListener("click", function() {
+	document.querySelector('.bg-modal').style.display = "flex";
+});
+
+document.querySelector('.close').addEventListener("click", function() {
+	document.querySelector('.bg-modal').style.display = "none";
+});
