@@ -1,4 +1,5 @@
 <?php
+    session_start();
     /* Attempt to connect to MySQL database */
     $conn = new mysqli('localhost', 'root', '', 'test');
     

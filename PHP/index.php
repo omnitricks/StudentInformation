@@ -1,11 +1,16 @@
 <!-- Insert Form Data to Database -->
 <?php
+?>
+<!-- <?php
     session_start();
     // database connection
     include('config.php');
 
+    //Flag for Alerts refer to line 168
     $added = false;
     $duplicate = false;
+
+    //Erros Stored in single array
     $errors = array();
 
     //Add  new student code 
@@ -108,6 +113,7 @@
 
         if(isset($_POST['submit']) && empty($errors)){
 
+            //Check for Student-Number duplicate in database
             $dup = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'");
 
             if(mysqli_num_rows($dup)>0){
@@ -131,16 +137,8 @@
 
             }
         }
-
-        // $stmt = $conn->prepare("INSERT INTO `student-information`(`studentNumber`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentStreet`, `studentTown`, `studentDistrict`, `studentProvincialStreet`, `studentProvincialTown`, `studentProvincialDistrict`, `studentPhoneNumber`, `studentTelephoneNumber`, `studentEmail`, `guardianName`, `guardianPhoneNumber`, `guardianTelephoneNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        // $stmt->bind_param("sssssssssssssssssssss", $studentNumber,  $studentSurname, $studentFirstName, $studentMiddleIniital, $studentBirthdate, $studentGender,  $studentStreet, $studentTown, $studentDistrict, $studentProvincialStreet, $studentProvincialTown, $studentProvincialDistrict, $studentPhoneNumber,  $studentTelephoneNumber, $studentEmail, $guardianName, $guardianPhoneNumber, $guardianTelephoneNumber, $studentRemark, $studentSponsor, $studentHighSchoolAddress);
-        // $stmt->execute();
-        // echo "Registration Successful";
-
-        
-
     }
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -151,15 +149,14 @@
         <title>Student Information</title>
         
         <link rel="stylesheet" href="https://unpkg.com/open-props"/>
-        <link rel="stylesheet" href="../ETC/style.css">
+        <link rel="stylesheet" href="../CSS/style.css">
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
-
         <!-- Search Bar with Drop Down Box for Class Selection -->
         <div class="searchbar">
             <form action="search.php" method="get">
-                <select name="data-filter" id="data-filter">
+                <select name="data-filter" id="data-filter" class="data-filter">
                     <option value="">Select Filter</option>
                     <option value="studentNumber">Student Number</option>
                     <option value="studentSurname">Surname</option>
@@ -167,52 +164,89 @@
                     <option value="student-provincial-district">Province</option>
                     <option value="student-district">City</option>
                 </select>
-                <input type="search" name="data-searchbox" id="data-searchbox" oninput="this.value = this.value.toUpperCase()">
-                <input type="submit" value="Search">
+                <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
+                <button type="submit" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>    
         </div><br>
 
+
         <!-- Alert -->
         <?php
-            if($added){
-                echo "
-                    <div class='alert-success' style='background-color: var(--green-1);
-                    border-left: 5px solid var(--green-3);'>
-                        <h3 style='padding-left: 5px;'>
-                            Student Data has been Successfully Added.
-                        </h3>
-                    </div><br>
-                ";
+            if(isset($_SESSION['status'])){
+                echo 
+                "<div class='alert-success' style='background-color: var(--green-1); border-left: 5px solid var(--green-3);'>
+                    <h3 style='padding-left: 5px;'>"
+                        . $_SESSION['status'] .
+                    "</h3>
+                </div><br>";
+                unset($_SESSION['status']);
             }
         ?>
 
         <?php
-            if($duplicate){
-                echo "
-                    <div class='alert-error' style='background-color: var(--red-1);
-                    border-left: 5px solid var(--red-3);'>
-                        <h3 style='padding-left: 5px;'>
-                            Duplicate Data Entered.
-                        </h3>
-                    </div><br>
-                ";
+            if(isset($_SESSION['insert'])){
+                echo 
+                "<div class='alert-success' style='background-color: var(--green-1); border-left: 5px solid var(--green-3);'>
+                    <h3 style='padding-left: 5px;'>"
+                        . $_SESSION['insert'] .
+                    "</h3>
+                </div><br>";
+                unset($_SESSION['insert']);
+            }
+        ?>
+
+        <?php
+            if(isset($_SESSION['duplicateedit'])){
+                echo 
+                "<div class='alert-error' style='background-color: var(--red-1); border-left: 5px solid var(--red-3);'>
+                    <h3 style='padding-left: 5px;'>"
+                        . $_SESSION['duplicateedit'] .
+                    "</h3>
+                </div><br>";
+                unset($_SESSION['duplicateedit']);
+            }
+        ?>
+
+        <?php
+            if(isset($_SESSION['duplicate'])){
+                echo 
+                "<div class='alert-error' style='background-color: var(--red-1); border-left: 5px solid var(--red-3);'>
+                    <h3 style='padding-left: 5px;'>"
+                        . $_SESSION['duplicate'] .
+                    "</h3>
+                </div><br>";
+                unset($_SESSION['duplicate']);
+            }
+        ?>
+
+        <?php
+            if(isset($_SESSION['delete'])){
+                echo 
+                "<div class='alert-error' style='background-color: var(--red-1); border-top: 100px; border-left: 5px solid var(--red-3);'>
+                    <h3 style='padding-left: 5px;'>"
+                        . $_SESSION['delete'] .
+                    "</h3>
+                </div><br>";
+                unset($_SESSION['delete']);
             }
         ?>
 
 
+        <!-- Insert student information via popup modal -->
         <a href="#" id="create" class="create">Create</a>
 
 
+        <!-- Insert Modal -->
         <div class="bg-modal">
             <div class="modal-contents">
 
                 <div class="close"><i class="fa-solid fa-xmark"></i></div>
 
                 <!-- Registration Form -->
-                <form method="post"  enctype="multipart/form-data" id="studentInformation">
+                <form id="studentInformation">
                     <label for="student-number">Student Number:</label>
-                    <!--  May show error in VSCode due to return statement not used within a function body -->
-                        <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255" value="<?php echo isset($_POST['student-number']) ? $_POST['student-number'] : ''; ?>" require>
+                        <!--  May show error in VSCode due to return statement not used within a function body -->
+                        <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255" value="<?php echo isset($_POST['student-number']) ? $_POST['student-number'] : ''; ?>">
 
                         <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNumberError']) ? $errors['studentNumberError'] : ''; ?></span><br>
 
@@ -268,7 +302,7 @@
                     <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentProvincialAddressError']) ? $errors['studentProvincialAddressError'] : ''; ?></span><br>
                         <div class="tab student-provincial-address">
                             <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address" id="current-address" value="true">
-                            <label for="vehicle1"> Same as Current Address</label><br>
+                            <label for="current-address"> Same as Current Address</label><br>
 
                             <div class="hide" id="hide">
                                 <label for="student-provincial-street">Street:</label>
@@ -314,7 +348,6 @@
 
 
                     <label for="student-remark">Remark:</label>
-                        <!-- <input type="text" name="student-remark" id="student-remark" oninput="this.value = this.value.toUpperCase()"><br> -->
                         <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"><?php echo isset($_POST['student-remark']) ? $_POST['student-remark'] : ''; ?></textarea><br>
 
 
@@ -323,13 +356,15 @@
 
                         
                     <label for="student-hs-address">Student HighSchool Address:</label>
-                        <!-- <input type="text" name="student-hs-address" id="student-hs-address" oninput="this.value = this.value.toUpperCase()"><br> -->
                         <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"><?php echo isset($_POST['student-hs-address']) ? $_POST['student-hs-address'] : ''; ?></textarea><br>
 
-                    <input type="submit" name="submit" id="submit" value="Submit">
+                    <!-- <input type="submit" name="submit" id="submit" value="Submit"> -->
+                    <button id="submit" class="submit">Submit</button>
                 </form>
             </div>
         </div>
+
+
         <!-- Prevents Modal from closing, when Error is encountered while creating -->
         <?php 
             if ($errors) {
@@ -342,6 +377,7 @@
                 </script>';
             }
         ?>
+
 
         <!-- Table View -->
         <div class="tableContainer">
@@ -375,7 +411,7 @@
                     $run_data = mysqli_query($conn,$get_data);
 
                     while($row = mysqli_fetch_array($run_data)){
-                        // Combines Surname, First Name, & Middle Initial
+                        // Combines data
                         $studentName = $row['studentSurname'] . ', ' . $row['studentFirstName'] . ' ' . $row['studentMiddleInitial'] . '.';
                         $studentAddress = $row['studentStreet'] . ' ' . $row['studentTown'] . ' ' . $row['studentDistrict'];
                         $studentProvincialAddress = $row['studentProvincialStreet'] . ' ' . $row['studentProvincialTown'] . ' ' . $row['studentProvincialDistrict'];
@@ -425,10 +461,9 @@
         </div>
         
 
-
+        <!-- Popup Modal Delete Confirmation -->
         <div class="bg-modal-delete">
             <div class="modal-contents-delete">
-
                 <table class="popdel" id="popdel">
                     <thead>
                         <tr>
@@ -437,8 +472,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><a href="#" id="cancel" class="edit">No</a></td>
-                            <td><a href="#" id="" class="delete confirm" data-id="id" data-toggle="modal" data-target="#confirm_delete_modal">Yes</a></td>
+                            <td><a href="#" id="cancel" class="cancel">No</a></td>
+                            <td><a href="#" id="" class="confirm" data-id="id" data-toggle="modal" data-target="#confirm_delete_modal">Yes</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -447,16 +482,146 @@
 
 
 
+        <!-- Edit Modal -->
+        <div class="bg-modal-edit">
+            <div class="modal-contents-edit">
+
+                <div class="close"><i class="fa-solid fa-xmark"></i></div>
+
+                <h1>Update</h1>
+                <!-- Registration Form -->
+                <form id="studentInformation-edit">
+
+                    <input type="hidden" name="id-edit" id="id-edit">
+
+                    <label for="student-number-edit">Student Number:</label>
+                        <!--  May show error in VSCode due to return statement not used within a function body -->
+                        <input type="tel" name="student-number-edit" id="student-number-edit" onkeypress="return isNumberKey(event);" maxlength="255">
+
+                        <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNumberError']) ? $errors['studentNumberError'] : ''; ?></span><br>
+
+
+                    <label for="student-name-edit">Student Name:</label>
+
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentNameError']) ? $errors['studentNameError'] : ''; ?></span><br>
+
+                        <div class="tab student-name-edit">
+                            <label for="student-surname-edit">Surname:</label>
+                                <input type="text" name="student-surname-edit" id="student-surname-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50">
+
+                            <label for="student-first-name-edit">First Name:</label>
+                                <input type="text" name="student-first-name-edit" id="student-first-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50">
+
+                            <label for="student-middle-initial-edit">Middle Initial:</label>
+                                <input type="text" name="student-middle-initial-edit" id="student-middle-initial-edit" oninput="this.value = this.value.toUpperCase()" maxlength="5">
+                        </div><br>
+
+
+                    <label for="student-birthdate-edit">Student Birthdate:</label>
+                        <input type="date" name="student-birthdate-edit" id="student-birthdate-edit">
+
+                        <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentBirthdateError']) ? $errors['studentBirthdateError'] : ''; ?></span><br>
+
+
+                    <label for="student-gender">Student Gender:</label>
+                        <input type="radio" id="student-gender-male" name="student-gender-edit" value="MALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "MALE") { echo ' checked="checked"'; } ?>/>
+                        <label for="student-gender-male">MALE</label> 
+
+                        <input type="radio" id="student-gender-female" name="student-gender-edit" value="FEMALE" <?php if(isset($_POST['student-gender']) && $_POST['student-gender'] == "FEMALE") { echo ' checked="checked"'; } ?>/>
+                        <label for="student-gender-female">FEMALE</label>
+
+                        <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGenderError']) ? $errors['studentGenderError'] : ''; ?></span><br>
+
+
+                    <label for="student-address-edit">Student Current Address:</label>
+
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentAddressError']) ? $errors['studentAddressError'] : ''; ?></span><br>
+                        <div class="tab student-address-edit">
+                            <label for="student-street-edit">Street:</label>
+                                <input type="text" name="student-street-edit" id="student-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+
+                            <label for="student-town-edit">Town:</label>
+                                <input type="text" name="student-town-edit" id="student-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-district-edit">District:</label>
+                                <input type="text" name="student-district-edit" id="student-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                        </div><br>
+
+
+                    <label for="student-provincial-address-edit">Student Provincial Address:</label>
+
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentProvincialAddressError']) ? $errors['studentProvincialAddressError'] : ''; ?></span><br>
+                        <div class="tab student-provincial-address-edit">
+                            <input type="checkbox" onclick="SameAsCurrentEdit(this)" name="current-address-edit" id="current-address-edit" value="true">
+                            <label for="current-address-edit"> Same as Current Address</label><br>
+
+                            <div class="hide" id="hide">
+                                <label for="student-provincial-street-edit">Street:</label>
+                                    <input type="text" name="student-provincial-street-edit" id="student-provincial-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+
+                                <label for="student-provincial-town-edit">Town:</label>
+                                    <input type="text" name="student-provincial-town-edit" id="student-provincial-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                                <label for="student-provincial-district-edit">District:</label>
+                                    <input type="text" name="student-provincial-district-edit" id="student-provincial-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                            </div>
+                        </div><br>
+
+
+                    <label for="student-phone-number-edit">Student Phone Number:</label>
+                        <input type="tel" name="student-phone-number-edit" id="student-phone-number-edit" onkeypress="return isPhone(event);" maxlength="15">
+
+                    <label for="student-telephone-number-edit">Student Telephone Number:</label>
+                        <input type="tel" name="student-telephone-number-edit" id="student-telephone-number-edit" onkeypress="return isPhone(event);" maxlength="10">
+
+                        <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentPhoneNumberError']) ? $errors['studentPhoneNumberError'] : ''; ?></span><br>
+                    
+                    
+                    <label for="student-email-edit">Student Email Address:</label>
+                        <input type="email" name="student-email-edit" id="student-email-edit" maxlength="50">
+
+                        <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentEmailError']) ? $errors['studentEmailError'] : ''; ?></span><br>
+                    
+
+                    <label for="student-guardian-edit">Student Guardian:</label>
+
+                    <span class="error" style="color: var(--red-9);"><?php echo isset($errors['studentGuardianError']) ? $errors['studentGuardianError'] : ''; ?></span><br>
+                        <div class="tab student-guardian-edit">
+                            <label for="guardian-name-edit">Guardian Name:</label>
+                                <input type="text" name="guardian-name-edit" id="guardian-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="guardian-phone-number-edit">Guardian Phone Number:</label>
+                                <input type="tel" name="guardian-phone-number-edit" id="guardian-phone-number-edit" onkeypress="return isPhone(event);" maxlength="15">
+                            
+                            <label for="guardian-telephone-number-edit">Guardian Telephone Number:</label>
+                                <input type="tel" name="guardian-telephone-number-edit" id="guardian-telephone-number-edit" onkeypress="return isPhone(event);" maxlength="10"> 
+                        </div><br>
+
+
+                    <label for="student-remark-edit">Remark:</label>
+                        <textarea name="student-remark-edit" id="student-remark-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+
+                    <label for="student-sponsor-edit">Sponsor:</label>
+                        <input type="text" name="student-sponsor-edit" id="student-sponsor-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                        
+                    <label for="student-hs-address-edit">Student HighSchool Address:</label>
+                        <textarea name="student-hs-address-edit" id="student-hs-address-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+                    <button name="update" id="update">update</button>
+                    <!-- <input type="submit" name="update" id="update" value="update"> -->
+                </form>
+            </div>
+        </div>
+
+
 
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="../ETC/script.js"></script>
+        <script src="../JS/script.js"></script>
         <!-- Prevents resubmission of form data when refreshing -->
         <script>
-            // if ( window.history.replaceState ) {
-            //     window.history.replaceState( null, null, window.location.href );
-            // }
-
-            // jQuery Version of Prevent Resubmission of Form Data when Refreshing  (JS Version Above)
+            // jQuery Version of Prevent Resubmission of Form Data when Refreshing
             $(document).ready(function(){
                 window.history.replaceState("","",window.location.href)
             });
