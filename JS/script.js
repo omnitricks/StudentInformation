@@ -10,7 +10,7 @@ function isNumberKey(evt){
 }
 
 // When checkbox is ticked, copy current address to provincial address (Create Modal)
-function SameAsCurrent(cb) {
+function SameAsCurrentCreate(cb) {
     var street = cb.checked ? document.getElementById("student-street").value : '';
     var town = cb.checked ? document.getElementById("student-town").value : '';
     var district = cb.checked ? document.getElementById("student-district").value : '';
@@ -53,9 +53,9 @@ $(".create").click(function(){
 });
 
 $('.submit').click(function(){
-    var $registerForm = $('#studentInformationCreate');
-    if($registerForm.length){
-        $registerForm.validate({
+    var $registerFormCreate = $('#studentInformationCreate');
+    if($registerFormCreate.length){
+        $registerFormCreate.validate({
             rules:{
                 "student-number":{
                     required: true
@@ -100,7 +100,8 @@ $('.submit').click(function(){
                     required: false
                 },
                 "student-email":{
-                    required: true
+                    required: true,
+                    email: true
                 },
                 "guardian-name":{
                     required: true
@@ -162,7 +163,8 @@ $('.submit').click(function(){
                     required: ' Student Phone Number is required'
                 },
                 "student-email":{
-                    required: ' Student Email is required'
+                    required: ' Student Email is required',
+                    email: " Student Email is invalid"
                 },
                 "guardian-name":{
                     required: ' Guardian Details is required'
@@ -199,11 +201,11 @@ $('.submit').click(function(){
         })
     }
 
-    var formData1 = $('#studentInformationCreate').serialize();
+    var formDataCreate = $('#studentInformationCreate').serialize();
     $.ajax({
         url: 'insert.php',
         type: 'POST',
-        data: formData1,
+        data: formDataCreate,
         error: function() {
             alert('Something is wrong');
         },
@@ -217,7 +219,6 @@ $(".close").click(function(){
     $(".bg-modal").hide();
     $('body').css('overflow', 'auto');
 });
-
 
 
 
@@ -302,9 +303,9 @@ $('.edit').click(function(){
 });
 
 $('.update').click(function(){
-    var $registerForm1 = $('#studentInformationEdit');
-    if($registerForm1.length){
-        $registerForm1.validate({
+    var $registerFormEdit = $('#studentInformationEdit');
+    if($registerFormEdit.length){
+        $registerFormEdit.validate({
             rules:{
                 "student-number-edit":{
                     required: true
@@ -349,7 +350,8 @@ $('.update').click(function(){
                     required: false
                 },
                 "student-email-edit":{
-                    required: true
+                    required: true,
+                    email: true
                 },
                 "guardian-name-edit":{
                     required: true
@@ -411,7 +413,8 @@ $('.update').click(function(){
                     required: ' Student Phone Number is required'
                 },
                 "student-email-edit":{
-                    required: ' Student Email is required'
+                    required: ' Student Email is required',
+                    email: " Student Email is invalid"
                 },
                 "guardian-name-edit":{
                     required: ' Guardian Details is required'
@@ -448,11 +451,11 @@ $('.update').click(function(){
         })
     }
 
-    var formData = $('#studentInformationEdit').serialize();
+    var formDataEdit = $('#studentInformationEdit').serialize();
     $.ajax({
         url: 'update.php',
         type: 'GET',
-        data: formData,
+        data: formDataEdit,
         error: function() {
             alert('Something is wrong');
         },

@@ -112,9 +112,7 @@
         $dupcheck = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber' AND `id`='$id'");
 
         if(mysqli_num_rows($dup) > 0  &&  mysqli_num_rows($dup) !=  mysqli_num_rows($dupcheck)){
-
-            $_SESSION['duplicateedit'] = "Data not Updated, Student Number already in use";
-            header('location:index.php');
+            $_SESSION['duplicate-edit'] = "Data not Updated, Student Number already in use";
 
         } else{
 
@@ -123,8 +121,8 @@
             $run_data = mysqli_query($conn,$update);
 
             if($run_data){
-                $_SESSION['status'] = "Data Updated Successfully";
-                header('location:index.php');
+                $_SESSION['update-success'] = "Data Updated Successfully";
+                
             }else{
 
             }

@@ -8,7 +8,7 @@
     $run_data = mysqli_query($conn,$delete);
 
     if($run_data){
-        $_SESSION['delete'] = "Data Deleted Successfully";
+        $_SESSION['delete-success'] = "Data Deleted Successfully";
     }else{
 
     }

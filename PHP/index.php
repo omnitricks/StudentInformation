@@ -1,144 +1,7 @@
-<!-- Insert Form Data to Database -->
 <?php
-?>
-<!-- <?php
-    session_start();
     // database connection
     include('config.php');
-
-    //Flag for Alerts refer to line 168
-    $added = false;
-    $duplicate = false;
-
-    //Erros Stored in single array
-    $errors = array();
-
-    //Add  new student code 
-    if(isset($_POST['submit'])){
-
-        // Form Data - Required
-        if (empty($_POST['student-number'])){
-            $errors['studentNumberError'] = "Student Number is Required";
-        } else{
-            $studentNumber = $_POST['student-number'];
-        }
-
-        if (empty($_POST['student-surname']) || empty($_POST['student-first-name']) || empty($_POST['student-middle-initial'])){
-            $errors['studentNameError'] = "Student Name is Required";
-        } else{
-            $studentSurname = $_POST['student-surname'];
-            $studentFirstName = $_POST['student-first-name'];
-            $studentMiddleInitial = $_POST['student-middle-initial'];
-        }
-
-        if (empty($_POST['student-birthdate'])){
-            $errors['studentBirthdateError'] = "Student Birthdate is Required";
-        } else{
-            $studentBirthdate = $_POST['student-birthdate'];
-        }
-
-        if (empty($_POST['student-gender'])){
-            $errors['studentGenderError'] = "Student Gender is Required";
-        } else{
-            $studentGender = $_POST['student-gender'];
-        }
-
-        if (empty($_POST['student-street']) || empty($_POST['student-town']) || empty($_POST['student-district'])){
-            $errors['studentAddressError'] = "Student Address is Required";
-        } else{
-            $studentStreet = $_POST['student-street'];
-            $studentTown = $_POST['student-town'];
-            $studentDistrict = $_POST['student-district'];
-        }
-
-        if (empty($_POST['student-provincial-street']) || empty($_POST['student-provincial-town']) || empty($_POST['student-provincial-district'])){
-            $errors['studentProvincialAddressError'] = "Student Provincial Address is Required";
-        } else{
-            $studentProvincialStreet = $_POST['student-provincial-street'];
-            $studentProvincialTown = $_POST['student-provincial-town'];
-            $studentProvincialDistrict = $_POST['student-provincial-district'];
-        }
-
-        if (empty($_POST['student-phone-number'])){
-            $errors['studentPhoneNumberError'] = "Student Phone Number is Required";
-        } else{
-            $studentPhoneNumber = $_POST['student-phone-number'];
-        }
-
-        if (empty($_POST['student-email'])){
-            $errors['studentEmailError'] = "Student Email is Required";
-        } else{
-            $studentEmail = $_POST['student-email'];
-        }
-
-        if (empty($_POST['guardian-name']) || empty($_POST['guardian-phone-number'])){
-            $errors['studentGuardianError'] = "Guardian Information is Required";
-        } else{
-            $guardianName = $_POST['guardian-name'];
-            $guardianPhoneNumber = $_POST['guardian-phone-number'];
-        }
-
-
-        // Form Data - optional
-        if (isset($_POST['student-telephone-number'])){
-            $studentTelephoneNumber = $_POST['student-telephone-number'];
-        } else{
-            $studentTelephoneNumber = '';
-        }
-        
-        if (isset($_POST['guardian-telephone-number'])){
-            $guardianTelephoneNumber = $_POST['guardian-telephone-number'];
-        } else{
-            $guardianTelephoneNumber = '';
-        }
-        
-        if (isset($_POST['student-remark'])){
-            $studentRemark = $_POST['student-remark'];
-        } else{
-            $studentRemark = '';
-        }
-        
-        if (isset($_POST['student-sponsor'])){
-            $studentSponsor = $_POST['student-sponsor'];
-        } else{
-            $studentSponsor = '';
-        }
-        
-        if (isset($_POST['student-hs-address'])){
-            $studentHighSchoolAddress = $_POST['student-hs-address'];
-        } else{
-            $studentHighSchoolAddress = '';
-        }
-
-
-        if(isset($_POST['submit']) && empty($errors)){
-
-            //Check for Student-Number duplicate in database
-            $dup = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'");
-
-            if(mysqli_num_rows($dup)>0){
-                $duplicate = true;
-            } else{
-
-                $query = "INSERT INTO `student-information`(`studentNumber`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentStreet`, `studentTown`, `studentDistrict`, `studentProvincialStreet`, `studentProvincialTown`, `studentProvincialDistrict`, `studentPhoneNumber`, `studentTelephoneNumber`, `studentEmail`, `guardianName`, `guardianPhoneNumber`, `guardianTelephoneNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`) VALUES ('$studentNumber',  '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender',  '$studentStreet', '$studentTown', '$studentDistrict', '$studentProvincialStreet', '$studentProvincialTown', '$studentProvincialDistrict', '$studentPhoneNumber',  '$studentTelephoneNumber', '$studentEmail', '$guardianName', '$guardianPhoneNumber', '$guardianTelephoneNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress')";
-  
-                $run_data = mysqli_query($conn,$query);
-
-                if($run_data){
-                    $added = true;
-
-                    // Removes values in TextBox when form is successful
-                    unset($_POST['student-number'], $_POST['student-surname'],$_POST['student-first-name'], $_POST['student-middle-initial'], $_POST['student-student-birthdate'], $_POST['student-gender'], $_POST['student-street'], $_POST['student-town'], $_POST['student-district'], $_POST['student-provincial-street'], $_POST['student-provincial-town'], $_POST['student-provincial-district'], $_POST['student-phone-number'], $_POST['student-telephone-number'], $_POST['student-email'], $_POST['guardian-name'], $_POST['guardian-phone-number'], $_POST['guardian-telephone-number'], $_POST['student-remark'], $_POST['student-sponsor'], $_POST['student-hs-address']); 
-
-                    
-                }else{
-                    echo "Data not Inserted";
-                }
-
-            }
-        }
-    }
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -153,9 +16,9 @@
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <!-- Search Bar with Drop Down Box for Class Selection -->
+        <!-- Search Bar with Drop Down Box -->
         <div class="searchbar">
-            <form action="search.php" method="get">
+            <form action="search.php">
                 <select name="data-filter" id="data-filter" class="data-filter">
                     <option value="">Select Filter</option>
                     <option value="studentNumber">Student Number</option>
@@ -165,81 +28,75 @@
                     <option value="student-district">City</option>
                 </select>
                 <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
-                <button type="submit" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button name="searchbtn" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>    
         </div><br>
 
 
-        <!-- Alert -->
-        <div>
+        <!-- Alert Messages -->
+        <div class="alerts">
             <?php
-                if(isset($_SESSION['status'])){
+                // Create/ Insert Alerts
+                if(isset($_SESSION['insert-success'])){
                     echo 
-                    "<div class='alert-success' style='background-color: var(--green-1); border-left: 5px solid var(--green-3);'>
-                        <h3 style='padding-left: 5px;'>"
-                            . $_SESSION['status'] .
+                    "<div class='alert-success'>
+                        <h3>"
+                            . $_SESSION['insert-success'] .
                         "</h3>
                     </div><br>";
-                    unset($_SESSION['status']);
+                    unset($_SESSION['insert-success']);
                 }
-            ?>
 
-            <?php
-                if(isset($_SESSION['insert'])){
+                if(isset($_SESSION['duplicate-insert'])){
                     echo 
-                    "<div class='alert-success' style='background-color: var(--green-1); border-left: 5px solid var(--green-3);'>
-                        <h3 style='padding-left: 5px;'>"
-                            . $_SESSION['insert'] .
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['duplicate-insert'] .
                         "</h3>
                     </div><br>";
-                    unset($_SESSION['insert']);
+                    unset($_SESSION['duplicate-insert']);
                 }
-            ?>
 
-            <?php
-                if(isset($_SESSION['duplicateedit'])){
+                // Update/ Edit Alerts
+                if(isset($_SESSION['update-success'])){
                     echo 
-                    "<div class='alert-error' style='background-color: var(--red-1); border-left: 5px solid var(--red-3);'>
-                        <h3 style='padding-left: 5px;'>"
-                            . $_SESSION['duplicateedit'] .
+                    "<div class='alert-success'>
+                        <h3>"
+                            . $_SESSION['update-success'] .
                         "</h3>
                     </div><br>";
-                    unset($_SESSION['duplicateedit']);
+                    unset($_SESSION['update-success']);
                 }
-            ?>
 
-            <?php
-                if(isset($_SESSION['duplicate'])){
+                if(isset($_SESSION['duplicate-edit'])){
                     echo 
-                    "<div class='alert-error' style='background-color: var(--red-1); border-left: 5px solid var(--red-3);'>
-                        <h3 style='padding-left: 5px;'>"
-                            . $_SESSION['duplicate'] .
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['duplicate-edit'] .
                         "</h3>
                     </div><br>";
-                    unset($_SESSION['duplicate']);
+                    unset($_SESSION['duplicate-edit']);
                 }
-            ?>
 
-            <?php
-                if(isset($_SESSION['delete'])){
+                // Delete Alert
+                if(isset($_SESSION['delete-success'])){
                     echo 
-                    "<div class='alert-error' style='background-color: var(--red-1); border-top: 100px; border-left: 5px solid var(--red-3);'>
-                        <h3 style='padding-left: 5px;'>"
-                            . $_SESSION['delete'] .
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['delete-success'] .
                         "</h3>
                     </div><br>";
-                    unset($_SESSION['delete']);
+                    unset($_SESSION['delete-success']);
                 }
             ?>    
         </div>
         
 
-
-        <!-- Insert student information via popup modal -->
+        <!-- Show Popup Modal Create/ Insert -->
         <a href="#" id="create" class="create">Create</a>
 
 
-        <!-- Insert Modal -->
+        <!-- Popup Modal Create/ Insert -->
         <div class="bg-modal">
             <div class="modal-contents">
 
@@ -295,7 +152,7 @@
                     <label class="student-provincial-address-label" for="student-provincial-address">Student Provincial Address:</label>
 
                         <div class="tab student-provincial-address">
-                            <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address" id="current-address" value="true">
+                            <input type="checkbox" onclick="SameAsCurrentCreate(this)" name="current-address" id="current-address" value="true">
                             <label for="current-address"> Same as Current Address</label><br>
 
                             <!-- <div class="hide" id="hide"> -->
@@ -458,7 +315,7 @@
 
 
 
-        <!-- Edit Modal -->
+        <!-- Popup Modal Update/ Edit -->
         <div class="bg-modal-edit">
             <div class="modal-contents-edit">
 

@@ -107,8 +107,8 @@
         $dup = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'");
 
         if(mysqli_num_rows($dup)>0){
-            $_SESSION['duplicate'] = "Data not Inserted, Student Number already in use";
-            // header('location:index.php');
+            $_SESSION['duplicate-insert'] = "Data not Inserted, Student Number already in use";
+
         } else{
 
             $query = "INSERT INTO `student-information`(`studentNumber`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentStreet`, `studentTown`, `studentDistrict`, `studentProvincialStreet`, `studentProvincialTown`, `studentProvincialDistrict`, `studentPhoneNumber`, `studentTelephoneNumber`, `studentEmail`, `guardianName`, `guardianPhoneNumber`, `guardianTelephoneNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`) VALUES ('$studentNumber',  '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender',  '$studentStreet', '$studentTown', '$studentDistrict', '$studentProvincialStreet', '$studentProvincialTown', '$studentProvincialDistrict', '$studentPhoneNumber',  '$studentTelephoneNumber', '$studentEmail', '$guardianName', '$guardianPhoneNumber', '$guardianTelephoneNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress')";
@@ -116,7 +116,7 @@
             $run_data = mysqli_query($conn,$query);
 
             if($run_data){
-                $_SESSION['insert'] = "Data Inserted Succesfully";
+                $_SESSION['insert-success'] = "Data Inserted Succesfully";
             
             }else{ 
 
