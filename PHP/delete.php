@@ -1,5 +1,4 @@
 <?php
-    session_start();
     // database connection
     include('config.php');
 
@@ -10,10 +9,8 @@
 
     if($run_data){
         $_SESSION['delete'] = "Data Deleted Successfully";
-        // $_SESSION['duplicateedit2'] = "Data not Updated, Student Number already in use2";
-        // header('location:index.php');
     }else{
-        echo "Data not Deleted";
+
     }
 
 ?>
