@@ -104,9 +104,10 @@
     if(empty($errors)){
 
         //Check for Student-Number duplicate in database
-        $dup = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'");
+        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'";
+        $duplicate = mysqli_query($conn, $duplicateQuery);
 
-        if(mysqli_num_rows($dup)>0){
+        if(mysqli_num_rows($duplicate)>0){
             $_SESSION['duplicate-insert'] = "Data not Inserted, Student Number already in use";
 
         } else{

@@ -5,7 +5,7 @@
     //Erros Stored in single array
     $errors = array();
 
-            $id = $_GET['id-edit'];
+    $id = $_GET['id-edit'];
     //Add  new student code 
     // Form Data - Required
     if (empty($_GET['student-number-edit'])){
@@ -108,10 +108,12 @@
     if(empty($errors)){
 
         // Check for Student-Number duplicate in database
-        $dup = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'");
-        $dupcheck = mysqli_query($conn, "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber' AND `id`='$id'");
+        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'";
+        $duplicateCheckQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber' AND `id`='$id'";
+        $duplicate = mysqli_query($conn, $duplicateQuery);
+        $duplicateCheck = mysqli_query($conn, $duplicateCheckQuery);
 
-        if(mysqli_num_rows($dup) > 0  &&  mysqli_num_rows($dup) !=  mysqli_num_rows($dupcheck)){
+        if(mysqli_num_rows($duplicate) > 0  &&  mysqli_num_rows($duplicate) !=  mysqli_num_rows($duplicateCheck)){
             $_SESSION['duplicate-edit'] = "Data not Updated, Student Number already in use";
 
         } else{

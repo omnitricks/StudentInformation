@@ -18,17 +18,17 @@
     <body>
         <!-- Search Bar with Drop Down Box -->
         <div class="searchbar">
-            <form action="search.php">
+            <form>
                 <select name="data-filter" id="data-filter" class="data-filter">
                     <option value="">Select Filter</option>
                     <option value="studentNumber">Student Number</option>
                     <option value="studentSurname">Surname</option>
                     <option value="studentFirstName">First Name</option>
-                    <option value="student-provincial-district">Province</option>
-                    <option value="student-district">City</option>
+                    <option value="studentProvincialDistrict">Province</option>
+                    <option value="studentDistrict">City</option>
                 </select>
                 <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
-                <button name="searchbtn" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="submit" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>    
         </div><br>
 
@@ -213,7 +213,7 @@
 
 
         <!-- Table View -->
-        <div class="tableContainer">
+        <!-- <div class="tableContainer">
             <table id="tableView" class="tableView">
                 <thead>
                     <tr>
@@ -238,7 +238,7 @@
                 <tbody>
 
 
-                <!-- View Data in Table -->
+                View Data in Table
                 <?php
                     $get_data = "SELECT * FROM `student-information`";
                     $run_data = mysqli_query($conn,$get_data);
@@ -291,7 +291,9 @@
                 ?>
                 </tbody>
             </table>
-        </div>
+        </div> -->
+
+        <div id="result"></div>
         
 
         <!-- Popup Modal Delete Confirmation -->
