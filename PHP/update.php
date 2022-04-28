@@ -2,7 +2,7 @@
     // database connection
     include('config.php');
 
-    //Erros Stored in single array
+    //Errors Stored in single array
     $errors = array();
 
     $id = $_GET['id-edit'];
@@ -12,6 +12,12 @@
         $errors['studentNumberError'] = "Student Number is Required";
     } else{
         $studentNumber = $_GET['student-number-edit'];
+    }
+
+    if (empty($_GET['student-course-edit'])){
+        $errors['studentCourseError'] = "Student Course is Required";
+    } else{
+        $studentCourse = $_GET['student-course-edit'];
     }
 
     if (empty($_GET['student-surname-edit']) || empty($_GET['student-first-name-edit']) || empty($_GET['student-middle-initial-edit'])){
@@ -34,26 +40,30 @@
         $studentGender = $_GET['student-gender-edit'];
     }
 
-    if (empty($_GET['student-street-edit']) || empty($_GET['student-town-edit']) || empty($_GET['student-district-edit'])){
+    if (empty($_GET['student-house-number-edit']) || empty($_GET['student-street-edit'])  || empty($_GET['student-barangay-edit']) || empty($_GET['student-town-edit']) || empty($_GET['student-district-edit'])){
         $errors['studentAddressError'] = "Student Address is Required";
     } else{
+        $studentHouseNumber = $_GET['student-house-number-edit'];
         $studentStreet = $_GET['student-street-edit'];
+        $studentBarangay = $_GET['student-barangay-edit'];
         $studentTown = $_GET['student-town-edit'];
         $studentDistrict = $_GET['student-district-edit'];
     }
 
-    if (empty($_GET['student-provincial-street-edit']) || empty($_GET['student-provincial-town-edit']) || empty($_GET['student-provincial-district-edit'])){
+    if (empty($_GET['student-provincial-house-number-edit']) || empty($_GET['student-provincial-street-edit'])  || empty($_GET['student-provincial-barangay-edit']) || empty($_GET['student-provincial-town-edit']) || empty($_GET['student-provincial-district-edit'])){
         $errors['studentProvincialAddressError'] = "Student Provincial Address is Required";
     } else{
+        $studentProvincialHouseNumber = $_GET['student-provincial-house-number-edit'];
         $studentProvincialStreet = $_GET['student-provincial-street-edit'];
+        $studentProvincialBarangay = $_GET['student-provincial-barangay-edit'];
         $studentProvincialTown = $_GET['student-provincial-town-edit'];
         $studentProvincialDistrict = $_GET['student-provincial-district-edit'];
     }
 
-    if (empty($_GET['student-phone-number-edit'])){
-        $errors['studentPhoneNumberError'] = "Student Phone Number is Required";
+    if (empty($_GET['student-contact-number-edit'])){
+        $errors['studentContactNumberError'] = "Student Contact Number is Required";
     } else{
-        $studentPhoneNumber = $_GET['student-phone-number-edit'];
+        $studentContactNumber = $_GET['student-contact-number-edit'];
     }
 
     if (empty($_GET['student-email-edit'])){
@@ -62,30 +72,27 @@
         $studentEmail = $_GET['student-email-edit'];
     }
 
-    if (empty($_GET['guardian-name-edit']) || empty($_GET['guardian-phone-number-edit'])){
+    if (empty($_GET['guardian-name-edit']) || empty($_GET['guardian-contact-number-edit'])){
         $errors['studentGuardianError'] = "Guardian Information is Required";
     } else{
         $guardianName = $_GET['guardian-name-edit'];
-        $guardianPhoneNumber = $_GET['guardian-phone-number-edit'];
+        $guardianContactNumber = $_GET['guardian-contact-number-edit'];
     }
-
-
-
 
 
     // Form Data - optional
-    if (isset($_GET['student-telephone-number'])){
-        $studentTelephoneNumber = $_GET['student-telephone-number-edit'];
+    if(empty($_GET['student-subdivision-edit'])){
+        $studentSubdivision = $_GET['student-subdivision-edit'];
     } else{
-        $studentTelephoneNumber = '';
+        $studentSubdivision = '';
     }
-    
-    if (isset($_GET['guardian-telephone-number-edit'])){
-        $guardianTelephoneNumber = $_GET['guardian-telephone-number-edit'];
+
+    if(empty($_GET['student-provincial-subdivision-edit'])){
+        $studentProvincialSubdivision = $_GET['student-provincial-subdivision-edit'];
     } else{
-        $guardianTelephoneNumber = '';
+        $studentProvincialSubdivision = '';
     }
-    
+
     if (isset($_GET['student-remark-edit'])){
         $studentRemark = $_GET['student-remark-edit'];
     } else{
@@ -104,12 +111,14 @@
         $studentHighSchoolAddress = '';
     }
 
+    $blank = '';
+
 
     if(empty($errors)){
 
         // Check for Student-Number duplicate in database
-        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'";
-        $duplicateCheckQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber' AND `id`='$id'";
+        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber`= '$studentNumber'";
+        $duplicateCheckQuery = "SELECT * FROM `student-information` WHERE `studentNumber`= '$studentNumber' AND `id`= '$id'";
         $duplicate = mysqli_query($conn, $duplicateQuery);
         $duplicateCheck = mysqli_query($conn, $duplicateCheckQuery);
 
@@ -118,7 +127,7 @@
 
         } else{
 
-            $update = "UPDATE `student-information` SET `studentNumber`= '$studentNumber',`studentSurname`= '$studentSurname',`studentFirstName`= '$studentFirstName',`studentMiddleInitial`= '$studentMiddleInitial',`studentBirthdate`= '$studentBirthdate',`studentGender`= '$studentGender',`studentStreet`= '$studentStreet',`studentTown`= '$studentTown',`studentDistrict`= '$studentDistrict',`studentProvincialStreet`= '$studentProvincialStreet',`studentProvincialTown`= '$studentProvincialTown',`studentProvincialDistrict`= '$studentProvincialDistrict',`studentPhoneNumber`= '$studentPhoneNumber',`studentTelephoneNumber`= '$studentTelephoneNumber',`studentEmail`= '$studentEmail',`guardianName`= '$guardianName',`guardianPhoneNumber`= '$guardianPhoneNumber',`guardianTelephoneNumber`= '$guardianTelephoneNumber',`studentRemark`= '$studentRemark',`studentSponsor`= '$studentSponsor',`studentHighSchoolAddress`= '$studentHighSchoolAddress' WHERE `id`= '$id'";
+            $update = "UPDATE `student-information` SET `studentNumber`='$studentNumber',`studentCourse`='$studentCourse',`studentSurname`='$studentSurname',`studentFirstName`='$studentFirstName',`studentMiddleInitial`='$studentMiddleInitial',`studentBirthdate`='$studentBirthdate',`studentGender`='$studentGender',`studentHouseNumber`='$studentHouseNumber',`studentStreet`='$studentStreet',`studentSubdivision`='$studentSubdivision',`studentBarangay`='$studentBarangay',`studentTown`='$studentTown',`studentDistrict`='$studentDistrict',`studentProvincialHouseNumber`='$studentProvincialHouseNumber',`studentProvincialStreet`='$studentProvincialStreet',`studentProvincialSubdivision`='$studentProvincialSubdivision',`studentProvincialBarangay`='$studentProvincialBarangay',`studentProvincialTown`='$studentProvincialTown',`studentProvincialDistrict`='$studentProvincialDistrict',`studentContactNumber`='$studentContactNumber',`studentEmail`='$studentEmail',`guardianName`='$guardianName',`guardianContactNumber`='$guardianContactNumber',`studentRemark`='$studentRemark',`studentSponsor`='$studentSponsor',`studentHighSchoolAddress`='$studentHighSchoolAddress',`studentCompanyName`='$blank',`studentCompanyAddress`='$blank',`studentCompanyPosition`='$blank',`studentCompanyContactNumber`='$blank' WHERE `id`= '$id'";
 
             $run_data = mysqli_query($conn,$update);
 

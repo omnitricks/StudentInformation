@@ -9,7 +9,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Information</title>
+        <title>Central Colleges of the Philippines | CCP - Student Information</title>
+        <link rel="icon" type="image/png" href="https://www.ccp.edu.ph/students/CCP_WORLD2/images/fav_icon.png">
         
         <link rel="stylesheet" href="https://unpkg.com/open-props"/>
         <link rel="stylesheet" href="../CSS/style.css">
@@ -25,7 +26,7 @@
                     <option value="studentSurname">Surname</option>
                     <option value="studentFirstName">First Name</option>
                     <option value="studentProvincialDistrict">Province</option>
-                    <option value="studentDistrict">City</option>
+                    <option value="studentTown">City</option>
                 </select>
                 <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
                 <button type="submit" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -102,11 +103,16 @@
 
                 <div class="close"><i class="fa-solid fa-xmark"></i></div>
                 
+                <h1>Create</h1>
                 <!-- Registration Form -->
                 <form id="studentInformationCreate">
                     <label for="student-number">Student Number:</label>
                         <!--  May show error in VSCode due to return statement not used within a function body -->
                         <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255"><br>
+
+
+                    <label for="student-course">Course:</label>
+                        <input type="text" name="student-course" id="student-course" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
 
 
                     <label class="student-name-label" for="student-name">Student Name:</label>
@@ -138,8 +144,17 @@
                     <label class="student-address-label" for="student-address">Student Current Address:</label>
 
                         <div class="tab student-address">
+                            <label for="student-house-number">House Number:</label>
+                                <input type="text" name="student-house-number" id="student-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
+
                             <label for="student-street">Street:</label>
                                 <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+
+                            <label for="student-subdivision">Subdivision:</label>
+                                <input type="text" name="student-subdivision" id="student-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-barangay">Barangay:</label>
+                                <input type="text" name="student-barangay" id="student-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
 
                             <label for="student-town">Town:</label>
                                 <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
@@ -155,24 +170,29 @@
                             <input type="checkbox" onclick="SameAsCurrentCreate(this)" name="current-address" id="current-address" value="true">
                             <label for="current-address"> Same as Current Address</label><br>
 
-                            <!-- <div class="hide" id="hide"> -->
-                                <label for="student-provincial-street">Street:</label>
-                                    <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                            <label for="student-provincial-house-number">House Number:</label>
+                                <input type="text" name="student-provincial-house-number" id="student-provincial-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
-                                <label for="student-provincial-town">Town:</label>
-                                    <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <label for="student-provincial-street">Street:</label>
+                                <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
 
-                                <label for="student-provincial-district">District:</label>
-                                    <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="255">
-                            <!-- </div> -->
+                            <label for="student-provincial-subdivision">Subdivision:</label>
+                                <input type="text" name="student-provincial-subdivision" id="student-provincial-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-barangay">Barangay:</label>
+                                <input type="text" name="student-provincial-barangay" id="student-provincial-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-town">Town:</label>
+                                <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-district">District:</label>
+                                <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+
                         </div><br>
 
 
-                    <label for="student-phone-number">Student Phone Number:</label>
-                        <input type="tel" name="student-phone-number" id="student-phone-number" onkeypress="return isPhone(event);" maxlength="15">
-
-                    <label for="student-telephone-number">Student Telephone Number:</label>
-                        <input type="tel" name="student-telephone-number" id="student-telephone-number" onkeypress="return isPhone(event);" maxlength="10"><br>
+                    <label for="student-contact-number">Student Contact Number:</label>
+                        <input type="tel" name="student-contact-number" id="student-contact-number" onkeypress="return isPhone(event);" maxlength="15"><br>
                     
                     
                     <label for="student-email">Student Email Address:</label>
@@ -186,16 +206,19 @@
                                 <input type="text" name="guardian-name" id="guardian-name" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
-                            <label for="guardian-phone-number">Guardian Phone Number:</label>
-                                <input type="tel" name="guardian-phone-number" id="guardian-phone-number" onkeypress="return isPhone(event);" maxlength="15">
-                            
-                            <label for="guardian-telephone-number">Guardian Telephone Number:</label>
-                                <input type="tel" name="guardian-telephone-number" id="guardian-telephone-number" onkeypress="return isPhone(event);" maxlength="10"> 
+                            <label for="guardian-contact-number">Guardian Contact Number:</label>
+                                <input type="tel" name="guardian-contact-number" id="guardian-contact-number" onkeypress="return isPhone(event);" maxlength="15">
                         </div><br>
 
 
                     <label for="student-remark">Remark:</label>
                         <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+                        <input type="checkbox" onclick="AddressNotFoundCreate(this)" name="address-not-found" id="address-not-found" value="true">
+                            <label for="address-not-found"> Address not found</label><br>
+
+                        <input type="checkbox" onclick="UnableToReachCreate(this)" name="unable-to-reach" id="unable-to-reach" value="true">
+                            <label for="unable-to-reach"> Unable to reach Contact Number</label><br>
 
 
                     <label for="student-sponsor">Sponsor:</label>
@@ -207,92 +230,13 @@
 
                     <!-- <input type="submit" name="submit" id="submit" value="Submit"> -->
                     <button type="submit" id="submit" class="submit">Submit</button>
+
                 </form>
             </div>
         </div>
 
 
-        <!-- Table View -->
-        <!-- <div class="tableContainer">
-            <table id="tableView" class="tableView">
-                <thead>
-                    <tr>
-                        <th colspan="2"></th>
-                        <th>Student Number</th>
-                        <th>Student Name</th>
-                        <th>Student Birthdate</th>
-                        <th>Student Gender</th>
-                        <th>Student Current Address</th>
-                        <th>Student Provincial Address</th>
-                        <th>Student Phone Number</th>
-                        <th>Student Telephone Number</th>
-                        <th>Student Email Address</th>
-                        <th>Guardian Name</th>
-                        <th>Guardian Phone Number</th>
-                        <th>Guardian Telephone Number</th>
-                        <th>Remark</th>
-                        <th>Sponsor</th>
-                        <th>Student HighSchool Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                View Data in Table
-                <?php
-                    $get_data = "SELECT * FROM `student-information`";
-                    $run_data = mysqli_query($conn,$get_data);
-
-                    while($row = mysqli_fetch_array($run_data)){
-                        // Combines data
-                        $studentName = $row['studentSurname'] . ', ' . $row['studentFirstName'] . ' ' . $row['studentMiddleInitial'] . '.';
-                        $studentAddress = $row['studentStreet'] . ' ' . $row['studentTown'] . ' ' . $row['studentDistrict'];
-                        $studentProvincialAddress = $row['studentProvincialStreet'] . ' ' . $row['studentProvincialTown'] . ' ' . $row['studentProvincialDistrict'];
-
-                        // Conditions for optional fields left blank
-                        if($row['studentTelephoneNumber'] == ''){
-                            $row['studentTelephoneNumber'] = 'N/A';
-                        }
-                        if($row['guardianTelephoneNumber'] == ''){
-                            $row['guardianTelephoneNumber'] = 'N/A';
-                        }
-                        if($row['studentRemark'] == ''){
-                            $row['studentRemark'] = 'N/A';
-                        }
-                        if($row['studentSponsor'] == ''){
-                            $row['studentSponsor'] = 'N/A';
-                        }
-                        if($row['studentHighSchoolAddress'] == ''){
-                            $row['studentHighSchoolAddress'] = 'N/A';
-                        }
-
-                        echo "<tr id='$row[id]'>";
-                            echo '<td><a href="#" id="edit" class="edit"><i class="fa-solid fa-pen-to-square"></i></a></td>';
-                            echo '<td><a href="#" id="delete" class="delete"><i class="fa-solid fa-trash-can"></i></a></td>';
-                            echo '<td>' . $row['studentNumber'] . '</td>';
-                            echo '<td>' . $studentName . '</td>';
-                            echo '<td>' . $row['studentBirthdate'] . '</td>';
-                            echo '<td>' . $row['studentGender'] . '</td>';
-                            echo '<td>' . $studentAddress . '</td>';
-                            echo '<td>' . $studentProvincialAddress . '</td>';
-                            echo '<td>' . $row['studentPhoneNumber'] . '</td>';
-                            echo '<td>' . $row['studentTelephoneNumber'] . '</td>';
-                            echo '<td>' . $row['studentEmail'] . '</td>';
-                            echo '<td>' . $row['guardianName'] . '</td>';
-                            echo '<td>' . $row['guardianPhoneNumber'] . '</td>';
-                            echo '<td>' . $row['guardianTelephoneNumber'] . '</td>';
-                            echo '<td>' . $row['studentRemark'] . '</td>';
-                            echo '<td>' . $row['studentSponsor'] . '</td>';
-                            echo '<td>' . $row['studentHighSchoolAddress'] . '</td>';
-                        echo '</tr>';
-                    }
-
-
-                ?>
-                </tbody>
-            </table>
-        </div> -->
-
+        <!-- Table View via search.php -->
         <div id="result"></div>
         
 
@@ -302,7 +246,7 @@
                 <table class="popdel" id="popdel">
                     <thead>
                         <tr>
-                            <td colspan="2">Are you sure?</td>
+                            <td colspan="2">Are you sure you want to delete this row?</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -334,6 +278,10 @@
                         <input type="tel" name="student-number-edit" id="student-number-edit" onkeypress="return isNumberKey(event);" maxlength="255"><br>
 
 
+                    <label for="student-course-edit">Course:</label>
+                        <input type="text" name="student-course-edit" id="student-course-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+
+
                     <label class="student-name-label-edit" for="student-name-edit">Student Name:</label>
 
                         <div class="tab student-name-edit">
@@ -363,8 +311,17 @@
                     <label class="student-address-label-edit" for="student-address-edit">Student Current Address:</label>
 
                         <div class="tab student-address-edit">
+                            <label for="student-house-number-edit">House Number:</label>
+                                <input type="text" name="student-house-number-edit" id="student-house-number-edit" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
+
                             <label for="student-street-edit">Street:</label>
                                 <input type="text" name="student-street-edit" id="student-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+
+                            <label for="student-subdivision-edit">Subdivision:</label>
+                                <input type="text" name="student-subdivision-edit" id="student-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-barangay-edit">Barangay:</label>
+                                <input type="text" name="student-barangay-edit" id="student-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
 
                             <label for="student-town-edit">Town:</label>
                                 <input type="text" name="student-town-edit" id="student-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
@@ -377,27 +334,33 @@
                     <label class="student-provincial-address-label-edit" for="student-provincial-address-edit">Student Provincial Address:</label>
 
                         <div class="tab student-provincial-address-edit">
-                            <input type="checkbox" onclick="SameAsCurrent(this)" name="current-address-edit" id="current-address-edit" value="true">
+                            <input type="checkbox" onclick="SameAsCurrentEdit(this)" name="current-address-edit" id="current-address-edit" value="true">
+
                             <label for="current-address-edit"> Same as Current Address</label><br>
 
-                            <!-- <div class="hide" id="hide"> -->
-                                <label for="student-provincial-street-edit">Street:</label>
-                                    <input type="text" name="student-provincial-street-edit" id="student-provincial-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                            <label for="student-provincial-house-number-edit">House Number:</label>
+                                <input type="text" name="student-provincial-house-number-edit" id="student-provincial-house-number-edit" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
-                                <label for="student-provincial-town-edit">Town:</label>
-                                    <input type="text" name="student-provincial-town-edit" id="student-provincial-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <label for="student-provincial-street-edit">Street:</label>
+                                <input type="text" name="student-provincial-street-edit" id="student-provincial-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
 
-                                <label for="student-provincial-district-edit">District:</label>
-                                    <input type="text" name="student-provincial-district-edit" id="student-provincial-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
-                            <!-- </div> -->
+                            <label for="student-provincial-subdivision-edit">Subdivision:</label>
+                                <input type="text" name="student-provincial-subdivision-edit" id="student-provincial-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-barangay-edit">Barangay:</label>
+                                <input type="text" name="student-provincial-barangay-edit" id="student-provincial-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-town-edit">Town:</label>
+                                <input type="text" name="student-provincial-town-edit" id="student-provincial-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+
+                            <label for="student-provincial-district-edit">District:</label>
+                                <input type="text" name="student-provincial-district-edit" id="student-provincial-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+
                         </div><br>
 
 
-                    <label for="student-phone-number-edit">Student Phone Number:</label>
-                        <input type="tel" name="student-phone-number-edit" id="student-phone-number-edit" onkeypress="return isPhone(event);" maxlength="15">
-
-                    <label for="student-telephone-number-edit">Student Telephone Number:</label>
-                        <input type="tel" name="student-telephone-number-edit" id="student-telephone-number-edit" onkeypress="return isPhone(event);" maxlength="10"><br>
+                    <label for="student-contact-number-edit">Student Contact Number:</label>
+                        <input type="tel" name="student-contact-number-edit" id="student-contact-number-edit" onkeypress="return isPhone(event);" maxlength="15"><br>
                     
                     
                     <label for="student-email-edit">Student Email Address:</label>
@@ -411,11 +374,8 @@
                                 <input type="text" name="guardian-name-edit" id="guardian-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
-                            <label for="guardian-phone-number-edit">Guardian Phone Number:</label>
-                                <input type="tel" name="guardian-phone-number-edit" id="guardian-phone-number-edit" onkeypress="return isPhone(event);" maxlength="15">
-                            
-                            <label for="guardian-telephone-number-edit">Guardian Telephone Number:</label>
-                                <input type="tel" name="guardian-telephone-number-edit" id="guardian-telephone-number-edit" onkeypress="return isPhone(event);" maxlength="10"> 
+                            <label for="guardian-contact-number-edit">Guardian Contact Number:</label>
+                                <input type="tel" name="guardian-contact-number-edit" id="guardian-contact-number-edit" onkeypress="return isPhone(event);" maxlength="15">
                         </div><br>
 
 
@@ -430,8 +390,101 @@
                     <label for="student-hs-address-edit">Student HighSchool Address:</label>
                         <textarea name="student-hs-address-edit" id="student-hs-address-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
 
+                        <br>
+                        <br>
+
                     <!-- <input type="update" name="update" id="update" value="Update"> -->
-                    <button type="update" id="update" class="update">Update</button>
+                    <!-- <button type="update" id="update" class="update">Update</button> -->
+                    <div class="viewport-wrapper">
+                        <button type="update" id="update" class="update">Update</button>
+                        <a href='#' id='delete' class='delete'>DELETE</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- Popup Modal Read/ View -->
+        <div class="bg-modal-view">
+            <div class="modal-contents-view">
+
+                <div class="close"><i class="fa-solid fa-xmark"></i></div>
+
+                <h1>View</h1>
+                <!-- Registration Form -->
+                <form id="studentInformationView">
+
+                    <input type="hidden" name="id-view" id="id-view">
+
+                    <label for="student-number-view"><b>Student Number:</b></label>
+                        <!--  May show error in VSCode due to return statement not used within a function body -->
+                        <!-- <input type="tel" name="student-number-view" id="student-number-view" onkeypress="return isNumberKey(event);" maxlength="255"><br> -->
+                        <div class="tab student-number-view"></div><br>
+
+
+                    <label for="student-course-view"><b>Student Number:</b></label>
+                        <div class="tab student-course-view"></div><br>
+
+
+                    <label for="student-name-view"><b>Student Name:</b></label>
+                        <!-- <input type="text" name="student-name-view" id="student-surname-view" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br> -->
+                        <div class="tab student-name-view"></div><br>
+
+
+                    <label for="student-birthdate-view"><b>Student Birthdate:</b></label>
+                        <!-- <input type="date" name="student-birthdate-view" id="student-birthdate-view"><br> -->
+                        <div class="tab student-birthdate-view"></div><br>
+
+
+                    <label for="student-gender-view"><b>Student Gender:</b></label>
+                        <!-- <input type="radio" id="student-gender-male-view" name="student-gender-view" value="MALE"/>
+                        <label for="student-gender-male-view">MALE</label> 
+
+                        <input type="radio" id="student-gender-female-view" name="student-gender-view" value="FEMALE"/>
+                        <label class="student-gender-label-view" for="student-gender-female-view">FEMALE</label><br> -->
+                        <div class="tab student-gender-view"></div><br>
+
+
+                    <label for="student-address-view"><b>Student Current Address:</b></label>
+                        <div class="tab student-address-view"></div><br>
+
+
+                    <label for="student-provincial-address-view"><b>Student Provincial Address:</b></label>
+                        <div class="tab student-provincial-address-view"></div><br>
+
+
+                    <label for="student-contact-number-view"><b>Student Contact Number:</b></label>
+                        <!-- <input type="tel" name="student-phone-number-view" id="student-phone-number-view" onkeypress="return isPhone(event);" maxlength="15"><br> -->
+                        <div class="tab student-contact-number-view"></div><br>
+                    
+                    
+                    <label for="student-email-view"><b>Student Email Address:</b></label>
+                        <!-- <input type="email" name="student-email-view" id="student-email-view" maxlength="50"><br> -->
+                        <div class="tab student-email-view"></div><br>
+                    
+
+                    <label for="student-guardian-view"><b>Student Guardian:</b></label>
+                        <div class="tab student-guardian-view"></div><br>
+
+                    <label for="guardian-contact-number-view"><b>Guardian Contact Number:</b></label>
+                        <!-- <input type="tel" name="guardian-phone-number-view" id="guardian-phone-number-view" onkeypress="return isPhone(event);" maxlength="15"> -->
+                        <div class="tab guardian-contact-number-view"></div><br>             
+
+
+                    <label for="student-remark-view"><b>Remark:</b></label>
+                        <!-- <textarea name="student-remark-view" id="student-remark-view" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br> -->
+                        <div class="tab student-remark-view"></div><br>
+
+
+                    <label for="student-sponsor-view"><b>Sponsor:</b></label>
+                        <!-- <input type="text" name="student-sponsor-view" id="student-sponsor-view" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br> -->
+                        <div class="tab student-sponsor-view"></div><br>
+
+                        
+                    <label for="student-hs-address-view"><b>Student HighSchool Address:</b></label>
+                        <!-- <textarea name="student-hs-address-view" id="student-hs-address-view" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br> -->
+                        <div class="tab student-hs-address-view"></div><br>
                 </form>
             </div>
         </div>

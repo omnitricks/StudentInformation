@@ -2,15 +2,21 @@
     // database connection
     include('config.php');
 
-    //Erros Stored in single array
+    // Erros Stored in single array
     $errors = array();
 
-    //Add  new student code 
+    // Add  new student code 
     // Form Data - Required
     if (empty($_POST['student-number'])){
         $errors['studentNumberError'] = "Student Number is Required";
     } else{
         $studentNumber = $_POST['student-number'];
+    }
+
+    if (empty($_POST['student-course'])){
+        $errors['studentCourseError'] = "Student Course is Required";
+    } else{
+        $studentCourse = $_POST['student-course'];
     }
 
     if (empty($_POST['student-surname']) || empty($_POST['student-first-name']) || empty($_POST['student-middle-initial'])){
@@ -33,26 +39,30 @@
         $studentGender = $_POST['student-gender'];
     }
 
-    if (empty($_POST['student-street']) || empty($_POST['student-town']) || empty($_POST['student-district'])){
+    if (empty($_POST['student-house-number']) || empty($_POST['student-street'])  || empty($_POST['student-barangay']) || empty($_POST['student-town']) || empty($_POST['student-district'])){
         $errors['studentAddressError'] = "Student Address is Required";
     } else{
+        $studentHouseNumber = $_POST['student-house-number'];
         $studentStreet = $_POST['student-street'];
+        $studentBarangay = $_POST['student-barangay'];
         $studentTown = $_POST['student-town'];
         $studentDistrict = $_POST['student-district'];
     }
 
-    if (empty($_POST['student-provincial-street']) || empty($_POST['student-provincial-town']) || empty($_POST['student-provincial-district'])){
+    if (empty($_POST['student-provincial-house-number']) || empty($_POST['student-provincial-street'])  || empty($_POST['student-provincial-barangay']) || empty($_POST['student-provincial-town']) || empty($_POST['student-provincial-district'])){
         $errors['studentProvincialAddressError'] = "Student Provincial Address is Required";
     } else{
+        $studentProvincialHouseNumber = $_POST['student-provincial-house-number'];
         $studentProvincialStreet = $_POST['student-provincial-street'];
+        $studentProvincialBarangay = $_POST['student-provincial-barangay'];
         $studentProvincialTown = $_POST['student-provincial-town'];
         $studentProvincialDistrict = $_POST['student-provincial-district'];
     }
 
-    if (empty($_POST['student-phone-number'])){
-        $errors['studentPhoneNumberError'] = "Student Phone Number is Required";
+    if (empty($_POST['student-contact-number'])){
+        $errors['studentContactNumberError'] = "Student Contact Number is Required";
     } else{
-        $studentPhoneNumber = $_POST['student-phone-number'];
+        $studentContactNumber = $_POST['student-contact-number'];
     }
 
     if (empty($_POST['student-email'])){
@@ -61,27 +71,27 @@
         $studentEmail = $_POST['student-email'];
     }
 
-    if (empty($_POST['guardian-name']) || empty($_POST['guardian-phone-number'])){
+    if (empty($_POST['guardian-name']) || empty($_POST['guardian-contact-number'])){
         $errors['studentGuardianError'] = "Guardian Information is Required";
     } else{
         $guardianName = $_POST['guardian-name'];
-        $guardianPhoneNumber = $_POST['guardian-phone-number'];
+        $guardianContactNumber = $_POST['guardian-contact-number'];
     }
 
 
     // Form Data - optional
-    if (isset($_POST['student-telephone-number'])){
-        $studentTelephoneNumber = $_POST['student-telephone-number'];
+    if(empty($_POST['student-subdivision'])){
+        $studentSubdivision = $_POST['student-subdivision'];
     } else{
-        $studentTelephoneNumber = '';
+        $studentSubdivision = '';
     }
-    
-    if (isset($_POST['guardian-telephone-number'])){
-        $guardianTelephoneNumber = $_POST['guardian-telephone-number'];
+
+    if(empty($_POST['student-provincial-subdivision'])){
+        $studentProvincialSubdivision = $_POST['student-provincial-subdivision'];
     } else{
-        $guardianTelephoneNumber = '';
+        $studentProvincialSubdivision = '';
     }
-    
+
     if (isset($_POST['student-remark'])){
         $studentRemark = $_POST['student-remark'];
     } else{
@@ -100,11 +110,13 @@
         $studentHighSchoolAddress = '';
     }
 
+    $blank = '';
+
 
     if(empty($errors)){
 
-        //Check for Student-Number duplicate in database
-        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber`='$studentNumber'";
+        // Check for Student-Number duplicate in database
+        $duplicateQuery = "SELECT * FROM `student-information` WHERE `studentNumber` = '$studentNumber'";
         $duplicate = mysqli_query($conn, $duplicateQuery);
 
         if(mysqli_num_rows($duplicate)>0){
@@ -112,7 +124,7 @@
 
         } else{
 
-            $query = "INSERT INTO `student-information`(`studentNumber`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentStreet`, `studentTown`, `studentDistrict`, `studentProvincialStreet`, `studentProvincialTown`, `studentProvincialDistrict`, `studentPhoneNumber`, `studentTelephoneNumber`, `studentEmail`, `guardianName`, `guardianPhoneNumber`, `guardianTelephoneNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`) VALUES ('$studentNumber',  '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender',  '$studentStreet', '$studentTown', '$studentDistrict', '$studentProvincialStreet', '$studentProvincialTown', '$studentProvincialDistrict', '$studentPhoneNumber',  '$studentTelephoneNumber', '$studentEmail', '$guardianName', '$guardianPhoneNumber', '$guardianTelephoneNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress')";
+            $query = "INSERT INTO `student-information`(`studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`) VALUES ('$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$blank', '$blank', '$blank', '$blank')";
 
             $run_data = mysqli_query($conn,$query);
 
