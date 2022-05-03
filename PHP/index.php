@@ -108,11 +108,11 @@
                 <form id="studentInformationCreate">
                     <label for="student-number">Student Number:</label>
                         <!--  May show error in VSCode due to return statement not used within a function body -->
-                        <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="255"><br>
+                        <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="50"><br>
 
 
                     <label for="student-course">Course:</label>
-                        <input type="text" name="student-course" id="student-course" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                        <input type="text" name="student-course" id="student-course" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
                     <label class="student-name-label" for="student-name">Student Name:</label>
@@ -148,19 +148,19 @@
                                 <input type="text" name="student-house-number" id="student-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
                             <label for="student-street">Street:</label>
-                                <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                                <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-subdivision">Subdivision:</label>
-                                <input type="text" name="student-subdivision" id="student-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-subdivision" id="student-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-barangay">Barangay:</label>
-                                <input type="text" name="student-barangay" id="student-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-barangay" id="student-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-town">Town:</label>
-                                <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-district">District:</label>
-                                <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                                <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" maxlength="100">
                         </div><br>
 
 
@@ -174,19 +174,19 @@
                                 <input type="text" name="student-provincial-house-number" id="student-provincial-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
                             <label for="student-provincial-street">Street:</label>
-                                <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                                <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-subdivision">Subdivision:</label>
-                                <input type="text" name="student-provincial-subdivision" id="student-provincial-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-provincial-subdivision" id="student-provincial-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-barangay">Barangay:</label>
-                                <input type="text" name="student-provincial-barangay" id="student-provincial-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-provincial-barangay" id="student-provincial-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-town">Town:</label>
-                                <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                                <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-district">District:</label>
-                                <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                                <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="100">
 
                         </div><br>
 
@@ -202,7 +202,7 @@
                     <label class="student-guardian-label" for="student-guardian">Student Guardian:</label>
 
                         <div class="tab student-guardian">
-                            <label class="guardian-name-label" for="guardian-name">Guardian Name:</label>
+                            <label for="guardian-name">Guardian Name:</label>
                                 <input type="text" name="guardian-name" id="guardian-name" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
@@ -214,15 +214,15 @@
                     <label for="student-remark">Remark:</label>
                         <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
 
-                        <input type="checkbox" onclick="AddressNotFoundCreate(this)" name="address-not-found" id="address-not-found" value="true">
-                            <label for="address-not-found"> Address not found</label><br>
+                            <input type="checkbox" onclick="AddressNotFoundCreate(this)" name="address-not-found" id="address-not-found" value="true">
+                                <label for="address-not-found"> Address not found</label><br>
 
-                        <input type="checkbox" onclick="UnableToReachCreate(this)" name="unable-to-reach" id="unable-to-reach" value="true">
-                            <label for="unable-to-reach"> Unable to reach Contact Number</label><br>
+                            <input type="checkbox" onclick="UnableToReachCreate(this)" name="unable-to-reach" id="unable-to-reach" value="true">
+                                <label for="unable-to-reach"> Unable to reach Contact Number</label><br>
 
 
                     <label for="student-sponsor">Sponsor:</label>
-                        <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+                        <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
 
                         
                     <label for="student-hs-address">Student HighSchool Address:</label>
@@ -274,33 +274,40 @@
                     <input type="hidden" name="id-edit" id="id-edit">
 
                     <label for="student-number-edit">Student Number:</label>
+                    <input type="hidden" name="student-number-edit-hidden" id="student-number-edit-hidden">
                         <!--  May show error in VSCode due to return statement not used within a function body -->
-                        <input type="tel" name="student-number-edit" id="student-number-edit" onkeypress="return isNumberKey(event);" maxlength="255"><br>
+                        <input type="tel" name="student-number-edit" id="student-number-edit" onkeypress="return isNumberKey(event);" maxlength="50"><br>
 
 
                     <label for="student-course-edit">Course:</label>
-                        <input type="text" name="student-course-edit" id="student-course-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                    <input type="hidden" name="student-course-edit-hidden" id="student-course-edit-hidden">
+                        <input type="text" name="student-course-edit" id="student-course-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
                     <label class="student-name-label-edit" for="student-name-edit">Student Name:</label>
 
                         <div class="tab student-name-edit">
                             <label for="student-surname-edit">Surname:</label>
+                            <input type="hidden" name="student-surname-edit-hidden" id="student-surname-edit-hidden">
                                 <input type="text" name="student-surname-edit" id="student-surname-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50">
 
                             <label for="student-first-name-edit">First Name:</label>
+                            <input type="hidden" name="student-first-name-edit-hidden" id="student-first-name-edit-hidden">
                                 <input type="text" name="student-first-name-edit" id="student-first-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50">
 
                             <label for="student-middle-initial-edit">Middle Initial:</label>
+                            <input type="hidden" name="student-middle-initial-edit-hidden" id="student-middle-initial-edit-hidden">
                                 <input type="text" name="student-middle-initial-edit" id="student-middle-initial-edit" oninput="this.value = this.value.toUpperCase()" maxlength="5">
                         </div><br>
 
 
                     <label for="student-birthdate-edit">Student Birthdate:</label>
+                    <input type="hidden" name="student-birthdate-edit-hidden" id="student-birthdate-edit-hidden">
                         <input type="date" name="student-birthdate-edit" id="student-birthdate-edit"><br>
 
 
                     <label for="student-gender-edit">Student Gender:</label>
+                    <input type="hidden" name="student-gender-edit-hidden" id="student-gender-edit-hidden">
                         <input type="radio" id="student-gender-male-edit" name="student-gender-edit" value="MALE"/>
                         <label for="student-gender-male-edit">MALE</label> 
 
@@ -312,22 +319,28 @@
 
                         <div class="tab student-address-edit">
                             <label for="student-house-number-edit">House Number:</label>
+                            <input type="hidden" name="student-house-number-edit-hidden" id="student-house-number-edit-hidden">
                                 <input type="text" name="student-house-number-edit" id="student-house-number-edit" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
                             <label for="student-street-edit">Street:</label>
-                                <input type="text" name="student-street-edit" id="student-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                            <input type="hidden" name="student-street-edit-hidden" id="student-street-edit-hidden">
+                                <input type="text" name="student-street-edit" id="student-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-subdivision-edit">Subdivision:</label>
-                                <input type="text" name="student-subdivision-edit" id="student-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-subdivision-edit-hidden" id="student-subdivision-edit-hidden">
+                                <input type="text" name="student-subdivision-edit" id="student-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-barangay-edit">Barangay:</label>
-                                <input type="text" name="student-barangay-edit" id="student-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-barangay-edit-hidden" id="student-barangay-edit-hidden">
+                                <input type="text" name="student-barangay-edit" id="student-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-town-edit">Town:</label>
-                                <input type="text" name="student-town-edit" id="student-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-town-edit-hidden" id="student-town-edit-hidden">
+                                <input type="text" name="student-town-edit" id="student-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-district-edit">District:</label>
-                                <input type="text" name="student-district-edit" id="student-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                            <input type="hidden" name="student-district-edit-hidden" id="student-district-edit-hidden">
+                                <input type="text" name="student-district-edit" id="student-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100">
                         </div><br>
 
 
@@ -339,56 +352,80 @@
                             <label for="current-address-edit"> Same as Current Address</label><br>
 
                             <label for="student-provincial-house-number-edit">House Number:</label>
+                            <input type="hidden" name="student-provincial-house-number-edit-hidden" id="student-provincial-house-number-edit-hidden">
                                 <input type="text" name="student-provincial-house-number-edit" id="student-provincial-house-number-edit" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
 
                             <label for="student-provincial-street-edit">Street:</label>
-                                <input type="text" name="student-provincial-street-edit" id="student-provincial-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255"><br>
+                            <input type="hidden" name="student-provincial-street-edit-hidden" id="student-provincial-street-edit-hidden">
+                                <input type="text" name="student-provincial-street-edit" id="student-provincial-street-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-subdivision-edit">Subdivision:</label>
-                                <input type="text" name="student-provincial-subdivision-edit" id="student-provincial-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-provincial-subdivision-edit-hidden" id="student-provincial-subdivision-edit-hidden">
+                                <input type="text" name="student-provincial-subdivision-edit" id="student-provincial-subdivision-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-barangay-edit">Barangay:</label>
-                                <input type="text" name="student-provincial-barangay-edit" id="student-provincial-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-provincial-barangay-edit-hidden" id="student-provincial-barangay-edit-hidden">
+                                <input type="text" name="student-provincial-barangay-edit" id="student-provincial-barangay-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-town-edit">Town:</label>
-                                <input type="text" name="student-provincial-town-edit" id="student-provincial-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="150"><br>
+                            <input type="hidden" name="student-provincial-town-edit-hidden" id="student-provincial-town-edit-hidden">
+                                <input type="text" name="student-provincial-town-edit" id="student-provincial-town-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
                             <label for="student-provincial-district-edit">District:</label>
-                                <input type="text" name="student-provincial-district-edit" id="student-provincial-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="255">
+                            <input type="hidden" name="student-provincial-district-edit-hidden" id="student-provincial-district-edit-hidden">
+                                <input type="text" name="student-provincial-district-edit" id="student-provincial-district-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100">
 
                         </div><br>
 
 
                     <label for="student-contact-number-edit">Student Contact Number:</label>
+                    <input type="hidden" name="student-contact-number-edit-hidden" id="student-contact-number-edit-hidden">
                         <input type="tel" name="student-contact-number-edit" id="student-contact-number-edit" onkeypress="return isPhone(event);" maxlength="15"><br>
                     
                     
                     <label for="student-email-edit">Student Email Address:</label>
+                    <input type="hidden" name="student-email-edit-hidden" id="student-email-edit-hidden">
                         <input type="email" name="student-email-edit" id="student-email-edit" maxlength="50"><br>
                     
 
                     <label class="student-guardian-label-edit" for="student-guardian-edit">Student Guardian:</label>
 
                         <div class="tab student-guardian-edit">
-                            <label class="guardian-name-label-edit" for="guardian-name-edit">Guardian Name:</label>
+                            <label for="guardian-name-edit">Guardian Name:</label>
+                            <input type="hidden" name="guardian-name-edit-hidden" id="guardian-name-edit-hidden">
                                 <input type="text" name="guardian-name-edit" id="guardian-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
 
 
                             <label for="guardian-contact-number-edit">Guardian Contact Number:</label>
+                            <input type="hidden" name="guardian-contact-number-edit-hidden" id="guardian-contact-number-edit-hidden">
                                 <input type="tel" name="guardian-contact-number-edit" id="guardian-contact-number-edit" onkeypress="return isPhone(event);" maxlength="15">
                         </div><br>
 
 
                     <label for="student-remark-edit">Remark:</label>
+                    <input type="hidden" name="student-remark-edit-hidden" id="student-remark-edit-hidden">
                         <textarea name="student-remark-edit" id="student-remark-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+                            <input type="checkbox" onclick="AddressNotFoundEdit(this)" name="address-not-found" id="address-not-found" value="true">
+                                <label for="address-not-found"> Address not found</label><br>
+
+                            <input type="checkbox" onclick="UnableToReachEdit(this)" name="unable-to-reach" id="unable-to-reach" value="true">
+                                <label for="unable-to-reach"> Unable to reach Contact Number</label><br>
 
 
                     <label for="student-sponsor-edit">Sponsor:</label>
-                        <input type="text" name="student-sponsor-edit" id="student-sponsor-edit" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+                    <input type="hidden" name="student-sponsor-edit-hidden" id="student-sponsor-edit-hidden">
+                        <input type="text" name="student-sponsor-edit" id="student-sponsor-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
 
                         
                     <label for="student-hs-address-edit">Student HighSchool Address:</label>
+                    <input type="hidden" name="student-hs-address-edit-hidden" id="student-hs-address-edit-hidden">
                         <textarea name="student-hs-address-edit" id="student-hs-address-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+                    <input type="hidden" name="student-company-name-edit-hidden" id="student-company-name-edit-hidden">
+                    <input type="hidden" name="student-company-address-edit-hidden" id="student-company-address-edit-hidden">
+                    <input type="hidden" name="student-company-position-edit-hidden" id="student-company-position-edit-hidden">
+                    <input type="hidden" name="student-company-contact-number-edit-hidden" id="student-company-contact-number-edit-hidden">
 
                         <br>
                         <br>

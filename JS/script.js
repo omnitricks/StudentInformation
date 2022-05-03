@@ -132,8 +132,112 @@ function UnableToReachCreate(cb) {
     }
 }
 
+// When checkbox is ticked, input into "" remarks (Update Modal)
+function AddressNotFoundEdit(cb) {
+    var remark = document.getElementById("student-remark-edit").value;
+
+    var add = "•Address not found";
+    var addressNotFound = cb.checked ? add : '';
+
+    var newRemark = remark + addressNotFound + "\r\n";
+    
+    if(remark.indexOf(add) != -1){
+        return;
+
+    }else{
+        return document.getElementById("student-remark-edit").value = newRemark;
+
+    }
+}
+
+// When checkbox is ticked, input into "" remarks (Update Modal)
+function UnableToReachEdit(cb) {
+    var remark = document.getElementById("student-remark-edit").value;
+
+    var add = "•Unable to reach Contact Number";
+    var unableToReach = cb.checked ? add : '';
+
+    var newRemark = remark + unableToReach + "\r\n";
+
+    if(remark.indexOf(add) != -1){
+        return;
+
+    }else{
+        return document.getElementById("student-remark-edit").value = newRemark;
+
+    }
+}
+
+// Detect changes in form
+function DetectChanges(unmodified, modified){
+    if(unmodified == modified){
+        return false;
+    } else{
+        return true;
+    }
+}
+
 
 $(document).ready(function(){
+    // Checks for changes in the Edit/ Update Form
+    function Changes(){
+        var $blank = "";
+        var $studentNumber = DetectChanges($('#student-number-edit').val(), $('#student-number-edit-hidden').val());
+        var $studentCourse = DetectChanges($('#student-course-edit').val(), $('#student-course-edit-hidden').val());
+        var $studentSurname = DetectChanges($('#student-surname-edit').val(), $('#student-surname-edit-hidden').val());
+        var $studentFirstName = DetectChanges($('#student-first-name-edit').val(), $('#student-first-name-edit-hidden').val());
+        var $studentMiddleInitial = DetectChanges($('#student-middle-initial-edit').val(), $('#student-middle-initial-edit-hidden').val());
+        var $studentBirthdate = DetectChanges($('#student-birthdate-edit').val(), $('#student-birthdate-edit-hidden').val());
+        var $studentGender = DetectChanges($('#student-gender-edit').val(), $("input[name='student-house-number-edit-hidden']:checked").val());
+        var $studentHouseNumber = DetectChanges($('#student-house-number-edit').val(), $('#student-house-number-edit-hidden').val());
+        var $studentStreet = DetectChanges($('#student-street-edit').val(), $('#student-street-edit-hidden').val());
+        var $studentSubdivision = DetectChanges($('#student-subdivision-edit').val(), $('#student-subdivision-edit-hidden').val());
+        var $studentBarangay = DetectChanges($('#student-barangay-edit').val(), $('#student-barangay-edit-hidden').val());
+        var $studentTown = DetectChanges($('#student-town-edit').val(), $('#student-town-edit-hidden').val());
+        var $studentDistrict = DetectChanges($('#student-district-edit').val(), $('#student-district-edit-hidden').val());
+        var $studentProvincialHouseNumber = DetectChanges($('#student-provincial-house-number-edit').val(), $('#student-provincial-house-number-edit-hidden').val());
+        var $studentProvincialStreet = DetectChanges($('#student-provincial-street-edit').val(), $('#student-provincial-street-edit-hidden').val());
+        var $studentProvincialSubdivision = DetectChanges($('#student-provincial-subdivision-edit').val(), $('#student-provincial-subdivision-edit-hidden').val());
+        var $studentProvincialBarangay = DetectChanges($('#student-provincial-barangay-edit').val(), $('#student-provincial-barangay-edit-hidden').val());
+        var $studentProvincialTown = DetectChanges($('#student-provincial-town-edit').val(), $('#student-provincial-town-edit-hidden').val());
+        var $studentProvincialDistrict = DetectChanges($('#student-provincial-district-edit').val(), $('#student-provincial-district-edit-hidden').val());
+        var $studentContactNumber = DetectChanges($('#student-contact-number-edit').val(), $('#student-contact-number-edit-hidden').val());
+        var $studentEmail = DetectChanges($('#student-email-edit').val(), $('#student-email-edit-hidden').val());
+        var $guardianName = DetectChanges($('#guardian-name-edit').val(), $('#guardian-name-edit-hidden').val());
+        var $guardianContactNumber = DetectChanges($('#guardian-contact-number-edit').val(), $('#guardian-contact-number-edit-hidden').val());
+        var $studentRemark = DetectChanges($('#student-remark-edit').val(), $('#student-remark-edit-hidden').val());
+        var $studentSponsor = DetectChanges($('#student-sponsor-edit').val(), $('#student-sponsor-edit-hidden').val());
+        var $studentHighSchoolAddress = DetectChanges($('#student-hs-address-edit').val(), $('#student-hs-address-edit-hidden').val());
+
+        var $studentCompanyName = DetectChanges($blank, $('#student-company-name-edit-hidden').val());
+        var $studentCompanyAddress = DetectChanges($blank, $('#student-company-address-edit-hidden').val());
+        var $studentCompanyPosition = DetectChanges($blank, $('#student-company-position-edit-hidden').val());
+        var $studentCompanyContactNumber = DetectChanges($blank, $('#student-company-contact-number-edit-hidden').val());
+
+
+        if($studentNumber || $studentCourse || $studentSurname || $studentFirstName || $studentMiddleInitial || $studentBirthdate || $studentGender || $studentHouseNumber ||$studentStreet || $studentSubdivision || $studentBarangay || $studentTown || $studentDistrict || $studentProvincialHouseNumber || $studentProvincialStreet || $studentProvincialSubdivision || $studentProvincialBarangay || $studentProvincialTown || $studentProvincialDistrict || $studentContactNumber || $studentEmail || $guardianName || $guardianContactNumber || $studentRemark || $studentSponsor || $studentHighSchoolAddress || $studentCompanyName || $studentCompanyAddress || $studentCompanyPosition || $studentCompanyContactNumber){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    // Gets page number, alternative to $_GET method for pagination function in search.php
+    function CheckPage(){
+        // Gets current url
+        var url = window.location.href;
+        // Gets page number from the url
+        var res = url.split("http://localhost/StudentInformation/PHP/index.php?page=");
+
+        // if page number is undetected it is equivalent to one
+        if(res[1] === undefined){
+            res[1] = 1;
+        }
+        
+        return res[1];
+    }
+
+
 
     // jQuery Version of change icon when there is input detected
     $('.data-searchbox').on('input', function() {
@@ -374,21 +478,48 @@ $(document).ready(function(){
 
     $('.confirm').click(function(){
         var id = $(this).data('id');
+        var formDataEdit = $('#studentInformationEdit').serialize();
+        Obj = new Object();
+        Obj.activityType = "DELETE";
+        var Data = formDataEdit + "&" + $.param(Obj);
 
+        //Archive Deleted Data
         $.ajax({
-            url: 'delete.php',
-            type: 'GET',
-            data: 'id=' + id,
+            url: 'archive.php',
+            type: 'POST',
+            data: formDataEdit,
             error: function() {
                 alert('Something is wrong');
             },
             success: function(data) {
-                $("#"+ id).remove();
-                // Needs this because there's a bug that does not show message when not refreshed
-                location.reload(true);
+                
+                //Update Activity Log
+                $.ajax({
+                    url: 'activityLog.php',
+                    type: 'POST',
+                    data: Data,
+                    error: function() {
+                        alert('Something is wrong');
+                    },
+                    success: function(data) {
+                        
+                        //Delete Data
+                        $.ajax({
+                            url: 'delete.php',
+                            type: 'GET',
+                            data: 'id=' + id,
+                            error: function() {
+                                alert('Something is wrong');
+                            },
+                            success: function(data) {
+                                $("#"+ id).remove();
+                                window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                            }
+                        });
+                    }
+                });
             }
         });
-        // e.preventDefault();
         $(".bg-modal-delete").hide();
     });
 
@@ -443,6 +574,38 @@ $(document).ready(function(){
                 $('#student-remark-edit').val(data[24]);
                 $('#student-sponsor-edit').val(data[25]);
                 $('#student-hs-address-edit').val(data[26]);
+
+                // hidden
+                $('#student-number-edit-hidden').val(data[1]);
+                $('#student-course-edit-hidden').val(data[2]);
+                $('#student-surname-edit-hidden').val(data[3]);
+                $('#student-first-name-edit-hidden').val(data[4]);
+                $('#student-middle-initial-edit-hidden').val(data[5]);
+                $('#student-birthdate-edit-hidden').val(data[6]);
+                $('#student-gender-edit-hidden').val(data[7]);
+                $('#student-house-number-edit-hidden').val(data[8]);
+                $('#student-street-edit-hidden').val(data[9]);
+                $('#student-subdivision-edit-hidden').val(data[10]);
+                $('#student-barangay-edit-hidden').val(data[11]);
+                $('#student-town-edit-hidden').val(data[12]);
+                $('#student-district-edit-hidden').val(data[13]);
+                $('#student-provincial-house-number-edit-hidden').val(data[14]);
+                $('#student-provincial-street-edit-hidden').val(data[15]);
+                $('#student-provincial-subdivision-edit-hidden').val(data[16]);
+                $('#student-provincial-barangay-edit-hidden').val(data[17]);
+                $('#student-provincial-town-edit-hidden').val(data[18]);
+                $('#student-provincial-district-edit-hidden').val(data[19]);
+                $('#student-contact-number-edit-hidden').val(data[20]);
+                $('#student-email-edit-hidden').val(data[21]);
+                $('#guardian-name-edit-hidden').val(data[22]);
+                $('#guardian-contact-number-edit-hidden').val(data[23]);
+                $('#student-remark-edit-hidden').val(data[24]);
+                $('#student-sponsor-edit-hidden').val(data[25]);
+                $('#student-hs-address-edit-hidden').val(data[26]);
+                $('#student-company-name-edit-hidden').val(data[27]);
+                $('#student-company-address-edit-hidden').val(data[28]);
+                $('#student-company-position-edit-hidden').val(data[29]);
+                $('#student-company-contact-number-edit-hidden').val(data[30]);
             }
         });
     });
@@ -628,18 +791,42 @@ $(document).ready(function(){
         }
 
         var formDataEdit = $('#studentInformationEdit').serialize();
-        $.ajax({
-            url: 'update.php',
-            type: 'GET',
-            data: formDataEdit,
-            error: function() {
-                alert('Something is wrong');
-            },
-            success: function(data) {
-                // Needs this because there's a bug that does not show message when not refreshed
-                // location.reload(true);
-            }
-        });
+        Obj = new Object();
+        Obj.activityType = "UPDATE";
+        var Data = formDataEdit + "&" + $.param(Obj);
+
+        // Checks if there is any changes made, if not no data is inserted into the database
+        if(Changes()){
+
+            //Update Activity Log
+            $.ajax({
+                url: 'activityLog.php',
+                type: 'POST',
+                data: Data,
+                error: function() {
+                    alert('Something is wrong');
+                },
+                success: function(data) {
+
+                    // Update Data in Database
+                    $.ajax({
+                        url: 'update.php',
+                        type: 'GET',
+                        data: formDataEdit,
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(data) {
+                            window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                        }
+                    });
+                }
+            });
+        } else{
+            location.reload(true);
+
+        }
+
     });
 
     $(".close").click(function(){
@@ -700,10 +887,12 @@ $(document).ready(function(){
 
     function search_data(query, queryType){
 
+        var page = CheckPage();
+
         $.ajax({
             url: 'search.php',
             method:'POST',
-            data:{query:query, queryType:queryType},
+            data:{query:query, queryType:queryType, page:page},
             error: function() {
                 alert('Something is wrong');
 
@@ -712,6 +901,7 @@ $(document).ready(function(){
                 $('#result').html(data);
             }
         });
+
     }
 
     $('.data-searchbox').keyup(function(){

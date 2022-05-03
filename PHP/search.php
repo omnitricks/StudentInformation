@@ -2,16 +2,92 @@
     // database connection
     include('config.php');
 
-    $output = '';
+    if(isset($_POST["query"]) && isset($_POST["queryType"])){
+        $search = mysqli_real_escape_string($conn, $_POST['query']);
+        $searchType = $_POST['queryType'];
+        $sql = "SELECT * FROM `student-information` WHERE ".$searchType." LIKE '%".$search."%'";
+    } else{
+        $sql = "SELECT * FROM `student-information`";
+    }
+
+    $res = mysqli_query($conn, $sql);
+
+    // Sets the number of total data in a page
+    $results_per_page = 5;
+    $number_of_results = mysqli_num_rows($res);
+    // Determines number of total pages available
+    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+    // Determines which page number user is currently on
+    if(!isset( ($_POST["page"]) )){
+        $page = 1;
+    } else if( isset( ($_POST["page"]) ) ){
+        $page =   $_POST["page"];
+    }
+
+    // Determines the LIMIT starting number
+    $this_page_first_result = ($page - 1) * $results_per_page;
+
+
+    // Display links to pages
+    $pageLink = '';
+
+    //First Page, only shows when page number is more than 2
+    if($number_of_pages >= 3){
+        if($page != 1){
+            $pageLink .=  '<span><a href="index.php?page=1" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-left"></i></a></span>';
+        }
+    }
+    
+    //Previous Page
+    $prevlimit = $page - 1;
+    if($prevlimit < 1){
+        $prevlimit = 1;
+    }
+    if($page != $prevlimit){
+        $pageLink .=  '<span><a href="index.php?page=' . $prevlimit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-chevron-left"></i></a></span>';
+    }
+
+    for($pages=1; $pages<=$number_of_pages; $pages++){
+        //Adds active class to the page user is currently on
+        if($pages ==  $page){
+            $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+        } else{
+            $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+        }
+    };
+
+    //Next Page
+    $nextlimit = $page + 1;
+    if($nextlimit == $pages){
+        $nextlimit = $pages - 1;
+    }
+    if($page != $nextlimit){
+        $pageLink .=  '<span><a href="index.php?page=' . $nextlimit . '" class="pagenext active" id="pagenext"> <i class="fa-solid fa-chevron-right"></i></a></span>';
+    }
+
+    //Last Page, only shows when page number is more than 2
+    $limit = $pages - 1;
+    if($number_of_pages >= 3){
+        if($page != $limit){
+            $pageLink .=  '<span><a href="index.php?page=' . $limit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-right"></i></a></span>';
+        }
+    }
+
+
+    // Retrieves selected results according to the limit
     if(isset($_POST["query"]) && isset($_POST["queryType"])){
         $search = mysqli_real_escape_string($conn, $_POST['query']);
         $searchType = $_POST['queryType'];
         $query = "SELECT * FROM `student-information` WHERE ".$searchType." LIKE '%".$search."%'";
+        $pageLink = '';
     } else{
-        $query = "SELECT * FROM `student-information`";
+        $query = "SELECT * FROM `student-information` LIMIT " . $this_page_first_result . "," . $results_per_page;
     }
 
     $result = mysqli_query($conn, $query);
+    $output = '';
+
     if(mysqli_num_rows($result) > 0){
         $output .= '
         <div class="tableContainer">
@@ -30,33 +106,6 @@
         while($row = mysqli_fetch_array($result)){
             // Combines data
             $studentName = $row['studentSurname'] . ', ' . $row['studentFirstName'] . ' ' . $row['studentMiddleInitial'] . '.';
-            // $studentAddress = $row['studentStreet'] . ' ' . $row['studentTown'] . ' ' . $row['studentDistrict'];
-
-            // if($row['studentProvincialStreet']=='N/A' && $row['studentProvincialTown'] =='N/A' && $row['studentProvincialDistrict']=='N/A'){
-            //     $studentProvincialAddress = 'N/A';
-            // }else{
-            //     $studentProvincialAddress = $row['studentProvincialStreet'] . ' ' . $row['studentProvincialTown'] . ' ' . $row['studentProvincialDistrict'];
-            // }
-
-            // Conditions for optional fields left blank
-            // if($row['studentTelephoneNumber'] == ''){
-            //     $row['studentTelephoneNumber'] = 'N/A';
-            // }
-            // if($row['guardianTelephoneNumber'] == ''){
-            //     $row['guardianTelephoneNumber'] = 'N/A';
-            // }
-            // if($row['studentRemark'] == ''){
-            //     $row['studentRemark'] = 'N/A';
-            // }
-            // if($row['studentSponsor'] == ''){
-            //     $row['studentSponsor'] = 'N/A';
-            // }
-            // if($row['studentHighSchoolAddress'] == ''){
-            //     $row['studentHighSchoolAddress'] = 'N/A';
-            // }
-
-            //  Changes format of date from YYYY-MM-DD to Month Day, Year
-            // $birthdate = date('M j, Y',strtotime($row['studentBirthdate']));
 
             $output .= "
             <tr id='$row[id]'>
@@ -72,7 +121,11 @@
         $output .= "
                 </tbody>
             </table>
-        </div>
+            ";
+
+        $output .= "
+                <div class='pagination_links'>" . $pageLink . "</div>
+            </div>
         ";
         
         echo $output;

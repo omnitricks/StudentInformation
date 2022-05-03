@@ -81,13 +81,13 @@
 
 
     // Form Data - optional
-    if(empty($_GET['student-subdivision-edit'])){
+    if(isset($_GET['student-subdivision-edit'])){
         $studentSubdivision = $_GET['student-subdivision-edit'];
     } else{
         $studentSubdivision = '';
     }
 
-    if(empty($_GET['student-provincial-subdivision-edit'])){
+    if(isset($_GET['student-provincial-subdivision-edit'])){
         $studentProvincialSubdivision = $_GET['student-provincial-subdivision-edit'];
     } else{
         $studentProvincialSubdivision = '';
