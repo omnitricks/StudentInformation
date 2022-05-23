@@ -34,6 +34,7 @@
         </div><br>
 
 
+
         <!-- Alert Messages -->
         <div class="alerts">
             <?php
@@ -89,13 +90,66 @@
                     </div><br>";
                     unset($_SESSION['delete-success']);
                 }
-            ?>    
+            ?>
         </div>
         
+
 
         <!-- Show Popup Modal Create/ Insert -->
         <a href="#" id="create" class="create">Create</a>
 
+
+
+        <!-- Table View via search.php -->
+        <div id="result"></div>
+
+
+
+        <!-- Chart View -->
+        <div class="row">
+
+            <div class="chart-container">
+                <h1>GENDER</h1>
+                <div class="chartBar">
+                    <canvas id="gender_chart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h1>CITY</h1>
+                <div class="chartDonut">
+                    <canvas id="city_chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h1>PROVINCE</h1>
+                <div class="chartDonut">
+                    <canvas id="province_chart"></canvas>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <!-- Popup Modal Delete Confirmation -->
+        <div class="bg-modal-delete">
+            <div class="modal-contents-delete">
+                <table class="popdel" id="popdel">
+                    <thead>
+                        <tr>
+                            <td colspan="2">Are you sure you want to delete this row?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#" id="cancel" class="cancel">No</a></td>
+                            <td><a href="#" id="" class="confirm">Yes</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- Popup Modal Create/ Insert -->
         <div class="bg-modal">
@@ -234,32 +288,6 @@
                 </form>
             </div>
         </div>
-
-
-        <!-- Table View via search.php -->
-        <div id="result"></div>
-        
-
-        <!-- Popup Modal Delete Confirmation -->
-        <div class="bg-modal-delete">
-            <div class="modal-contents-delete">
-                <table class="popdel" id="popdel">
-                    <thead>
-                        <tr>
-                            <td colspan="2">Are you sure you want to delete this row?</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#" id="cancel" class="cancel">No</a></td>
-                            <td><a href="#" id="" class="confirm">Yes</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
 
         <!-- Popup Modal Update/ Edit -->
         <div class="bg-modal-edit">
@@ -440,8 +468,6 @@
             </div>
         </div>
 
-
-
         <!-- Popup Modal Read/ View -->
         <div class="bg-modal-view">
             <div class="modal-contents-view">
@@ -530,6 +556,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../JS/script.js"></script>
         <!-- Prevents resubmission of form data when refreshing -->
         <script>

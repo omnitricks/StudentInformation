@@ -48,6 +48,16 @@
         $studentBarangay = $_GET['student-barangay-edit'];
         $studentTown = $_GET['student-town-edit'];
         $studentDistrict = $_GET['student-district-edit'];
+
+        // Test if string contains the word
+        $word = "CITY";
+        $string = $studentTown;
+        if(strpos($string, $word) !== false){
+            $studentTown = $string;
+        } else{
+            $string .= " CITY";
+            $studentTown = $string;
+        }
     }
 
     if (empty($_GET['student-provincial-house-number-edit']) || empty($_GET['student-provincial-street-edit'])  || empty($_GET['student-provincial-barangay-edit']) || empty($_GET['student-provincial-town-edit']) || empty($_GET['student-provincial-district-edit'])){
@@ -58,6 +68,16 @@
         $studentProvincialBarangay = $_GET['student-provincial-barangay-edit'];
         $studentProvincialTown = $_GET['student-provincial-town-edit'];
         $studentProvincialDistrict = $_GET['student-provincial-district-edit'];
+
+        // Test if string contains the word
+        $word2 = "CITY";
+        $string2 = $studentProvincialTown;
+        if(strpos($string2, $word2) !== false){
+            $studentProvincialTown = $string2;
+        } else{
+            $string2 .= " CITY";
+            $studentProvincialTown = $string2;
+        }
     }
 
     if (empty($_GET['student-contact-number-edit'])){

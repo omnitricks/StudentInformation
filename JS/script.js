@@ -182,37 +182,71 @@ $(document).ready(function(){
     // Checks for changes in the Edit/ Update Form
     function Changes(){
         var $blank = "";
-        var $studentNumber = DetectChanges($('#student-number-edit').val(), $('#student-number-edit-hidden').val());
-        var $studentCourse = DetectChanges($('#student-course-edit').val(), $('#student-course-edit-hidden').val());
-        var $studentSurname = DetectChanges($('#student-surname-edit').val(), $('#student-surname-edit-hidden').val());
-        var $studentFirstName = DetectChanges($('#student-first-name-edit').val(), $('#student-first-name-edit-hidden').val());
-        var $studentMiddleInitial = DetectChanges($('#student-middle-initial-edit').val(), $('#student-middle-initial-edit-hidden').val());
-        var $studentBirthdate = DetectChanges($('#student-birthdate-edit').val(), $('#student-birthdate-edit-hidden').val());
-        var $studentGender = DetectChanges($('#student-gender-edit').val(), $("input[name='student-house-number-edit-hidden']:checked").val());
-        var $studentHouseNumber = DetectChanges($('#student-house-number-edit').val(), $('#student-house-number-edit-hidden').val());
-        var $studentStreet = DetectChanges($('#student-street-edit').val(), $('#student-street-edit-hidden').val());
-        var $studentSubdivision = DetectChanges($('#student-subdivision-edit').val(), $('#student-subdivision-edit-hidden').val());
-        var $studentBarangay = DetectChanges($('#student-barangay-edit').val(), $('#student-barangay-edit-hidden').val());
-        var $studentTown = DetectChanges($('#student-town-edit').val(), $('#student-town-edit-hidden').val());
-        var $studentDistrict = DetectChanges($('#student-district-edit').val(), $('#student-district-edit-hidden').val());
-        var $studentProvincialHouseNumber = DetectChanges($('#student-provincial-house-number-edit').val(), $('#student-provincial-house-number-edit-hidden').val());
-        var $studentProvincialStreet = DetectChanges($('#student-provincial-street-edit').val(), $('#student-provincial-street-edit-hidden').val());
-        var $studentProvincialSubdivision = DetectChanges($('#student-provincial-subdivision-edit').val(), $('#student-provincial-subdivision-edit-hidden').val());
-        var $studentProvincialBarangay = DetectChanges($('#student-provincial-barangay-edit').val(), $('#student-provincial-barangay-edit-hidden').val());
-        var $studentProvincialTown = DetectChanges($('#student-provincial-town-edit').val(), $('#student-provincial-town-edit-hidden').val());
-        var $studentProvincialDistrict = DetectChanges($('#student-provincial-district-edit').val(), $('#student-provincial-district-edit-hidden').val());
-        var $studentContactNumber = DetectChanges($('#student-contact-number-edit').val(), $('#student-contact-number-edit-hidden').val());
-        var $studentEmail = DetectChanges($('#student-email-edit').val(), $('#student-email-edit-hidden').val());
-        var $guardianName = DetectChanges($('#guardian-name-edit').val(), $('#guardian-name-edit-hidden').val());
-        var $guardianContactNumber = DetectChanges($('#guardian-contact-number-edit').val(), $('#guardian-contact-number-edit-hidden').val());
-        var $studentRemark = DetectChanges($('#student-remark-edit').val(), $('#student-remark-edit-hidden').val());
-        var $studentSponsor = DetectChanges($('#student-sponsor-edit').val(), $('#student-sponsor-edit-hidden').val());
-        var $studentHighSchoolAddress = DetectChanges($('#student-hs-address-edit').val(), $('#student-hs-address-edit-hidden').val());
 
-        var $studentCompanyName = DetectChanges($blank, $('#student-company-name-edit-hidden').val());
-        var $studentCompanyAddress = DetectChanges($blank, $('#student-company-address-edit-hidden').val());
-        var $studentCompanyPosition = DetectChanges($blank, $('#student-company-position-edit-hidden').val());
-        var $studentCompanyContactNumber = DetectChanges($blank, $('#student-company-contact-number-edit-hidden').val());
+        var $studentNumber = "";
+        var $studentCourse = "";
+        var $studentSurname = "";
+        var $studentFirstName = "";
+        var $studentMiddleInitial = "";
+        var $studentBirthdate = "";
+        var $studentGender = "";
+        var $studentHouseNumber = "";
+        var $studentStreet = "";
+        var $studentSubdivision = "";
+        var $studentBarangay = "";
+        var $studentTown = "";
+        var $studentDistrict = "";
+        var $studentProvincialHouseNumber = "";
+        var $studentProvincialStreet = "";
+        var $studentProvincialSubdivision = "";
+        var $studentProvincialBarangay = "";
+        var $studentProvincialTown = "";
+        var $studentProvincialDistrict = "";
+        var $studentContactNumber = "";
+        var $studentEmail = "";
+        var $guardianName = "";
+        var $guardianContactNumber = "";
+        var $studentRemark = "";
+        var $studentSponsor = "";
+        var $studentHighSchoolAddress = "";
+        var $studentCompanyName = "";
+        var $studentCompanyAddress = "";
+        var $studentCompanyPosition = "";
+        var $studentCompanyContactNumber = "";
+
+
+
+        $studentNumber = DetectChanges($('#student-number-edit').val(), $('#student-number-edit-hidden').val());
+        $studentCourse = DetectChanges($('#student-course-edit').val(), $('#student-course-edit-hidden').val());
+        $studentSurname = DetectChanges($('#student-surname-edit').val(), $('#student-surname-edit-hidden').val());
+        $studentFirstName = DetectChanges($('#student-first-name-edit').val(), $('#student-first-name-edit-hidden').val());
+        $studentMiddleInitial = DetectChanges($('#student-middle-initial-edit').val(), $('#student-middle-initial-edit-hidden').val());
+        $studentBirthdate = DetectChanges($('#student-birthdate-edit').val(), $('#student-birthdate-edit-hidden').val());
+        $studentGender = DetectChanges($("input[name='student-house-number-edit']:checked").val(), $("#student-gender-edit-hidden").val());
+        $studentHouseNumber = DetectChanges($('#student-house-number-edit').val(), $('#student-house-number-edit-hidden').val());
+        $studentStreet = DetectChanges($('#student-street-edit').val(), $('#student-street-edit-hidden').val());
+        $studentSubdivision = DetectChanges($('#student-subdivision-edit').val(), $('#student-subdivision-edit-hidden').val());
+        $studentBarangay = DetectChanges($('#student-barangay-edit').val(), $('#student-barangay-edit-hidden').val());
+        $studentTown = DetectChanges($('#student-town-edit').val(), $('#student-town-edit-hidden').val());
+        $studentDistrict = DetectChanges($('#student-district-edit').val(), $('#student-district-edit-hidden').val());
+        $studentProvincialHouseNumber = DetectChanges($('#student-provincial-house-number-edit').val(), $('#student-provincial-house-number-edit-hidden').val());
+        $studentProvincialStreet = DetectChanges($('#student-provincial-street-edit').val(), $('#student-provincial-street-edit-hidden').val());
+        $studentProvincialSubdivision = DetectChanges($('#student-provincial-subdivision-edit').val(), $('#student-provincial-subdivision-edit-hidden').val());
+        $studentProvincialBarangay = DetectChanges($('#student-provincial-barangay-edit').val(), $('#student-provincial-barangay-edit-hidden').val());
+        $studentProvincialTown = DetectChanges($('#student-provincial-town-edit').val(), $('#student-provincial-town-edit-hidden').val());
+        $studentProvincialDistrict = DetectChanges($('#student-provincial-district-edit').val(), $('#student-provincial-district-edit-hidden').val());
+        $studentContactNumber = DetectChanges($('#student-contact-number-edit').val(), $('#student-contact-number-edit-hidden').val());
+        $studentEmail = DetectChanges($('#student-email-edit').val(), $('#student-email-edit-hidden').val());
+        $guardianName = DetectChanges($('#guardian-name-edit').val(), $('#guardian-name-edit-hidden').val());
+        $guardianContactNumber = DetectChanges($('#guardian-contact-number-edit').val(), $('#guardian-contact-number-edit-hidden').val());
+        $studentRemark = DetectChanges($('#student-remark-edit').val(), $('#student-remark-edit-hidden').val());
+        $studentSponsor = DetectChanges($('#student-sponsor-edit').val(), $('#student-sponsor-edit-hidden').val());
+        $studentHighSchoolAddress = DetectChanges($('#student-hs-address-edit').val(), $('#student-hs-address-edit-hidden').val());
+
+        $studentCompanyName = DetectChanges($blank, $('#student-company-name-edit-hidden').val());
+        $studentCompanyAddress = DetectChanges($blank, $('#student-company-address-edit-hidden').val());
+        $studentCompanyPosition = DetectChanges($blank, $('#student-company-position-edit-hidden').val());
+        $studentCompanyContactNumber = DetectChanges($blank, $('#student-company-contact-number-edit-hidden').val());
 
 
         if($studentNumber || $studentCourse || $studentSurname || $studentFirstName || $studentMiddleInitial || $studentBirthdate || $studentGender || $studentHouseNumber ||$studentStreet || $studentSubdivision || $studentBarangay || $studentTown || $studentDistrict || $studentProvincialHouseNumber || $studentProvincialStreet || $studentProvincialSubdivision || $studentProvincialBarangay || $studentProvincialTown || $studentProvincialDistrict || $studentContactNumber || $studentEmail || $guardianName || $guardianContactNumber || $studentRemark || $studentSponsor || $studentHighSchoolAddress || $studentCompanyName || $studentCompanyAddress || $studentCompanyPosition || $studentCompanyContactNumber){
@@ -227,14 +261,15 @@ $(document).ready(function(){
         // Gets current url
         var url = window.location.href;
         // Gets page number from the url
-        var res = url.split("http://localhost/StudentInformation/PHP/index.php?page=");
+        // var res = url.split("http://localhost/StudentInformation/PHP/index.php?page=");
+        var res = url.replace(/\D/g, "");
 
         // if page number is undetected it is equivalent to one
-        if(res[1] === undefined){
-            res[1] = 1;
+        if(!res){
+            res = 1;
         }
         
-        return res[1];
+        return res;
     }
 
 
@@ -444,11 +479,20 @@ $(document).ready(function(){
             })
         }
 
-        var formDataCreate = $('#studentInformationCreate').serialize();
+        // var formDataCreate = $('#studentInformationCreate').serialize();
+
+        //Serialize form as array
+        var form = $('#studentInformationCreate');
+        var serializedForm = form.serializeArray();
+        //trim values
+        serializedForm.forEach(o => o.value = jQuery.trim(o.value));
+        //turn it into a string if you wish
+        serializedForm = $.param(serializedForm);
+
         $.ajax({
             url: 'insert.php',
             type: 'POST',
-            data: formDataCreate,
+            data: serializedForm,
             error: function() {
                 alert('Something is wrong');
             },
@@ -513,9 +557,11 @@ $(document).ready(function(){
                             },
                             success: function(data) {
                                 $("#"+ id).remove();
-                                window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                                
                             }
                         });
+
+                        window.location.href = "http://localhost/StudentInformation/PHP/index.php";
                     }
                 });
             }
@@ -790,10 +836,20 @@ $(document).ready(function(){
             })
         }
 
-        var formDataEdit = $('#studentInformationEdit').serialize();
+        // var formDataEdit = $('#studentInformationEdit').serialize();
+
+        //Serialize form as array
+        var form = $('#studentInformationEdit');
+        var serializedForm = form.serializeArray();
+        //trim values
+        serializedForm.forEach(o => o.value = jQuery.trim(o.value));
+        //turn it into a string if you wish
+        serializedForm = $.param(serializedForm);
+
+
         Obj = new Object();
         Obj.activityType = "UPDATE";
-        var Data = formDataEdit + "&" + $.param(Obj);
+        var Data = serializedForm + "&" + $.param(Obj);
 
         // Checks if there is any changes made, if not no data is inserted into the database
         if(Changes()){
@@ -812,18 +868,21 @@ $(document).ready(function(){
                     $.ajax({
                         url: 'update.php',
                         type: 'GET',
-                        data: formDataEdit,
+                        data: serializedForm,
                         error: function() {
                             alert('Something is wrong');
                         },
-                        success: function(data) {
-                            window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                        success: function (data) {
+                            
                         }
                     });
+
+                    window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+
                 }
             });
         } else{
-            location.reload(true);
+            window.location.href = "http://localhost/StudentInformation/PHP/index.php";
 
         }
 
@@ -915,5 +974,224 @@ $(document).ready(function(){
             search_data();
         }
     });
+
+    count_data();
+    
+    function count_data(){
+
+        $.ajax({
+            url: 'count.php',
+            method:'POST',
+            data:{chartType:'gender'},
+            dataType:"JSON",
+            error: function() {
+                alert('Something is wrong');
+
+            },
+            success:function(data) {
+                // $('#count').html(data);
+                var gender = [];
+				var total = [];
+				var color = [];
+
+				for(var count = 0; count < data.length; count++)
+				{
+					gender.push(data[count].gender);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+				var chart_data = {
+					labels:gender,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
+
+				var options = {
+                    plugins:{   
+                        legend: {
+                            display: false
+                        }
+                    },
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
+                    }
+				};
+
+				var group_chart = $('#gender_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"bar",
+					data:chart_data,
+                    options:options
+				});
+
+            }
+        });
+
+
+        $.ajax({
+            url: 'count.php',
+            method:'POST',
+            data:{chartType:'city'},
+            dataType:"JSON",
+            error: function() {
+                alert('Something is wrong');
+
+            },
+            success:function(data) {
+
+                var city = [];
+				var total = [];
+				var color = [];
+
+				for(var count = 0; count < data.length; count++)
+				{
+					city.push(data[count].city);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+				var chart_data = {
+					labels:city,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
+
+				var options = {
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
+                    }
+				};
+
+				var group_chart = $('#city_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"doughnut",
+					data:chart_data,
+				});
+
+
+
+            }
+        });
+
+
+        $.ajax({
+            url: 'count.php',
+            method:'POST',
+            data:{chartType:'province'},
+            dataType:"JSON",
+            error: function() {
+                alert('Something is wrong');
+
+            },
+            success:function(data) {
+
+                var province = [];
+				var total = [];
+				var color = [];
+
+				for(var count = 0; count < data.length; count++)
+				{
+					province.push(data[count].province);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+				var chart_data = {
+					labels:province,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
+
+				var options = {
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
+                    }
+				};
+
+				var group_chart = $('#province_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"doughnut",
+					data:chart_data,
+				});
+
+
+
+            }
+        });
+
+    }
 
 });

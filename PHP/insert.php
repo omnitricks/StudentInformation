@@ -47,6 +47,17 @@
         $studentBarangay = $_POST['student-barangay'];
         $studentTown = $_POST['student-town'];
         $studentDistrict = $_POST['student-district'];
+
+
+        // Test if string contains the word
+        $word = "CITY";
+        $string = $studentTown;
+        if(strpos($string, $word) !== false){
+            $studentTown = $string;
+        } else{
+            $string .= " CITY";
+            $studentTown = $string;
+        }
     }
 
     if (empty($_POST['student-provincial-house-number']) || empty($_POST['student-provincial-street'])  || empty($_POST['student-provincial-barangay']) || empty($_POST['student-provincial-town']) || empty($_POST['student-provincial-district'])){
@@ -57,6 +68,16 @@
         $studentProvincialBarangay = $_POST['student-provincial-barangay'];
         $studentProvincialTown = $_POST['student-provincial-town'];
         $studentProvincialDistrict = $_POST['student-provincial-district'];
+
+        // Test if string contains the word
+        $word2 = "CITY";
+        $string2 = $studentProvincialTown;
+        if(strpos($string2, $word2) !== false){
+            $studentProvincialTown = $string2;
+        } else{
+            $string2 .= " CITY";
+            $studentProvincialTown = $string2;
+        }
     }
 
     if (empty($_POST['student-contact-number'])){
