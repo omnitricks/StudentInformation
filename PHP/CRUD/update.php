@@ -1,12 +1,11 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     //Errors Stored in single array
     $errors = array();
 
     $id = $_GET['id-edit'];
-    //Add  new student code 
     // Form Data - Required
     if (empty($_GET['student-number-edit'])){
         $errors['studentNumberError'] = "Student Number is Required";
@@ -131,6 +130,31 @@
         $studentHighSchoolAddress = '';
     }
 
+    if (isset($_GET['student-company-name-edit'])){
+        $studentCompanyName = $_GET['student-company-name-edit'];
+    } else{
+        $studentCompanyName = '';
+    }
+
+    if (isset($_GET['student-company-address-edit'])){
+        $studentCompanyAddress = $_GET['student-company-address-edit'];
+    } else{
+        $studentCompanyAddress = '';
+    }
+
+    if (isset($_GET['student-company-position-edit'])){
+        $studentCompanyPosition = $_GET['student-company-position-edit'];
+    } else{
+        $studentCompanyPosition = '';
+    }
+
+    if (isset($_GET['student-company-contact-number-edit'])){
+        $studentCompanyContactNumber = $_GET['student-company-contact-number-edit'];
+    } else{
+        $studentCompanyContactNumber = '';
+    }
+
+
     $blank = '';
 
 
@@ -147,7 +171,7 @@
 
         } else{
 
-            $update = "UPDATE `student-information` SET `studentNumber`='$studentNumber',`studentCourse`='$studentCourse',`studentSurname`='$studentSurname',`studentFirstName`='$studentFirstName',`studentMiddleInitial`='$studentMiddleInitial',`studentBirthdate`='$studentBirthdate',`studentGender`='$studentGender',`studentHouseNumber`='$studentHouseNumber',`studentStreet`='$studentStreet',`studentSubdivision`='$studentSubdivision',`studentBarangay`='$studentBarangay',`studentTown`='$studentTown',`studentDistrict`='$studentDistrict',`studentProvincialHouseNumber`='$studentProvincialHouseNumber',`studentProvincialStreet`='$studentProvincialStreet',`studentProvincialSubdivision`='$studentProvincialSubdivision',`studentProvincialBarangay`='$studentProvincialBarangay',`studentProvincialTown`='$studentProvincialTown',`studentProvincialDistrict`='$studentProvincialDistrict',`studentContactNumber`='$studentContactNumber',`studentEmail`='$studentEmail',`guardianName`='$guardianName',`guardianContactNumber`='$guardianContactNumber',`studentRemark`='$studentRemark',`studentSponsor`='$studentSponsor',`studentHighSchoolAddress`='$studentHighSchoolAddress',`studentCompanyName`='$blank',`studentCompanyAddress`='$blank',`studentCompanyPosition`='$blank',`studentCompanyContactNumber`='$blank' WHERE `id`= '$id'";
+            $update = "UPDATE `student-information` SET `studentNumber`='$studentNumber',`studentCourse`='$studentCourse',`studentSurname`='$studentSurname',`studentFirstName`='$studentFirstName',`studentMiddleInitial`='$studentMiddleInitial',`studentBirthdate`='$studentBirthdate',`studentGender`='$studentGender',`studentHouseNumber`='$studentHouseNumber',`studentStreet`='$studentStreet',`studentSubdivision`='$studentSubdivision',`studentBarangay`='$studentBarangay',`studentTown`='$studentTown',`studentDistrict`='$studentDistrict',`studentProvincialHouseNumber`='$studentProvincialHouseNumber',`studentProvincialStreet`='$studentProvincialStreet',`studentProvincialSubdivision`='$studentProvincialSubdivision',`studentProvincialBarangay`='$studentProvincialBarangay',`studentProvincialTown`='$studentProvincialTown',`studentProvincialDistrict`='$studentProvincialDistrict',`studentContactNumber`='$studentContactNumber',`studentEmail`='$studentEmail',`guardianName`='$guardianName',`guardianContactNumber`='$guardianContactNumber',`studentRemark`='$studentRemark',`studentSponsor`='$studentSponsor',`studentHighSchoolAddress`='$studentHighSchoolAddress',`studentCompanyName`='$studentCompanyName',`studentCompanyAddress`='$studentCompanyAddress',`studentCompanyPosition`='$studentCompanyPosition',`studentCompanyContactNumber`='$studentCompanyContactNumber' WHERE `id`= '$id'";
 
             $run_data = mysqli_query($conn,$update);
 

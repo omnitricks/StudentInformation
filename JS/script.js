@@ -243,10 +243,10 @@ $(document).ready(function(){
         $studentSponsor = DetectChanges($('#student-sponsor-edit').val(), $('#student-sponsor-edit-hidden').val());
         $studentHighSchoolAddress = DetectChanges($('#student-hs-address-edit').val(), $('#student-hs-address-edit-hidden').val());
 
-        $studentCompanyName = DetectChanges($blank, $('#student-company-name-edit-hidden').val());
-        $studentCompanyAddress = DetectChanges($blank, $('#student-company-address-edit-hidden').val());
-        $studentCompanyPosition = DetectChanges($blank, $('#student-company-position-edit-hidden').val());
-        $studentCompanyContactNumber = DetectChanges($blank, $('#student-company-contact-number-edit-hidden').val());
+        $studentCompanyName = DetectChanges($('#student-company-name-edit').val(), $('#student-company-name-edit-hidden').val());
+        $studentCompanyAddress = DetectChanges($('#student-company-address-edit').val(), $('#student-company-address-edit-hidden').val());
+        $studentCompanyPosition = DetectChanges($('#student-company-position-edit').val(), $('#student-company-position-edit-hidden').val());
+        $studentCompanyContactNumber = DetectChanges($('#student-company-contact-number-edit').val(), $('#student-company-contact-number-edit-hidden').val());
 
 
         if($studentNumber || $studentCourse || $studentSurname || $studentFirstName || $studentMiddleInitial || $studentBirthdate || $studentGender || $studentHouseNumber ||$studentStreet || $studentSubdivision || $studentBarangay || $studentTown || $studentDistrict || $studentProvincialHouseNumber || $studentProvincialStreet || $studentProvincialSubdivision || $studentProvincialBarangay || $studentProvincialTown || $studentProvincialDistrict || $studentContactNumber || $studentEmail || $guardianName || $guardianContactNumber || $studentRemark || $studentSponsor || $studentHighSchoolAddress || $studentCompanyName || $studentCompanyAddress || $studentCompanyPosition || $studentCompanyContactNumber){
@@ -261,15 +261,22 @@ $(document).ready(function(){
         // Gets current url
         var url = window.location.href;
         // Gets page number from the url
-        // var res = url.split("http://localhost/StudentInformation/PHP/index.php?page=");
-        var res = url.replace(/\D/g, "");
-
+        var res = url.split("http://localhost/StudentInformation/PHP/CRUD/index.php?page=");
+        var result;
         // if page number is undetected it is equivalent to one
-        if(!res){
-            res = 1;
+        if(res[1]===undefined){
+            result = 1;
         }
-        
-        return res;
+
+        if(res[1]!=undefined){
+            if(res[1].indexOf("#") != -1){
+                result = res[1].slice(0, res[1].length - 1);
+            } else{
+                result = res[1];
+            }
+        }
+
+        return result;
     }
 
 
@@ -332,9 +339,6 @@ $(document).ready(function(){
                     "student-street":{
                         required: true
                     },
-                    "student-subdivision":{
-                        required: false
-                    },
                     "student-barangay":{
                         required: true
                     },
@@ -350,9 +354,6 @@ $(document).ready(function(){
                     },
                     "student-provincial-street":{
                         required: true
-                    },
-                    "student-provincial-subdivision":{
-                        required: false
                     },
                     "student-provincial-barangay":{
                         required: true
@@ -380,9 +381,9 @@ $(document).ready(function(){
                 groups:{
                     "student-name": "student-surname student-first-name student-middle-initial",
 
-                    "student-address":  "student-house-number student-street student-subdivision student-barangay student-town student-district",
+                    "student-address":  "student-house-number student-street student-barangay student-town student-district",
 
-                    "student-provincial-address": "student-provincial-house-number student-provincial-street student-provincial-subdivision student-provincial-barangay student-provincial-town student-provincial-district",
+                    "student-provincial-address": "student-provincial-house-number student-provincial-street student-provincial-barangay student-provincial-town student-provincial-district",
 
                     "student-guardian": "guardian-name guardian-contact-number"
                 },
@@ -494,11 +495,11 @@ $(document).ready(function(){
             type: 'POST',
             data: serializedForm,
             error: function() {
-                alert('Something is wrong');
+                alert('Insert: Something is wrong');
             },
             success: function(data) {
                 // Needs this because there's a bug that does not show message when not refreshed
-                // location.reload(true);
+                
             }
         });
     });
@@ -517,11 +518,11 @@ $(document).ready(function(){
         $(".bg-modal-delete").css('display', 'flex');
         $('body').css('overflow', 'hidden');
 
-        $('.confirm').data('id', id); //set the data attribute on the modal button
+        $('.confirm').attr('id', id); //set the data attribute on the modal button
     });
 
     $('.confirm').click(function(){
-        var id = $(this).data('id');
+        var id = $(this).attr('id');
         var formDataEdit = $('#studentInformationEdit').serialize();
         Obj = new Object();
         Obj.activityType = "DELETE";
@@ -533,7 +534,7 @@ $(document).ready(function(){
             type: 'POST',
             data: formDataEdit,
             error: function() {
-                alert('Something is wrong');
+                alert('Archive: Something is wrong arcive');
             },
             success: function(data) {
                 
@@ -543,7 +544,7 @@ $(document).ready(function(){
                     type: 'POST',
                     data: Data,
                     error: function() {
-                        alert('Something is wrong');
+                        alert('Log: Something is wrong log');
                     },
                     success: function(data) {
                         
@@ -553,7 +554,7 @@ $(document).ready(function(){
                             type: 'GET',
                             data: 'id=' + id,
                             error: function() {
-                                alert('Something is wrong');
+                                alert('Delete: Something is wrong');
                             },
                             success: function(data) {
                                 $("#"+ id).remove();
@@ -561,7 +562,7 @@ $(document).ready(function(){
                             }
                         });
 
-                        window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                        window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
                     }
                 });
             }
@@ -590,7 +591,7 @@ $(document).ready(function(){
             data: {id: id},
             dataType: 'json',
             error: function() {
-                alert('Something is wrong');
+                alert('Fetch: Something is wrong');
             },
             success: function(data) {
                 $('#id-edit').val(data[0]);
@@ -620,6 +621,10 @@ $(document).ready(function(){
                 $('#student-remark-edit').val(data[24]);
                 $('#student-sponsor-edit').val(data[25]);
                 $('#student-hs-address-edit').val(data[26]);
+                $('#student-company-name-edit').val(data[27]);
+                $('#student-company-address-edit').val(data[28]);
+                $('#student-company-position-edit').val(data[29]);
+                $('#student-company-contact-number-edit').val(data[30]);
 
                 // hidden
                 $('#student-number-edit-hidden').val(data[1]);
@@ -860,7 +865,7 @@ $(document).ready(function(){
                 type: 'POST',
                 data: Data,
                 error: function() {
-                    alert('Something is wrong');
+                    alert('Log: Something is wrong');
                 },
                 success: function(data) {
 
@@ -870,19 +875,20 @@ $(document).ready(function(){
                         type: 'GET',
                         data: serializedForm,
                         error: function() {
-                            alert('Something is wrong');
+                            alert('Update: Something is wrong');
                         },
                         success: function (data) {
-                            
+                            window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
+
                         }
                     });
 
-                    window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+                    window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
 
                 }
             });
         } else{
-            window.location.href = "http://localhost/StudentInformation/PHP/index.php";
+            window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
 
         }
 
@@ -909,7 +915,7 @@ $(document).ready(function(){
             data: {id: id},
             dataType: 'json',
             error: function() {
-                alert('Something is wrong');
+                alert('Fetch: Something is wrong');
             },
             success: function(data) {
 
@@ -929,6 +935,12 @@ $(document).ready(function(){
                 $('.student-remark-view').text(isOptional(data[24]));
                 $('.student-sponsor-view').text(isOptional(data[25]));
                 $('.student-hs-address-view').text(isOptional(data[26]));
+
+
+                $('.student-company-name-view').text(isOptional(data[27]));
+                $('.student-company-address-view').text(isOptional(data[28]));
+                $('.student-company-position-view').text(isOptional(data[29]));
+                $('.student-company-contact-number-view').text(isOptional(data[30]));
 
             }
         });
@@ -953,7 +965,7 @@ $(document).ready(function(){
             method:'POST',
             data:{query:query, queryType:queryType, page:page},
             error: function() {
-                alert('Something is wrong');
+                alert('Search: Something is wrong');
 
             },
             success:function(data) {
@@ -985,7 +997,7 @@ $(document).ready(function(){
             data:{chartType:'gender'},
             dataType:"JSON",
             error: function() {
-                alert('Something is wrong');
+                alert('Count: Something is wrong');
 
             },
             success:function(data) {
@@ -1059,7 +1071,7 @@ $(document).ready(function(){
             data:{chartType:'city'},
             dataType:"JSON",
             error: function() {
-                alert('Something is wrong');
+                alert('Count: Something is wrong');
 
             },
             success:function(data) {
@@ -1129,7 +1141,7 @@ $(document).ready(function(){
             data:{chartType:'province'},
             dataType:"JSON",
             error: function() {
-                alert('Something is wrong');
+                alert('Count: Something is wrong');
 
             },
             success:function(data) {

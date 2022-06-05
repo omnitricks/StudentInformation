@@ -80,6 +80,76 @@ function resetColor(){
 
     $('.student-hs-address-view-label').css("color", "var(--green-9)");
     $('.student-hs-address-view').css("color", "var(--green-9)");
+
+    $('.student-company-name-view-label').css("color", "var(--green-9)");
+    $('.student-company-name-view').css("color", "var(--green-9)");
+
+    $('.student-company-address-view-label').css("color", "var(--green-9)");
+    $('.student-company-address-view').css("color", "var(--green-9)");
+
+    $('.student-company-position-view-label').css("color", "var(--green-9)");
+    $('.student-company-position-view').css("color", "var(--green-9)");
+
+    $('.student-company-contact-number-view-label').css("color", "var(--green-9)");
+    $('.student-company-contact-number-view').css("color", "var(--green-9)");
+
+    $('.restore').css('display', 'none');
+}
+
+function redColor(){
+    $('.student-number-view-label').css("color", "var(--red-9)");
+    $('.student-number-view').css("color", "var(--red-9)");
+
+    $('.student-course-view-label').css("color", "var(--red-9)");
+    $('.student-course-view').css("color", "var(--red-9)");
+
+    $('.student-name-view-label').css("color", "var(--red-9)");
+    $('.student-name-view').css("color", "var(--red-9)");
+
+    $('.student-birthdate-view-label').css("color", "var(--red-9)");
+    $('.student-birthdate-view').css("color", "var(--red-9)");
+
+    $('.student-gender-view-label').css("color", "var(--red-9)");
+    $('.student-gender-view').css("color", "var(--red-9)");
+
+    $('.student-address-view-label').css("color", "var(--red-9)");
+    $('.student-address-view').css("color", "var(--red-9)");
+                    
+    $('.student-provincial-address-view-label').css("color", "var(--red-9)");
+    $('.student-provincial-address-view').css("color", "var(--red-9)");
+
+    $('.student-contact-number-view-label').css("color", "var(--red-9)");
+    $('.student-contact-number-view').css("color", "var(--red-9)");
+
+    $('.student-email-view-label').css("color", "var(--red-9)");
+    $('.student-email-view').css("color", "var(--red-9)");
+
+    $('.student-guardian-view-label').css("color", "var(--red-9)");
+    $('.student-guardian-view').css("color", "var(--red-9)");
+
+    $('.guardian-contact-number-view-label').css("color", "var(--red-9)");
+    $('.guardian-contact-number-view').css("color", "var(--red-9)");
+
+    $('.student-remark-view-label').css("color", "var(--red-9)");
+    $('.student-remark-view').css("color", "var(--red-9)");
+
+    $('.student-sponsor-view-label').css("color", "var(--red-9)");
+    $('.student-sponsor-view').css("color", "var(--red-9)");
+
+    $('.student-hs-address-view-label').css("color", "var(--red-9)");
+    $('.student-hs-address-view').css("color", "var(--red-9)");
+
+    $('.student-company-name-view-label').css("color", "var(--red-9)");
+    $('.student-company-name-view').css("color", "var(--red-9)");
+
+    $('.student-company-address-view-label').css("color", "var(--red-9)");
+    $('.student-company-address-view').css("color", "var(--red-9)");
+
+    $('.student-company-position-view-label').css("color", "var(--red-9)");
+    $('.student-company-position-view').css("color", "var(--red-9)");
+
+    $('.student-company-contact-number-view-label').css("color", "var(--red-9)");
+    $('.student-company-contact-number-view').css("color", "var(--red-9)");
 }
 
 $(document).ready(function(){
@@ -88,15 +158,22 @@ $(document).ready(function(){
         // Gets current url
         var url = window.location.href;
         // Gets page number from the url
-        // var res = url.split("http://localhost/StudentInformation/PHP/indexLog.php?page=");
-        var res = url.replace(/\D/g, "");
-
+        var res = url.split("http://localhost/StudentInformation/PHP/ActivityLog/indexLog.php?page=");
+        var result;
         // if page number is undetected it is equivalent to one
-        if(!res){
-            res = 1;
+        if(res[1]===undefined){
+            result = 1;
         }
-        
-        return res;
+
+        if(res[1]!=undefined){
+            if(res[1].indexOf("#") != -1){
+                result = res[1].slice(0, res[1].length - 1);
+            } else{
+                result = res[1];
+            }
+        } 
+
+        return result;
     }
 
 
@@ -122,11 +199,11 @@ $(document).ready(function(){
         //Poupulates Update/ Edit Form Inputs
         $.ajax({
             url: 'fetchLog.php',
-            type: 'get',
+            type: 'GET',
             data: {id: id},
             dataType: 'json',
             error: function() {
-                alert('Something is wrong');
+                alert('Fetch: Something is wrong');
             },
             success: function(data) {
 
@@ -161,6 +238,12 @@ $(document).ready(function(){
                     studentRemark = anyChange(data[26], data[56]);
                     studentSponsor = anyChange(data[27], data[57]);
                     studentHSAddress = anyChange(data[28], data[58]);
+
+
+                    studentCompanyName = anyChange(data[29], data[59]);
+                    studentCompanyAddress = anyChange(data[30], data[60]);
+                    studentCompanyPosition = anyChange(data[31], data[61]);
+                    studentCompanyContactNumber = anyChange(data[32], data[62]);
 
 
 
@@ -261,52 +344,42 @@ $(document).ready(function(){
 
                     }
                     $('.student-hs-address-view').html(isOptional(data[58]) + studentHSAddress);
+
+
+
+                    if(studentCompanyName != ""){
+                        $('.student-company-name-view-label').css("color", "var(--red-9)");
+                        $('.student-company-name-view').css("color", "var(--red-9)");
+
+                    }
+                    $('.student-company-name-view').html(isOptional(data[29]) + studentCompanyName);
+
+
+                    if(studentCompanyAddress != ""){
+                        $('.student-company-address-view-label').css("color", "var(--red-9)");
+                        $('.student-company-address-view').css("color", "var(--red-9)");
+
+                    }
+                    $('.student-company-address-view').html(isOptional(data[30]) + studentCompanyAddress);
+
+                    if(studentCompanyPosition != ""){
+                        $('.student-company-position-view-label').css("color", "var(--red-9)");
+                        $('.student-company-position-view').css("color", "var(--red-9)");
+
+                    }
+                    $('.student-company-position-view').html(isOptional(data[31]) + studentCompanyPosition);
+
+                    if(studentCompanyContactNumber != ""){
+                        $('.student-company-contact-number-view-label').css("color", "var(--red-9)");
+                        $('.student-company-contact-number-view').css("color", "var(--red-9)");
+
+                    }
+                    $('.student-company-contact-number-view').html(isOptional(data[32]) + studentCompanyContactNumber);
                 }
 
                 if(data[1] == "DELETE"){
 
-                    $('.student-number-view-label').css("color", "var(--red-9)");
-                    $('.student-number-view').css("color", "var(--red-9)");
-                
-                    $('.student-course-view-label').css("color", "var(--red-9)");
-                    $('.student-course-view').css("color", "var(--red-9)");
-                
-                    $('.student-name-view-label').css("color", "var(--red-9)");
-                    $('.student-name-view').css("color", "var(--red-9)");
-                
-                    $('.student-birthdate-view-label').css("color", "var(--red-9)");
-                    $('.student-birthdate-view').css("color", "var(--red-9)");
-                
-                    $('.student-gender-view-label').css("color", "var(--red-9)");
-                    $('.student-gender-view').css("color", "var(--red-9)");
-                
-                    $('.student-address-view-label').css("color", "var(--red-9)");
-                    $('.student-address-view').css("color", "var(--red-9)");
-                                    
-                    $('.student-provincial-address-view-label').css("color", "var(--red-9)");
-                    $('.student-provincial-address-view').css("color", "var(--red-9)");
-                
-                    $('.student-contact-number-view-label').css("color", "var(--red-9)");
-                    $('.student-contact-number-view').css("color", "var(--red-9)");
-                
-                    $('.student-email-view-label').css("color", "var(--red-9)");
-                    $('.student-email-view').css("color", "var(--red-9)");
-                
-                    $('.student-guardian-view-label').css("color", "var(--red-9)");
-                    $('.student-guardian-view').css("color", "var(--red-9)");
-                
-                    $('.guardian-contact-number-view-label').css("color", "var(--red-9)");
-                    $('.guardian-contact-number-view').css("color", "var(--red-9)");
-                
-                    $('.student-remark-view-label').css("color", "var(--red-9)");
-                    $('.student-remark-view').css("color", "var(--red-9)");
-                
-                    $('.student-sponsor-view-label').css("color", "var(--red-9)");
-                    $('.student-sponsor-view').css("color", "var(--red-9)");
-                
-                    $('.student-hs-address-view-label').css("color", "var(--red-9)");
-                    $('.student-hs-address-view').css("color", "var(--red-9)");
-
+                    redColor()
 
                     $('.student-number-view').text(data[3]);
                     $('.student-course-view').text(data[4]);
@@ -322,7 +395,15 @@ $(document).ready(function(){
                     $('.student-remark-view').text(isOptional(data[26]));
                     $('.student-sponsor-view').text(isOptional(data[27]));
                     $('.student-hs-address-view').text(isOptional(data[28]));
-                
+
+
+
+                    $('.student-company-name-view').text(isOptional(data[29]));
+                    $('.student-company-address-view').text(isOptional(data[30]));
+                    $('.student-company-position-view').text(isOptional(data[31]));
+                    $('.student-company-contact-number-view').text(isOptional(data[32]));
+
+                    $('.restore').css('display', 'inline-block');
                 }
             }
         });
@@ -335,7 +416,7 @@ $(document).ready(function(){
 
 
 
-    // jQuery Version of Search function
+    // jQuery Version of Search function// jQuery Version of Search function
     search_data();
 
     function search_data(query, queryType, activityType){
@@ -368,6 +449,75 @@ $(document).ready(function(){
         } else{
             search_data();
         }
+    });
+
+    // jQuery Version of Restore function
+    $('.restore').click(function(){
+        var id = $('#id-view').val();
+
+        //Poupulates Update/ Edit Form Inputs
+        $.ajax({
+            url: 'fetchRestoreLog.php',
+            type: 'GET',
+            data: {id: id},
+            dataType: 'json',
+            error: function() {
+                alert('Something is wrong');
+            },
+            success: function(data) {
+
+                id = data[1];
+                studentNumber = data[2];
+                studentCourse = data[3];
+                studentSurname = data[4];
+                studentFirstName = data[5];
+                studentMiddleInitial = data[6];
+                studentBirthdate = data[7];
+                studentGender = data[8];
+                studentHouseNumber = data[9];
+                studentStreet = data[10];
+                studentSubdivision = data[11];
+                studentBarangay = data[12];
+                studentTown = data[13];
+                studentDistrict = data[14];
+                studentProvincialHouseNumber = data[15];
+                studentProvincialStreet = data[16];
+                studentProvincialSubdivision = data[17];
+                studentProvincialBarangay = data[18];
+                studentProvincialTown = data[19];
+                studentProvincialDistrict = data[20];
+                studentContactNumber = data[21];
+                studentEmail = data[22];
+                guardianName = data[23];
+                guardianContactNumber = data[24];
+                studentRemark = data[25];
+                studentSponsor = data[26];
+                studentHighSchoolAddress = data[27];
+                studentCompanyName = data[28];
+                studentCompanyAddress = data[29];
+                studentCompanyPosition = data[30];
+                studentCompanyContactNumber = data[31];
+
+                
+                $.ajax({
+                    url: 'insertLog.php',
+                    type: 'POST',
+                    data: {id:id, studentNumber:studentNumber, studentCourse:studentCourse, studentSurname:studentSurname, studentFirstName:studentFirstName, studentMiddleInitial:studentMiddleInitial, studentBirthdate:studentBirthdate, studentGender:studentGender, studentHouseNumber:studentHouseNumber, studentStreet:studentStreet, studentSubdivision:studentSubdivision, studentBarangay:studentBarangay, studentTown:studentTown, studentDistrict:studentDistrict, studentProvincialHouseNumber:studentProvincialHouseNumber, studentProvincialStreet:studentProvincialStreet, studentProvincialSubdivision:studentProvincialSubdivision, studentProvincialBarangay:studentProvincialBarangay, studentProvincialTown:studentProvincialTown, studentProvincialDistrict:studentProvincialDistrict, studentContactNumber:studentContactNumber, studentEmail:studentEmail, guardianName:guardianName, guardianContactNumber:guardianContactNumber, studentRemark:studentRemark, studentSponsor:studentSponsor, studentHighSchoolAddress:studentHighSchoolAddress, studentCompanyName:studentCompanyName, studentCompanyAddress:studentCompanyAddress, studentCompanyPosition:studentCompanyPosition, studentCompanyContactNumber:studentCompanyContactNumber},
+                    error: function() {
+                        alert('Something is wrong');
+                    },
+                    success: function(data) {
+                        // Needs this because there's a bug that does not show message when not refreshed
+                        // location.reload(true);
+                        alert("check main");
+                        $(".bg-modal-view").hide();
+                        $('body').css('overflow', 'auto');
+                    }
+                });
+            }
+        });
+
+        
     });
  
 });

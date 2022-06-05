@@ -1,6 +1,6 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     $id = $_GET['id'];
     $delete = "DELETE FROM `student-information` WHERE `id` = '$id'";

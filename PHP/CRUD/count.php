@@ -1,6 +1,6 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     $query = "SELECT COUNT(*) as gendercount, `studentGender` FROM `student-information` GROUP BY `studentGender`";
     $query2 = "SELECT COUNT(*) as citycount, `studentTown` FROM `student-information` GROUP BY `studentTown`";
@@ -10,7 +10,6 @@
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query2);
     $result3 = mysqli_query($conn, $query3);
-    // $output = '';
     $data = array();
     $index =0;
 
@@ -95,80 +94,5 @@
     }
 
     echo json_encode($data);
-
-
-
-    // // Count Gender
-    // $output .= '
-    //     <div class="tableContainer">
-    //         <table id="tableView" class="tableView">
-    //             <thead>
-    //                 <tr>
-    //                     <th>Gender</th>
-    //                     <th>Number</th>
-    //                 </tr>
-    //             </thead>
-    //             <tbody>
-    // ';
-
-    // foreach($result as $row){
-    //     $output .= '
-    //         <tr>
-    //             <td>' . $row['studentGender'] . '</td>
-    //             <td>' . $row['gendercount'] . '</td>
-    //         </tr>
-    //     ';
-    // }
-
-    // // Count City
-    // $output .= '
-    //     </tbody>
-    //     <thead>
-    //         <tr>
-    //             <th>City</th>
-    //             <th>Number</th>
-    //         </tr>
-    //     </thead>
-    //     <tbody>
-    // ';
-
-    // while($row = mysqli_fetch_array($result2)){
-    //     $output .= '
-    //         <tr>
-    //             <td>' . $row[1] . '</td>
-    //             <td>' . $row[0] . '</td>
-    //         </tr>
-    //     ';
-    // }
-
-    // // Count Province
-    // $output .= '
-    //     </tbody>
-    //     <thead>
-    //         <tr>
-    //             <th>Province</th>
-    //             <th>Number</th>
-    //         </tr>
-    //     </thead>
-    //     <tbody>
-    // ';
-
-    // while($row = mysqli_fetch_array($result3)){
-    //     $output .= '
-    //         <tr>
-    //             <td>' . $row[1] . '</td>
-    //             <td>' . $row[0] . '</td>
-    //         </tr>
-    //     ';
-    // }
-
-    // $output .= '
-    //             </tbody>
-    //         </table>
-    //     </div>
-    // ';
-    
-    // echo $output;   
-
    
 ?>

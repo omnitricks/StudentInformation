@@ -1,17 +1,13 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
-    if(isset($_POST["query"]) && isset($_POST["queryType"]) && isset($_POST["activityType"])){
+    if(isset($_POST["query"]) && isset($_POST["queryType"])){
         $search = mysqli_real_escape_string($conn, $_POST['query']);
         $searchType = $_POST['queryType'];
-        $activityType = $_POST['activityType'];
-
-        $sql = "SELECT * FROM `student-activity-log` WHERE ".$searchType." LIKE '%".$search."%' AND `activityType` = '" .$activityType."'";
-        
+        $sql = "SELECT * FROM `student-information` WHERE ".$searchType." LIKE '%".$search."%'";
     } else{
-        $sql = "SELECT * FROM `student-activity-log`";
-
+        $sql = "SELECT * FROM `student-information`";
     }
 
     $res = mysqli_query($conn, $sql);
@@ -25,10 +21,8 @@
     // Determines which page number user is currently on
     if(!isset( ($_POST["page"]) )){
         $page = 1;
-
     } else if( isset( ($_POST["page"]) ) ){
         $page =   $_POST["page"];
-
     }
 
     // Determines the LIMIT starting number
@@ -41,7 +35,7 @@
     //First Page, only shows when page number is more than 2
     if($number_of_pages >= 3){
         if($page != 1){
-            $pageLink .=  '<span><a href="indexLog.php?page=1" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-left"></i></a></span>';
+            $pageLink .=  '<span><a href="index.php?page=1" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-left"></i></a></span>';
         }
     }
     
@@ -51,7 +45,7 @@
         $prevlimit = 1;
     }
     if($page != $prevlimit){
-        $pageLink .=  '<span><a href="indexLog.php?page=' . $prevlimit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-chevron-left"></i></a></span>';
+        $pageLink .=  '<span><a href="index.php?page=' . $prevlimit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-chevron-left"></i></a></span>';
     }
 
     if($number_of_pages >= 5){
@@ -96,9 +90,9 @@
             if($pages <= $upperLimit){
                 //Adds active class to the page user is currently on
                 if($pages ==  $page){
-                    $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                    $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
                 } else{
-                    $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                    $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
                 }
 
             }
@@ -109,15 +103,13 @@
         for($pages=1; $pages<=$number_of_pages; $pages++){
             //Adds active class to the page user is currently on
             if($pages ==  $page){
-                $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
             } else{
-                $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                $pageLink .=  '<span><a href="index.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
             }
         };
 
     }
-
-
 
     //Next Page
     $nextlimit = $page + 1;
@@ -125,29 +117,26 @@
         $nextlimit = $pages - 1;
     }
     if($page != $nextlimit){
-        $pageLink .=  '<span><a href="indexLog.php?page=' . $nextlimit . '" class="pagenext active" id="pagenext"> <i class="fa-solid fa-chevron-right"></i></a></span>';
+        $pageLink .=  '<span><a href="index.php?page=' . $nextlimit . '" class="pagenext active" id="pagenext"> <i class="fa-solid fa-chevron-right"></i></a></span>';
     }
 
     //Last Page, only shows when page number is more than 2
     $limit = $pages - 1;
     if($number_of_pages >= 3){
         if($page != $limit){
-            $pageLink .=  '<span><a href="indexLog.php?page=' . $limit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-right"></i></a></span>';
+            $pageLink .=  '<span><a href="index.php?page=' . $limit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-right"></i></a></span>';
         }
     }
 
 
     // Retrieves selected results according to the limit
-    if(isset($_POST["query"]) && isset($_POST["queryType"]) && isset($_POST["activityType"])){
+    if(isset($_POST["query"]) && isset($_POST["queryType"])){
         $search = mysqli_real_escape_string($conn, $_POST['query']);
         $searchType = $_POST['queryType'];
-        $activityType = $_POST['activityType'];
-        
-        $query = "SELECT * FROM `student-activity-log` WHERE ".$searchType." LIKE '%".$search."%' AND `activityType` = '" .$activityType."' ORDER BY `id` DESC";
-
+        $query = "SELECT * FROM `student-information` WHERE ".$searchType." LIKE '%".$search."%'";
         $pageLink = '';
     } else{
-        $query = "SELECT * FROM `student-activity-log` ORDER BY `id` DESC LIMIT " . $this_page_first_result . "," . $results_per_page;
+        $query = "SELECT * FROM `student-information` LIMIT " . $this_page_first_result . "," . $results_per_page;
     }
 
     $result = mysqli_query($conn, $query);
@@ -159,12 +148,10 @@
             <table id="tableView" class="tableView">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>Activity Type</th>
+                        <th colspan="2"></th>
                         <th>Student Number</th>
                         <th>Student Name</th>
-                        <th>Action Date</th>
-                        <th>User</th>
+                        <th>Student Course</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,25 +159,15 @@
 
         while($row = mysqli_fetch_array($result)){
             // Combines data
-            $studentName = $row['studentSurnameModified'] . ', ' . $row['studentFirstNameModified'] . ' ' . $row['studentMiddleInitialModified'] . '.';
-
-            if($row['activityType'] == "DELETE"){
-                $queryArchive= "SELECT * FROM `student-archive` WHERE `rowId` LIKE " . $row['rowId'];
-                $archive = mysqli_query($conn, $queryArchive);
-                $rowArchive = mysqli_fetch_array($archive);
-
-                $studentName = $rowArchive['studentSurname'] . ', ' . $rowArchive['studentFirstName'] . ' ' . $rowArchive['studentMiddleInitial'] . '.';
-
-            }
+            $studentName = $row['studentSurname'] . ', ' . $row['studentFirstName'] . ' ' . $row['studentMiddleInitial'] . '.';
 
             $output .= "
             <tr id='$row[id]'>
                 <td><a href='#' id='view' class='view'><i class='fa-solid fa-file-lines'></i></a></td>
-                <td>" . $row['activityType'] . "</td>
+                <td><a href='#' id='edit' class='edit'><i class='fa-solid fa-pen-to-square'></i></a></td>
                 <td>" . $row['studentNumber'] . "</td>
                 <td>" . $studentName . "</td>
-                <td>" . $row['actionDate'] . "</td>
-                <td>" . $row['user'] . "</td>
+                <td>" . $row['studentCourse'] . "</td>
             </tr>
             ";
         }

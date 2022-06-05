@@ -1,6 +1,6 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     $id = $_GET['id'];
     $get_data = "SELECT * FROM `student-information` WHERE `id` = '$id'";

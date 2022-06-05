@@ -1,6 +1,6 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
         <link rel="icon" type="image/png" href="https://www.ccp.edu.ph/students/CCP_WORLD2/images/fav_icon.png">
         
         <link rel="stylesheet" href="https://unpkg.com/open-props"/>
-        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../../CSS/style.css">
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -282,7 +282,22 @@
                     <label for="student-hs-address">Student HighSchool Address:</label>
                         <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
 
-                    <!-- <input type="submit" name="submit" id="submit" value="Submit"> -->
+
+                    <label for="student-company-name">Student Company Name:</label>
+                        <input type="text" name="student-company-name" id="student-company-name" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+                        
+                    <label for="student-company-address">Student Company Address:</label>
+                        <textarea name="student-company-address" id="student-company-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+
+                    <label for="student-company-position">Student Company Position:</label>
+                        <input type="text" name="student-company-position" id="student-company-position" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+                        
+                    <label for="student-company-contact-number">Student Company Contact Number:</label>
+                        <input type="tel" name="student-company-contact-number" id="student-company-contact-number" onkeypress="return isPhone(event);" maxlength="15"><br>
+
                     <button type="submit" id="submit" class="submit">Submit</button>
 
                 </form>
@@ -450,16 +465,29 @@
                     <input type="hidden" name="student-hs-address-edit-hidden" id="student-hs-address-edit-hidden">
                         <textarea name="student-hs-address-edit" id="student-hs-address-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
 
+
+                    <label for="student-company-name">Student Company Name:</label>
                     <input type="hidden" name="student-company-name-edit-hidden" id="student-company-name-edit-hidden">
+                        <input type="text" name="student-company-name-edit" id="student-company-name-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+
+                    <label for="student-company-address">Student Company Address:</label>
                     <input type="hidden" name="student-company-address-edit-hidden" id="student-company-address-edit-hidden">
+                        <textarea name="student-company-address-edit" id="student-company-address-edit" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+
+                    <label for="student-company-position">Student Company Position:</label>
                     <input type="hidden" name="student-company-position-edit-hidden" id="student-company-position-edit-hidden">
+                        <input type="text" name="student-company-position-edit" id="student-company-position-edit" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+
+                    <label for="student-company-contact-number">Student Company Contact Number:</label>
                     <input type="hidden" name="student-company-contact-number-edit-hidden" id="student-company-contact-number-edit-hidden">
-
+                        <input type="tel" name="student-company-contact-number-edit" id="student-company-contact-number-edit" onkeypress="return isPhone(event);" maxlength="15"><br>
+                    
                         <br>
                         <br>
 
-                    <!-- <input type="update" name="update" id="update" value="Update"> -->
-                    <!-- <button type="update" id="update" class="update">Update</button> -->
                     <div class="viewport-wrapper">
                         <button type="update" id="update" class="update">Update</button>
                         <a href='#' id='delete' class='delete'>DELETE</a>
@@ -481,8 +509,6 @@
                     <input type="hidden" name="id-view" id="id-view">
 
                     <label for="student-number-view"><b>Student Number:</b></label>
-                        <!--  May show error in VSCode due to return statement not used within a function body -->
-                        <!-- <input type="tel" name="student-number-view" id="student-number-view" onkeypress="return isNumberKey(event);" maxlength="255"><br> -->
                         <div class="tab student-number-view"></div><br>
 
 
@@ -491,21 +517,14 @@
 
 
                     <label for="student-name-view"><b>Student Name:</b></label>
-                        <!-- <input type="text" name="student-name-view" id="student-surname-view" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br> -->
                         <div class="tab student-name-view"></div><br>
 
 
                     <label for="student-birthdate-view"><b>Student Birthdate:</b></label>
-                        <!-- <input type="date" name="student-birthdate-view" id="student-birthdate-view"><br> -->
                         <div class="tab student-birthdate-view"></div><br>
 
 
                     <label for="student-gender-view"><b>Student Gender:</b></label>
-                        <!-- <input type="radio" id="student-gender-male-view" name="student-gender-view" value="MALE"/>
-                        <label for="student-gender-male-view">MALE</label> 
-
-                        <input type="radio" id="student-gender-female-view" name="student-gender-view" value="FEMALE"/>
-                        <label class="student-gender-label-view" for="student-gender-female-view">FEMALE</label><br> -->
                         <div class="tab student-gender-view"></div><br>
 
 
@@ -518,12 +537,10 @@
 
 
                     <label for="student-contact-number-view"><b>Student Contact Number:</b></label>
-                        <!-- <input type="tel" name="student-phone-number-view" id="student-phone-number-view" onkeypress="return isPhone(event);" maxlength="15"><br> -->
                         <div class="tab student-contact-number-view"></div><br>
                     
                     
                     <label for="student-email-view"><b>Student Email Address:</b></label>
-                        <!-- <input type="email" name="student-email-view" id="student-email-view" maxlength="50"><br> -->
                         <div class="tab student-email-view"></div><br>
                     
 
@@ -531,23 +548,35 @@
                         <div class="tab student-guardian-view"></div><br>
 
                     <label for="guardian-contact-number-view"><b>Guardian Contact Number:</b></label>
-                        <!-- <input type="tel" name="guardian-phone-number-view" id="guardian-phone-number-view" onkeypress="return isPhone(event);" maxlength="15"> -->
                         <div class="tab guardian-contact-number-view"></div><br>             
 
 
                     <label for="student-remark-view"><b>Remark:</b></label>
-                        <!-- <textarea name="student-remark-view" id="student-remark-view" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br> -->
                         <div class="tab student-remark-view"></div><br>
 
 
                     <label for="student-sponsor-view"><b>Sponsor:</b></label>
-                        <!-- <input type="text" name="student-sponsor-view" id="student-sponsor-view" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br> -->
                         <div class="tab student-sponsor-view"></div><br>
 
                         
                     <label for="student-hs-address-view"><b>Student HighSchool Address:</b></label>
-                        <!-- <textarea name="student-hs-address-view" id="student-hs-address-view" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br> -->
                         <div class="tab student-hs-address-view"></div><br>
+
+
+                    <label for="student-company-name-view"><b>Student Company Name:</b></label>
+                        <div class="tab student-company-name-view"></div><br>
+
+
+                    <label for="student-company-address-view"><b>Student Company Address:</b></label>
+                        <div class="tab student-company-address-view"></div><br>
+
+
+                    <label for="student-company-position-view"><b>Student Company Position:</b></label>
+                        <div class="tab student-company-position-view"></div><br>
+
+
+                    <label for="student-company-contact-number-view"><b>Student Company Contact Number:</b></label>
+                        <div class="tab student-company-contact-number-view"></div><br>
                 </form>
             </div>
         </div>
@@ -557,7 +586,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../JS/script.js"></script>
+        <script src="../../JS/script.js"></script>
         <!-- Prevents resubmission of form data when refreshing -->
         <script>
             // jQuery Version of Prevent Resubmission of Form Data when Refreshing

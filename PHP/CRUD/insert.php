@@ -1,11 +1,10 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     // Erros Stored in single array
     $errors = array();
 
-    // Add  new student code 
     // Form Data - Required
     if (empty($_POST['student-number'])){
         $errors['studentNumberError'] = "Student Number is Required";
@@ -131,6 +130,30 @@
         $studentHighSchoolAddress = '';
     }
 
+    if (isset($_POST['student-company-name'])){
+        $studentCompanyName = $_POST['student-company-name'];
+    } else{
+        $studentCompanyName = '';
+    }
+
+    if (isset($_POST['student-company-address'])){
+        $studentCompanyAddress = $_POST['student-company-address'];
+    } else{
+        $studentCompanyAddress = '';
+    }
+
+    if (isset($_POST['student-company-position'])){
+        $studentCompanyPosition = $_POST['student-company-position'];
+    } else{
+        $studentCompanyPosition = '';
+    }
+
+    if (isset($_POST['student-company-contact-number'])){
+        $studentCompanyContactNumber = $_POST['student-company-contact-number'];
+    } else{
+        $studentCompanyContactNumber = '';
+    }
+
     $blank = '';
 
 
@@ -145,7 +168,7 @@
 
         } else{
 
-            $query = "INSERT INTO `student-information`(`studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`) VALUES ('$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$blank', '$blank', '$blank', '$blank')";
+            $query = "INSERT INTO `student-information`(`studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`) VALUES ('$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$studentCompanyName', '$studentCompanyAddress', '$studentCompanyPosition', '$studentCompanyContactNumber')";
 
             $run_data = mysqli_query($conn,$query);
 

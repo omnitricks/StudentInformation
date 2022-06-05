@@ -1,6 +1,6 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
         <link rel="icon" type="image/png" href="https://www.ccp.edu.ph/students/CCP_WORLD2/images/fav_icon.png">
         
         <link rel="stylesheet" href="https://unpkg.com/open-props"/>
-        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../../CSS/style.css">
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -110,9 +110,26 @@
                             
                         <label for="student-hs-address-view" class="student-hs-address-view-label"><b>Student HighSchool Address:</b></label>
                             <div class="tab student-hs-address-view"></div><br>
+
+                        
+
+                        <label for="student-company-name-view" class="student-company-name-view-label"><b>Student Company Name:</b></label>
+                            <div class="tab student-company-name-view"></div><br>
+                            
+                        <label for="student-company-address-view" class="student-company-address-view-label"><b>Student Company Address:</b></label>
+                            <div class="tab student-company-address-view"></div><br>
+
+                        <label for="student-company-position-view" class="student-company-position-view-label"><b>Student Company Position:</b></label>
+                            <div class="tab student-company-position-view"></div><br>
+
+                        <label for="student-company-contact-number-view" class="student-company-contact-number-view-label"><b>Student Company Contact Number:</b></label>
+                            <div class="tab student-company-contact-number-view"></div><br>
+                    </div>
+                    
+                    <div class="viewport-wrapper">
+                        <a href="#" id="restore" class="restore">Restore</a>
                     </div>
 
-                    
                 </form>
             </div>
         </div>
@@ -122,7 +139,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../JS/scriptLog.js"></script>
+        <script src="../../JS/scriptLog.js"></script>
         <!-- Prevents resubmission of form data when refreshing -->
         <script>
             // jQuery Version of Prevent Resubmission of Form Data when Refreshing

@@ -1,12 +1,9 @@
+@import 'constant.css';
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-:root{
-	--ccp-maroon-1: #720000;
-	--ccp-maroon-2: #B20101;
 }
 
 body{
@@ -215,6 +212,32 @@ input.error{
 
 
 /* Table View */
+.tableViewLog{
+	border: 1px solid var(--gray-9);
+	border-collapse: separate;
+	border-spacing: 0;
+	min-width: max-content;
+	background-color: var(--gray-0);
+}
+
+.tableViewLog th:nth-child(1){
+	border: none;
+}
+
+.tableViewLog th{
+	position: sticky;
+	top: 0px;
+	background-color: var(--ccp-maroon-1);
+	color: var(--gray-0);
+}
+
+.tableViewLog th, .tableViewLog td {
+	border: 1px solid var(--gray-9);
+	padding: 10px;
+}
+
+
+
 .tableView{
 	border: 1px solid var(--gray-9);
 	border-collapse: separate;
@@ -574,10 +597,29 @@ canvas{
 	margin: 30px 10px;
 }
 
-.red-text{
-	color: var(--red-9);
-}
-
 .green-text{
 	color: var(--green-9);
+}
+
+/* Restore Button */
+.restore {
+	height: 50px;
+	font-size: var(--font-size-2);
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	background-color: var(--blue-9);
+	border: 2px solid var(--gray-3);
+	border-radius: 30px;
+	text-decoration: none;
+	padding: 10px 28px;
+	color: var(--gray-0);
+	margin-top: 10px;
+	display: none;
+}
+
+.restore:hover {
+    background-color: var(--gray-0);
+    color: var(--blue-9);
+    border: 2px solid var(--blue-9);
 }

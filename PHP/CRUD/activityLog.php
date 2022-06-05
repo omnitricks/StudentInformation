@@ -1,12 +1,13 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     // Erros Stored in single array
     $errors = array();
 
+    // CHecks if Update or Delete
     $activityType = $_POST['activityType'];
-    // Add  new student code 
+
     // Modified Form Data - Required
     if (empty($_POST['id-edit'])){
         $errors['rowIdError'] = "Student Number is Required";
@@ -117,6 +118,30 @@
         $studentHighSchoolAddressModified = '';
     }
 
+    if (isset($_POST['student-company-name-edit'])){
+        $studentCompanyNameModified = $_POST['student-company-name-edit'];
+    } else{
+        $studentCompanyNameModified = '';
+    }
+
+    if (isset($_POST['student-company-address-edit'])){
+        $studentCompanyAddressModified = $_POST['student-company-address-edit'];
+    } else{
+        $studentCompanyAddressModified = '';
+    }
+
+    if (isset($_POST['student-company-position-edit'])){
+        $studentCompanyPositionModified = $_POST['student-company-position-edit'];
+    } else{
+        $studentCompanyPositionModified = '';
+    }
+
+    if (isset($_POST['student-company-contact-number-edit'])){
+        $studentCompanyContactNumberModified = $_POST['student-company-contact-number-edit'];
+    } else{
+        $studentCompanyContactNumberModified = '';
+    }
+
     $actionDate = date('Y-m-d');
     $user = 'admin';
     $blank = '';
@@ -146,7 +171,6 @@
     $guardianContactNumber = $_POST['guardian-contact-number-edit-hidden'];
 
 
-
     // Unmodified Form Data - optional
     $studentSubdivision = $_POST['student-subdivision-edit-hidden'];
     $studentProvincialSubdivision = $_POST['student-provincial-subdivision-edit-hidden'];
@@ -161,12 +185,14 @@
 
     if(empty($errors)){
 
+        // if Update
         if($activityType == "UPDATE"){
+            $query = "INSERT INTO `student-activity-log`(`activityType`, `rowId`, `studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`, `studentNumberModified`, `studentCourseModified`, `studentSurnameModified`, `studentFirstNameModified`, `studentMiddleInitialModified`, `studentBirthdateModified`, `studentGenderModified`, `studentHouseNumberModified`, `studentStreetModified`, `studentSubdivisionModified`, `studentBarangayModified`, `studentTownModified`, `studentDistrictModified`, `studentProvincialHouseNumberModified`, `studentProvincialStreetModified`, `studentProvincialSubdivisionModified`, `studentProvincialBarangayModified`, `studentProvincialTownModified`, `studentProvincialDistrictModified`, `studentContactNumberModified`, `studentEmailModified`, `guardianNameModified`, `guardianContactNumberModified`, `studentRemarkModified`, `studentSponsorModified`, `studentHighSchoolAddressModified`, `studentCompanyNameModified`, `studentCompanyAddressModified`, `studentCompanyPositionModified`, `studentCompanyContactNumberModified`, `actionDate`, `user`) VALUES ('$activityType', '$rowId', '$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$studentCompanyName', '$studentCompanyAddress', '$studentCompanyPosition', '$studentCompanyContactNumber', '$studentNumberModified', '$studentCourseModified', '$studentSurnameModified', '$studentFirstNameModified', '$studentMiddleInitialModified', '$studentBirthdateModified', '$studentGenderModified', '$studentHouseNumberModified',  '$studentStreetModified', '$studentSubdivisionModified', '$studentBarangayModified', '$studentTownModified', '$studentDistrictModified', '$studentProvincialHouseNumberModified', '$studentProvincialStreetModified', '$studentProvincialSubdivisionModified', '$studentProvincialBarangayModified', '$studentProvincialTownModified', '$studentProvincialDistrictModified', '$studentContactNumberModified', '$studentEmailModified', '$guardianNameModified', '$guardianContactNumberModified', '$studentRemarkModified', '$studentSponsorModified', '$studentHighSchoolAddressModified', '$studentCompanyNameModified', '$studentCompanyAddressModified', '$studentCompanyPositionModified', '$studentCompanyContactNumberModified', '$actionDate', '$user')";
 
-            $query = "INSERT INTO `student-activity-log`(`activityType`, `rowId`, `studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`, `studentNumberModified`, `studentCourseModified`, `studentSurnameModified`, `studentFirstNameModified`, `studentMiddleInitialModified`, `studentBirthdateModified`, `studentGenderModified`, `studentHouseNumberModified`, `studentStreetModified`, `studentSubdivisionModified`, `studentBarangayModified`, `studentTownModified`, `studentDistrictModified`, `studentProvincialHouseNumberModified`, `studentProvincialStreetModified`, `studentProvincialSubdivisionModified`, `studentProvincialBarangayModified`, `studentProvincialTownModified`, `studentProvincialDistrictModified`, `studentContactNumberModified`, `studentEmailModified`, `guardianNameModified`, `guardianContactNumberModified`, `studentRemarkModified`, `studentSponsorModified`, `studentHighSchoolAddressModified`, `studentCompanyNameModified`, `studentCompanyAddressModified`, `studentCompanyPositionModified`, `studentCompanyContactNumberModified`, `actionDate`, `user`) VALUES ('$activityType', '$rowId', '$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$studentCompanyName', '$studentCompanyAddress', '$studentCompanyPosition', '$studentCompanyContactNumber', '$studentNumberModified', '$studentCourseModified', '$studentSurnameModified', '$studentFirstNameModified', '$studentMiddleInitialModified', '$studentBirthdateModified', '$studentGenderModified', '$studentHouseNumberModified',  '$studentStreetModified', '$studentSubdivisionModified', '$studentBarangayModified', '$studentTownModified', '$studentDistrictModified', '$studentProvincialHouseNumberModified', '$studentProvincialStreetModified', '$studentProvincialSubdivisionModified', '$studentProvincialBarangayModified', '$studentProvincialTownModified', '$studentProvincialDistrictModified', '$studentContactNumberModified', '$studentEmailModified', '$guardianNameModified', '$guardianContactNumberModified', '$studentRemarkModified', '$studentSponsorModified', '$studentHighSchoolAddressModified', '$blank', '$blank', '$blank', '$blank', '$actionDate', '$user')";
         } else if($activityType == "DELETE"){
-
+            // if Delete
             $query = "INSERT INTO `student-activity-log`(`activityType`, `rowId`, `studentNumber`, `actionDate`, `user`) VALUES ('$activityType', '$rowId', '$studentNumber', '$actionDate', '$user')";
+
         }
         
         $run_data = mysqli_query($conn,$query);

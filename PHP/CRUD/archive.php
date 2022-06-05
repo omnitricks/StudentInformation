@@ -1,11 +1,10 @@
 <?php
     // database connection
-    include('config.php');
+    include('../Config/config.php');
 
     // Erros Stored in single array
     $errors = array();
 
-    // Add  new student code 
     // Form Data - Required
     if (empty($_POST['id-edit'])){
         $errors['rowIdError'] = "Student Number is Required";
@@ -116,6 +115,30 @@
         $studentHighSchoolAddress = '';
     }
 
+    if (isset($_POST['student-company-name-edit'])){
+        $studentCompanyName = $_POST['student-company-name-edit'];
+    } else{
+        $studentCompanyName = '';
+    }
+
+    if (isset($_POST['student-company-address-edit'])){
+        $studentCompanyAddress = $_POST['student-company-address-edit'];
+    } else{
+        $studentCompanyAddress = '';
+    }
+
+    if (isset($_POST['student-company-position-edit'])){
+        $studentCompanyPosition = $_POST['student-company-position-edit'];
+    } else{
+        $studentCompanyPosition = '';
+    }
+
+    if (isset($_POST['student-company-contact-number-edit'])){
+        $studentCompanyContactNumber = $_POST['student-company-contact-number-edit'];
+    } else{
+        $studentCompanyContactNumber = '';
+    }
+
     $archivedDate = date('Y-m-d');
 
     $blank = '';
@@ -123,8 +146,7 @@
 
 
     if(empty($errors)){
-
-        $query = "INSERT INTO `student-archive`(`rowId`, `studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`, `archivedDate`, `user`) VALUES ('$rowId', '$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$blank', '$blank', '$blank', '$blank', '$archivedDate', '$user')";
+        $query = "INSERT INTO `student-archive`(`rowId`, `studentNumber`, `studentCourse`, `studentSurname`, `studentFirstName`, `studentMiddleInitial`, `studentBirthdate`, `studentGender`, `studentHouseNumber`, `studentStreet`, `studentSubdivision`, `studentBarangay`, `studentTown`, `studentDistrict`, `studentProvincialHouseNumber`, `studentProvincialStreet`, `studentProvincialSubdivision`, `studentProvincialBarangay`, `studentProvincialTown`, `studentProvincialDistrict`, `studentContactNumber`, `studentEmail`, `guardianName`, `guardianContactNumber`, `studentRemark`, `studentSponsor`, `studentHighSchoolAddress`, `studentCompanyName`, `studentCompanyAddress`, `studentCompanyPosition`, `studentCompanyContactNumber`, `archivedDate`, `user`) VALUES ('$rowId', '$studentNumber', '$studentCourse', '$studentSurname', '$studentFirstName', '$studentMiddleInitial', '$studentBirthdate', '$studentGender', '$studentHouseNumber',  '$studentStreet', '$studentSubdivision', '$studentBarangay', '$studentTown', '$studentDistrict', '$studentProvincialHouseNumber', '$studentProvincialStreet', '$studentProvincialSubdivision', '$studentProvincialBarangay', '$studentProvincialTown', '$studentProvincialDistrict', '$studentContactNumber', '$studentEmail', '$guardianName', '$guardianContactNumber', '$studentRemark', '$studentSponsor', '$studentHighSchoolAddress', '$studentCompanyName', '$studentCompanyAddress', '$studentCompanyPosition', '$studentCompanyContactNumber', '$archivedDate', '$user')";
 
         $run_data = mysqli_query($conn,$query);
         
