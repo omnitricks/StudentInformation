@@ -1,6 +1,7 @@
 <?php
 
 require '../Config/config.php';
+// require_once 'emailController.php';
 
 $errors = array();
 $errorslog = array();
@@ -9,7 +10,8 @@ $username = "";
 $usernameregi = "";
 $email = "";
 
-if(isset($_POST['signup-btn'])){
+//Register
+if(isset($_POST['register-btn'])){
     $usernameregi = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,12 +20,15 @@ if(isset($_POST['signup-btn'])){
     if(empty($usernameregi)){
         $errorsregi['username'] = "Username required";
     }
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errorsregi['email'] = "Email address is invalid";
     }
+
     if(empty($email)){
         $errorsregi['email'] = "Email required";
     }
+
     if(empty($password)){
         $errorsregi['password'] = "Password required";
     }
@@ -47,24 +52,24 @@ if(isset($_POST['signup-btn'])){
     if(count($errorsregi) === 0){
         $password = password_hash($password, PASSWORD_DEFAULT);
         $token = bin2hex(random_bytes(50));
-        $verified = false;
+        // $verified = false;
 
-        $sql = "INSERT INTO users (username, email, verified, token, password) VALUES ( ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, token, password) VALUES ( ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssbss', $usernameregi, $email, $verified, $token, $password);
+        $stmt->bind_param('ssbss', $usernameregi, $email, $token, $password);
         
         if($stmt->execute()){
             $user_id = $conn->insert_id;
             $_SESSION['id'] = $user_id;
             $_SESSION['username'] = $usernameregi;
             $_SESSION['email'] = $email;
-            $_SESSION['verified'] = $verified;
+            // $_SESSION['verified'] = $verified;
 
-            sendVerificationEmail($email, $token);
+            // sendVerificationEmail($email, $token);
 
             $_SESSION['message'] = "You are now logged in!";
             $_SESSION['alert-class'] = "alert-success";
-            header('location: Index.php');
+            header('location: ../CRUD/index.php');
             exit();
         }else{
             $errorsregi['db_error'] = "Database error: failed to register";
@@ -75,7 +80,7 @@ if(isset($_POST['signup-btn'])){
 }
 
 
-
+// Login
 if(isset($_POST['login-btn'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -101,11 +106,11 @@ if(isset($_POST['login-btn'])){
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['verified'] = $user['verified'];
+                // $_SESSION['verified'] = $user['verified'];
         
                 $_SESSION['message'] = "You are now logged in!";
                 $_SESSION['alert-class'] = "alert-success";
-                header('location: Index.php');
+                header('location: ../CRUD/index.php');
                 exit();
             }else{
                 $errorslog['login_fail'] = "Wrong Credentials";
@@ -118,13 +123,13 @@ if(isset($_POST['login-btn'])){
 }
 
 
-
+// Logout
 if(isset($_GET['logout'])){
     session_destroy();
     unset($_SESSION['id']);
     unset($_SESSION['username']);
     unset($_SESSION['email']);
-    unset($_SESSION['verified']);
+    // unset($_SESSION['verified']);
     header('location: LoginRegister.php');
     exit();
 }
@@ -133,31 +138,31 @@ if(isset($_GET['logout'])){
 
 
 
-function verifyUser($token){
-    global $conn;
-    $sql = "SELECT * FROM users Where token='$token' LIMIT 1";
-    $result = mysqli_query($conn, $sql);
+// function verifyUser($token){
+//     global $conn;
+//     $sql = "SELECT * FROM users Where token='$token' LIMIT 1";
+//     $result = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($result) > 0){
-        $user = mysqli_fetch_assoc($result);
-        $update_query = "UPDATE users SET verified=1 Where token='$token'";
+//     if(mysqli_num_rows($result) > 0){
+//         $user = mysqli_fetch_assoc($result);
+//         $update_query = "UPDATE users SET verified=1 Where token='$token'";
 
-        if (mysqli_query($conn, $update_query)){
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['verified'] = 1;
+//         if (mysqli_query($conn, $update_query)){
+//             $_SESSION['id'] = $user['id'];
+//             $_SESSION['username'] = $user['username'];
+//             $_SESSION['email'] = $user['email'];
+//             $_SESSION['verified'] = 1;
 
-            $_SESSION['message'] = "Your email address was successfully verified!";
-            $_SESSION['alert-class'] = "alert-success";
-            header('location: Index.php');
-            exit();
-        }
+//             $_SESSION['message'] = "Your email address was successfully verified!";
+//             $_SESSION['alert-class'] = "alert-success";
+//             header('location: ../CRUD/index.php');
+//             exit();
+//         }
 
-    }else{
-        echo 'User not found';
-    }
-}
+//     }else{
+//         echo 'User not found';
+//     }
+// }
 
 
     if(isset($_POST['forgot-password'])){
@@ -215,3 +220,4 @@ function verifyUser($token){
         header('location: reset_password.php');
         exit(0);
     }
+?>

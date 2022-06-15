@@ -3,6 +3,14 @@
     include('../Config/config.php');
 ?>
 
+<?php
+    // Session
+    if(!isset($_SESSION['id'])){
+        header('location: ../LoginRegister/LoginRegister.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,6 +25,8 @@
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <button type="submit" name="logout-btn" class="logout-btn" id=<?php echo $_SESSION['id']; ?>>Logout</button>
+
         <!-- Search Bar with Drop Down Box -->
         <div class="searchbar">
             <form>

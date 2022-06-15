@@ -623,3 +623,25 @@ canvas{
     color: var(--blue-9);
     border: 2px solid var(--blue-9);
 }
+
+
+.logout-btn{
+	display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 36px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    background: #EF233C;
+}
+
+.logout-btn:hover{
+    background: #D80032;
+}

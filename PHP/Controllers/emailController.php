@@ -1,7 +1,7 @@
 <?php
 
-require_once '../php/config/constants.php';
-
+require_once '../Vendor/autoload.php';
+require_once '../Config/constants.php';
 // Create the Transport
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
   ->setUsername(EMAIL)

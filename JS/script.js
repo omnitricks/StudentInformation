@@ -480,8 +480,6 @@ $(document).ready(function(){
             })
         }
 
-        // var formDataCreate = $('#studentInformationCreate').serialize();
-
         //Serialize form as array
         var form = $('#studentInformationCreate');
         var serializedForm = form.serializeArray();
@@ -1205,5 +1203,34 @@ $(document).ready(function(){
         });
 
     }
+
+
+
+
+
+
+
+
+
+    // Logout
+	$('.logout-btn').click(function(){
+        id = $('.logout-btn').attr('id')
+
+		$.ajax({
+			url: '../LoginRegister/Logout.php',
+			type: 'GET',
+            // data: {id:id},
+			error: function() {
+				alert('Logout: Something is wrong');
+
+			},
+			success: function(data) {
+				if(data.location){
+					window.location.href = data.location;
+				}
+				
+			}
+		});
+	});
 
 });
