@@ -25,203 +25,122 @@
         <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <button type="submit" name="logout-btn" class="logout-btn" id=<?php echo $_SESSION['id']; ?>>Logout</button>
 
-        <div class="container">
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa-solid fa-school"></i></span>
-                            <span class="title">CCP</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa-solid fa-circle-info"></i></span>
-                            <span class="title">Student Information</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../ActivityLog/indexLog.php">
-                            <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
-                            <span class="title">Activity Log</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" name="logout-btn" class="logout-btn" id=<?php echo $_SESSION['id']; ?>>
-                            <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-                            <span class="title">Sign Out</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Main -->
-            <div class="main">
-                <div class="topbar">
-                    <div class="toggle">
-                        <i class="fa-solid fa-bars"></i>
-                    </div>
-                    <!-- searchbar -->
-                    <div class="search">
-                        <label>
-                            <!-- Search Bar with Drop Down Box -->
-                            <div class="searchbar">
-                                <form>
-                                    <select name="data-filter" id="data-filter" class="data-filter">
-                                        <option value="">Select Filter</option>
-                                        <option value="studentNumber">Student Number</option>
-                                        <option value="studentSurname">Surname</option>
-                                        <option value="studentFirstName">First Name</option>
-                                        <option value="studentProvincialDistrict">Province</option>
-                                        <option value="studentTown">City</option>
-                                    </select>
-                                    <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
-                                    <button type="submit" id="searchbtn" class="searchbtn"><i class="change fa-solid fa-magnifying-glass"></i></button>
-                                </form>    
-                            </div>
-
-                        </label>
-                    </div>
-
-                    <!-- user img -->
-                    <div class="user">
-                        <!-- <img src="../../IMG/user.jpg" alt=""> -->
-                    </div>
-                </div>
-
-                <!-- cards -->
-                <div class="cardBox">
-                    <div class="card">
-                        <div>
-                            <div class="total numbers"></div>
-                            <div class="cardName">Total Students</div>
-                        </div>
-                        <div class="iconBox">
-                            <i class="fa-solid fa-people-group"></i>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div>
-                            <div class="male numbers"></div>
-                            <div class="cardName">Male</div>
-                        </div>
-                        <div class="iconBox">
-                            <i class="fa-solid fa-mars"></i>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div>
-                            <div class="female numbers"></div>
-                            <div class="cardName">Female</div>
-                        </div>
-                        <div class="iconBox">
-                            <i class="fa-solid fa-venus"></i>
-                        </div>
-                    </div>
-
-                </div>
+        <!-- Search Bar with Drop Down Box -->
+        <div class="searchbar">
+            <form>
+                <select name="data-filter" id="data-filter" class="data-filter">
+                    <option value="">Select Filter</option>
+                    <option value="studentNumber">Student Number</option>
+                    <option value="studentSurname">Surname</option>
+                    <option value="studentFirstName">First Name</option>
+                    <option value="studentProvincialDistrict">Province</option>
+                    <option value="studentTown">City</option>
+                </select>
+                <input type="search" name="data-searchbox" id="data-searchbox" class="data-searchbox" oninput="this.value = this.value.toUpperCase()">
+                <button type="submit" id="searchbtn" class="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>    
+        </div><br>
 
 
-                <!-- Add Charts -->
-                <div class="graphBox">
-                    <div class="box">
-                        <canvas id="city"></canvas>
-                    </div>
-                    <div class="box">
-                        <canvas id="province"></canvas>
-                    </div>
-                </div>
 
+        <!-- Alert Messages -->
+        <div class="alerts">
+            <?php
+                // Create/ Insert Alerts
+                if(isset($_SESSION['insert-success'])){
+                    echo 
+                    "<div class='alert-success'>
+                        <h3>"
+                            . $_SESSION['insert-success'] .
+                        "</h3>
+                    </div><br>";
+                    unset($_SESSION['insert-success']);
+                }
 
-                <!-- order details list -->
-                <div class="details">
-                    <div class="recentOrders">
-                        <div class="cardHeader">
-                            <h2>Student Information</h2>
-                            <a href="#" id="create" class="btn create">Create</a>
-                        </div>
+                if(isset($_SESSION['duplicate-insert'])){
+                    echo 
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['duplicate-insert'] .
+                        "</h3>
+                    </div><br>";
+                    unset($_SESSION['duplicate-insert']);
+                }
 
-                        <!-- Table View via search.php -->
-                        <div id="result"></div>
-                        
-                    </div>
+                // Update/ Edit Alerts
+                if(isset($_SESSION['update-success'])){
+                    echo 
+                    "<div class='alert-success'>
+                        <h3>"
+                            . $_SESSION['update-success'] .
+                        "</h3>
+                    </div><br>";
+                    unset($_SESSION['update-success']);
+                }
 
-                    <!-- New Customer -->
-                    <div class="recentCustomers">
-                        <div class="cardHeader">
-                            <h2>Notification</h2>
-                        </div>
+                if(isset($_SESSION['duplicate-edit'])){
+                    echo 
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['duplicate-edit'] .
+                        "</h3>
+                    </div><br>";
+                    unset($_SESSION['duplicate-edit']);
+                }
 
-                        <!-- Alert Messages -->
-                        <div class="alerts">
-
-                            <?php
-                                // Create/ Insert Alerts
-                                if(isset($_SESSION['insert-success'])){
-                                    echo 
-                                    "<div class='alert-success'>
-                                        <h3>"
-                                            . $_SESSION['insert-success'] .
-                                        "</h3>
-                                    </div><br>";
-                                    unset($_SESSION['insert-success']);
-                                }
-
-                                if(isset($_SESSION['duplicate-insert'])){
-                                    echo 
-                                    "<div class='alert-error'>
-                                        <h3>"
-                                            . $_SESSION['duplicate-insert'] .
-                                        "</h3>
-                                    </div><br>";
-                                    unset($_SESSION['duplicate-insert']);
-                                }
-
-                                // Update/ Edit Alerts
-                                if(isset($_SESSION['update-success'])){
-                                    echo 
-                                    "<div class='alert-success'>
-                                        <h3>"
-                                            . $_SESSION['update-success'] .
-                                        "</h3>
-                                    </div><br>";
-                                    unset($_SESSION['update-success']);
-                                }
-
-                                if(isset($_SESSION['duplicate-edit'])){
-                                    echo 
-                                    "<div class='alert-error'>
-                                        <h3>"
-                                            . $_SESSION['duplicate-edit'] .
-                                        "</h3>
-                                    </div><br>";
-                                    unset($_SESSION['duplicate-edit']);
-                                }
-
-                                // Delete Alert
-                                if(isset($_SESSION['delete-success'])){
-                                    echo 
-                                    "<div class='alert-error'>
-                                        <h3>"
-                                            . $_SESSION['delete-success'] .
-                                        "</h3>
-                                    </div><br>";
-                                    unset($_SESSION['delete-success']);
-                                }
-                            ?>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+                // Delete Alert
+                if(isset($_SESSION['delete-success'])){
+                    echo 
+                    "<div class='alert-error'>
+                        <h3>"
+                            . $_SESSION['delete-success'] .
+                        "</h3>
+                    </div><br>";
+                    unset($_SESSION['delete-success']);
+                }
+            ?>
         </div>
+        
+
+
+        <!-- Show Popup Modal Create/ Insert -->
+        <a href="#" id="create" class="create">Create</a>
+
+
+
+        <!-- Table View via search.php -->
+        <div id="result"></div>
+
+
+
+        <!-- Chart View -->
+        <div class="row">
+
+            <div class="chart-container">
+                <h1>GENDER</h1>
+                <div class="chartBar">
+                    <canvas id="gender_chart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h1>CITY</h1>
+                <div class="chartDonut">
+                    <canvas id="city_chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h1>PROVINCE</h1>
+                <div class="chartDonut">
+                    <canvas id="province_chart"></canvas>
+                </div>
+            </div>
+            
+        </div>
+        
 
         <!-- Popup Modal Delete Confirmation -->
         <div class="bg-modal-delete">
@@ -672,15 +591,17 @@
             </div>
         </div>
 
+
+
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../../JS/script.js"></script>
+        <!-- Prevents resubmission of form data when refreshing -->
         <script>
             // jQuery Version of Prevent Resubmission of Form Data when Refreshing
             $(document).ready(function(){
                 window.history.replaceState("","",window.location.href)
-            
             });
         </script>
     </body>

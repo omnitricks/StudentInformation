@@ -3,17 +3,6 @@
     include('../Config/config.php');
 
     $errorslog = array();
-    // $username = "";
-    // $email = "";
-
-    // Login
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
-
-    // if(empty($username)){
-    //     $errorslog['username'] = "Username required";
-    // }
-
 
     if(empty($_POST['usernamelogin'])){
         $errorslog['usernamelogin'] = "Username required";
@@ -27,11 +16,6 @@
         $password = $_POST['passwordlogin'];
     }
 
-
-    // if(empty($password)){
-    //     $errorslog['password'] = "Password required";
-    // }
-
     if (empty($errorslog)){
         $sql = "SELECT * From users WHERE email=? OR username=? LIMIT 1";
         $stmt = $conn->prepare($sql);
@@ -41,13 +25,10 @@
         $user = $result->fetch_assoc();
 
         if($user != null){
-            // if(password_verify($password, $user['password'])){
             if(password_verify($password, $user['password'])){
-
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
-                // $_SESSION['verified'] = $user['verified'];
         
                 // $_SESSION['message'] = "You are now logged in!";
                 // $_SESSION['alert-class'] = "alert-success";

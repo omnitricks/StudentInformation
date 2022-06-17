@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Central Colleges of the Philippines | CCP - Student Information</title>
+        <link rel="icon" type="image/png" href="https://www.ccp.edu.ph/students/CCP_WORLD2/images/fav_icon.png">
+        
+        <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-school"></i></span>
+                            <span class="title">CCP</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-circle-info"></i></span>
+                            <span class="title">Student Information</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
+                            <span class="title">Activity Log</span>
+                        </a>
+                    </li>
+
+                    <!-- <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-comment"></i></span>
+                            <span class="title">Message</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-question"></i></span>
+                            <span class="title">Help</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-gear"></i></span>
+                            <span class="title">Settings</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                            <span class="title">Password</span>
+                        </a>
+                    </li> -->
+
+
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span class="title">Sign Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main -->
+            <div class="main">
+                <div class="topbar">
+                    <div class="toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <!-- searchbar -->
+                    <div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </label>
+                    </div>
+                    <!-- user img -->
+                    <div class="user">
+                        <img src="user.jpg" alt="">
+                    </div>
+                </div>
+
+                <!-- cards -->
+                <div class="cardBox">
+                    <div class="card">
+                        <div>
+                            <div class="numbers">1,504</div>
+                            <div class="cardName">Daily Views</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">80</div>
+                            <div class="cardName">Sales</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">284</div>
+                            <div class="cardName">Comments</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">$7,842</div>
+                            <div class="cardName">Earning</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Add Charts -->
+                <div class="graphBox">
+                    <div class="box">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="box">
+                        <canvas id="earning"></canvas>
+                    </div>
+                </div>
+
+
+                <!-- order details list -->
+                <div class="details">
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Student Information</h2>
+                            <a href="#" id="create" class="btn create">Create</a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Action</td>
+                                    <td>Student Number</td>
+                                    <td>Student Name</td>
+                                    <td>Student Course</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Star Refirgerator</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- New Customer -->
+                    <div class="recentCustomers">
+                        <div class="cardHeader">
+                            <h2>Notification</h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBox"><img src="user.jpg"></div></td>
+                                <td><h4>David<br><span>Italy</span></h4></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Popup Modal Create/ Insert -->
+        <div class="bg-modal">
+            <div class="modal-contents">
+
+                <div class="close"><i class="fa-solid fa-xmark"></i></div>
+                
+                <h1>Create</h1>
+                <!-- Registration Form -->
+                <form id="studentInformationCreate">
+                    <label for="student-number">Student Number:</label>
+                        <!--  May show error in VSCode due to return statement not used within a function body -->
+                        <input type="tel" name="student-number" id="student-number" onkeypress="return isNumberKey(event);" maxlength="50"><br>
+
+
+                    <label for="student-course">Course:</label>
+                        <input type="text" name="student-course" id="student-course" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+
+                    <label class="student-name-label" for="student-name">Student Name:</label>
+
+                        <div class="tab student-name">
+                            <label for="student-surname">Surname:</label>
+                                <input type="text" name="student-surname" id="student-surname" oninput="this.value = this.value.toUpperCase()" maxlength="50">
+
+                            <label for="student-first-name">First Name:</label>
+                                <input type="text" name="student-first-name" id="student-first-name" oninput="this.value = this.value.toUpperCase()" maxlength="50">
+
+                            <label for="student-middle-initial">Middle Initial:</label>
+                                <input type="text" name="student-middle-initial" id="student-middle-initial" oninput="this.value = this.value.toUpperCase()" maxlength="5">
+                        </div><br>
+
+
+                    <label for="student-birthdate">Student Birthdate:</label>
+                        <input type="date" name="student-birthdate" id="student-birthdate"><br>
+
+
+                    <label for="student-gender">Student Gender:</label>
+                        <input type="radio" id="student-gender-male" name="student-gender" value="MALE"/>
+                        <label for="student-gender-male">MALE</label> 
+
+                        <input type="radio" id="student-gender-female" name="student-gender" value="FEMALE"/>
+                        <label class="student-gender-label" for="student-gender-female">FEMALE</label><br>
+
+
+                    <label class="student-address-label" for="student-address">Student Current Address:</label>
+
+                        <div class="tab student-address">
+                            <label for="student-house-number">House Number:</label>
+                                <input type="text" name="student-house-number" id="student-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
+
+                            <label for="student-street">Street:</label>
+                                <input type="text" name="student-street" id="student-street" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-subdivision">Subdivision:</label>
+                                <input type="text" name="student-subdivision" id="student-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-barangay">Barangay:</label>
+                                <input type="text" name="student-barangay" id="student-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-town">Town:</label>
+                                <input type="text" name="student-town" id="student-town" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-district">District:</label>
+                                <input type="text" name="student-district" id="student-district" oninput="this.value = this.value.toUpperCase()" maxlength="100">
+                        </div><br>
+
+
+                    <label class="student-provincial-address-label" for="student-provincial-address">Student Provincial Address:</label>
+
+                        <div class="tab student-provincial-address">
+                            <input type="checkbox" onclick="SameAsCurrentCreate(this)" name="current-address" id="current-address" value="true">
+                            <label for="current-address"> Same as Current Address</label><br>
+
+                            <label for="student-provincial-house-number">House Number:</label>
+                                <input type="text" name="student-provincial-house-number" id="student-provincial-house-number" onkeypress="return isHouseNumber(event);" maxlength="10"><br>
+
+                            <label for="student-provincial-street">Street:</label>
+                                <input type="text" name="student-provincial-street" id="student-provincial-street" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-provincial-subdivision">Subdivision:</label>
+                                <input type="text" name="student-provincial-subdivision" id="student-provincial-subdivision" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-provincial-barangay">Barangay:</label>
+                                <input type="text" name="student-provincial-barangay" id="student-provincial-barangay" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-provincial-town">Town:</label>
+                                <input type="text" name="student-provincial-town" id="student-provincial-town" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+                            <label for="student-provincial-district">District:</label>
+                                <input type="text" name="student-provincial-district" id="student-provincial-district" oninput="this.value = this.value.toUpperCase()" maxlength="100">
+
+                        </div><br>
+
+
+                    <label for="student-contact-number">Student Contact Number:</label>
+                        <input type="tel" name="student-contact-number" id="student-contact-number" onkeypress="return isPhone(event);" maxlength="15"><br>
+                    
+                    
+                    <label for="student-email">Student Email Address:</label>
+                        <input type="email" name="student-email" id="student-email" maxlength="50"><br>
+                    
+
+                    <label class="student-guardian-label" for="student-guardian">Student Guardian:</label>
+
+                        <div class="tab student-guardian">
+                            <label for="guardian-name">Guardian Name:</label>
+                                <input type="text" name="guardian-name" id="guardian-name" oninput="this.value = this.value.toUpperCase()" maxlength="100"><br>
+
+
+                            <label for="guardian-contact-number">Guardian Contact Number:</label>
+                                <input type="tel" name="guardian-contact-number" id="guardian-contact-number" onkeypress="return isPhone(event);" maxlength="15">
+                        </div><br>
+
+
+                    <label for="student-remark">Remark:</label>
+                        <textarea name="student-remark" id="student-remark" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+                            <input type="checkbox" onclick="AddressNotFoundCreate(this)" name="address-not-found" id="address-not-found" value="true">
+                                <label for="address-not-found"> Address not found</label><br>
+
+                            <input type="checkbox" onclick="UnableToReachCreate(this)" name="unable-to-reach" id="unable-to-reach" value="true">
+                                <label for="unable-to-reach"> Unable to reach Contact Number</label><br>
+
+
+                    <label for="student-sponsor">Sponsor:</label>
+                        <input type="text" name="student-sponsor" id="student-sponsor" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+                        
+                    <label for="student-hs-address">Student HighSchool Address:</label>
+                        <textarea name="student-hs-address" id="student-hs-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+
+                    <label for="student-company-name">Student Company Name:</label>
+                        <input type="text" name="student-company-name" id="student-company-name" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+                        
+                    <label for="student-company-address">Student Company Address:</label>
+                        <textarea name="student-company-address" id="student-company-address" cols="30" rows="10" oninput="this.value = this.value.toUpperCase()" maxlength="255"></textarea><br>
+
+
+                    <label for="student-company-position">Student Company Position:</label>
+                        <input type="text" name="student-company-position" id="student-company-position" oninput="this.value = this.value.toUpperCase()" maxlength="50"><br>
+
+                        
+                    <label for="student-company-contact-number">Student Company Contact Number:</label>
+                        <input type="tel" name="student-company-contact-number" id="student-company-contact-number" onkeypress="return isPhone(event);" maxlength="15"><br>
+
+                    <button type="submit" id="submit" class="submit">Submit</button>
+
+                </form>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="script.js"></script>
+        <script src="my_chart.js"></script>
+        <!-- Prevents resubmission of form data when refreshing -->
+        <script>
+            // jQuery Version of Prevent Resubmission of Form Data when Refreshing
+            $(document).ready(function(){
+                window.history.replaceState("","",window.location.href)
+            });
+
+
+            $('.toggle').click(function(){
+                $('.navigation').toggleClass('active');
+                $('.main').toggleClass('active');
+
+            });
+
+            // add hovered class in selected list item (jquery version)
+            let list = $('.navigation li');
+            function activeLink(){
+                $(list).each(function() {
+                    $(this).removeClass('hovered');
+                });
+
+                $(this).addClass('hovered')
+
+            };
+
+            $(list).each(function() {
+                $(this).mouseover(activeLink);
+
+            });
+
+        </script>
+    </body>
+</html>

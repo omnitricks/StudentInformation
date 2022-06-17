@@ -3,3 +3,10 @@
 	--ccp-maroon-2: #B20101;
  	--ccp-gray-1: #333;
 }
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}

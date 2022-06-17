@@ -179,50 +179,6 @@ function DetectChanges(unmodified, modified){
 
 
 $(document).ready(function(){
-    // Loads Last Toggle Class
-    if (localStorage.getItem('Toggle1') === 'true') {
-
-        $('.navigation').addClass('notransition');
-        $('.main').addClass('notransition');
-
-        $('.navigation').addClass('active');
-        $('.main').addClass('active');
-
-        setTimeout(function() {
-			$('.navigation').removeClass('notransition');
-            $('.main').removeClass('notransition');
-		}, 100);
-
-	}
-
-    
-    // Toggles Sidebar
-    $('.toggle').click(function(){
-        $('.navigation').toggleClass('active');
-        $('.main').toggleClass('active');
-        localStorage.setItem('Toggle1', $('.navigation').hasClass('active'));
-        // localStorage.setItem('Toggle2', $('.main').hasClass('active'));
-
-    });
-
-
-    // add hovered class in selected list item (jquery version)
-    let list = $('.navigation li');
-    function activeLink(){
-        $(list).each(function() {
-            $(this).removeClass('hovered');
-        });
-
-        $(this).addClass('hovered')
-
-    };
-
-    $(list).each(function() {
-        $(this).mouseover(activeLink);
-
-    });
-
-
     // Checks for changes in the Edit/ Update Form
     function Changes(){
         var $blank = "";
@@ -300,7 +256,6 @@ $(document).ready(function(){
         }
     }
 
-
     // Gets page number, alternative to $_GET method for pagination function in search.php
     function CheckPage(){
         // Gets current url
@@ -325,21 +280,24 @@ $(document).ready(function(){
     }
 
 
+
     // jQuery Version of change icon when there is input detected
     $('.data-searchbox').on('input', function() {
         if($(this).val().length) {
-            $('.change').removeClass('fa-magnifying-glass');
-            $('.change').addClass('fa-arrows-rotate');
+            $('.fa-solid:first').removeClass('fa-magnifying-glass');
+            $('.fa-solid:first').addClass('fa-arrows-rotate');
         } else {
-            $('.change').removeClass('fa-arrows-rotate');
-            $('.change').addClass('fa-magnifying-glass');
+            $('.fa-solid:first').removeClass('fa-arrows-rotate');
+            $('.fa-solid:first').addClass('fa-magnifying-glass');
         }
     });
+
 
 
     // jQuery Version of autohide alerts after 5 seconds
     $('.alert-error').delay(5000).fadeOut('slow');
     $('.alert-success').delay(5000).fadeOut('slow');
+
 
     
     // jQuery Version of the Insert Pop-up Modal
@@ -550,6 +508,7 @@ $(document).ready(function(){
     });
 
 
+
     // jQuery Version of the Delete Pop-up Modal & Delete function
     $('.delete').click(function(){
         var id = $("#id-edit").val();
@@ -613,6 +572,7 @@ $(document).ready(function(){
         $(".bg-modal-delete").hide();
         $('body').css('overflow', 'auto');
     });
+
 
 
     // jQuery Version of the Edit Pop-up Modal & Edit function
@@ -912,19 +872,16 @@ $(document).ready(function(){
                         url: 'update.php',
                         type: 'GET',
                         data: serializedForm,
-                        dataType:"json",
                         error: function() {
                             alert('Update: Something is wrong');
                         },
                         success: function (data) {
-                            if(data.location){
-                                window.location.replace(data.location);
-                            }
+                            window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
 
                         }
                     });
 
-                    // window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
+                    window.location.href = "http://localhost/StudentInformation/PHP/CRUD/index.php";
 
                 }
             });
@@ -939,6 +896,7 @@ $(document).ready(function(){
         $(".bg-modal-edit").hide();
         $('body').css('overflow', 'auto');
     });
+
 
 
     // jQuery Version of the View Pop-up Modal
@@ -992,6 +950,7 @@ $(document).ready(function(){
     });
 
 
+
     // jQuery Version of Search function
     search_data();
 
@@ -1026,8 +985,6 @@ $(document).ready(function(){
         }
     });
 
-
-    // jQuery Version of Graph function
     count_data();
     
     function count_data(){
@@ -1042,13 +999,65 @@ $(document).ready(function(){
 
             },
             success:function(data) {
-                $male = parseInt(data[0].total);
-                $female = parseInt(data[1].total);
-                $total = $male + $female;
+                // $('#count').html(data);
+                var gender = [];
+				var total = [];
+				var color = [];
 
-                $('.total').append($total);
-                $('.male').append($male);
-                $('.female').append($female);
+				for(var count = 0; count < data.length; count++)
+				{
+					gender.push(data[count].gender);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+				var chart_data = {
+					labels:gender,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
+
+				var options = {
+                    plugins:{   
+                        legend: {
+                            display: false
+                        }
+                    },
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
+                    }
+				};
+
+				var group_chart = $('#gender_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"bar",
+					data:chart_data,
+                    options:options
+				});
 
             }
         });
@@ -1076,23 +1085,49 @@ $(document).ready(function(){
 					color.push(data[count].color);
 				}
 
-                const ctx = document.getElementById('city').getContext('2d');
-                var graph = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                        labels: city,
-                        datasets: [{
-                            label: 'Students',
-                            data: total,
-                            backgroundColor: color,
-                            
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
+				var chart_data = {
+					labels:city,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
+
+				var options = {
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
                     }
-                });
+				};
+
+				var group_chart = $('#city_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"doughnut",
+					data:chart_data,
+				});
+
+
 
             }
         });
@@ -1120,30 +1155,62 @@ $(document).ready(function(){
 					color.push(data[count].color);
 				}
 
+				var chart_data = {
+					labels:province,
+					datasets:[
+						{
+							label:'Students',
+							backgroundColor:color,
+							color:'#fff',
+							data:total
+						}
+					]
+				};
 
-                const ctx2 = document.getElementById('province').getContext('2d');
-                const graph2 = new Chart(ctx2, {
-                    type: 'bar',
-                    data: {
-                        labels: province,
-                        datasets: [{
-                            label: 'Students',
-                            data: total,
-                            backgroundColor: color,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
+				var options = {
+					responsive:true,
+                    maintainAspectRatio: false,
+                    scales:{
+                        yAxes:{
+                            ticks:{
+                                min:0,
+                                precision:0,
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        },
+                        xAxes:{
+                            ticks:{
+                                font: {
+                                    size: 20,
+                                }
+                            }
+                        }
                     }
-                });
+				};
+
+				var group_chart = $('#province_chart');
+
+				var graph = new Chart(group_chart, {
+					type:"doughnut",
+					data:chart_data,
+				});
+
+
 
             }
         });
 
     }
- 
+
+
+
+
+
+
+
+
 
     // Logout
 	$('.logout-btn').click(function(){
@@ -1152,14 +1219,14 @@ $(document).ready(function(){
 		$.ajax({
 			url: '../LoginRegister/Logout.php',
 			type: 'GET',
-            dataType:"json",
+            // data: {id:id},
 			error: function() {
 				alert('Logout: Something is wrong');
 
 			},
 			success: function(data) {
 				if(data.location){
-					window.location.replace(data.location);
+					window.location.href = data.location;
 				}
 				
 			}

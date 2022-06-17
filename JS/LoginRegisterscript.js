@@ -31,19 +31,28 @@ $(document).ready(function(){
 	}, 10);
 
 	// Loads Last Toggle Class
-	$('.cont').toggleClass(window.localStorage.toggled);
+	if (localStorage.getItem('Toggle') === 'true') {
+
+		$('.img').addClass('notransition');
+		$('.img-btn span').addClass('notransition');
+		$('.img-text').addClass('notransition');
+		$('.sub-cont').addClass('notransition');
+
+		$('.cont').addClass('s-signup');
+
+		setTimeout(function() {
+			$('.img').removeClass('notransition');
+			$('.img-btn span').removeClass('notransition');
+			$('.img-text').removeClass('notransition');
+			$('.sub-cont').removeClass('notransition');
+		}, 100);
+	}
 
 	// Toggles Login and SignUp
 	$('.img-btn').click(function(){
-		if (window.localStorage.toggled != 's-signup' ) {
-			$('.cont').toggleClass('s-signup', true );
-			window.localStorage.toggled = 's-signup';
-		 } else {
-			$('.cont').toggleClass('s-signup', false );
-			window.localStorage.toggled = "";
-		 }
+		$('.cont').toggleClass('s-signup');
+		localStorage.setItem('Toggle', $('.cont').hasClass('s-signup'));
 	});
-
 
 
 
@@ -126,10 +135,7 @@ $(document).ready(function(){
 			},
 			success: function(data) {
 				if(data.location){
-					window.location.href = data.location;
-				}
-				if(data.loginfail){
-					alert(data.loginfail);
+					window.location.replace(data.location);
 				}
 				
 			}
@@ -154,7 +160,7 @@ $(document).ready(function(){
 
 
 	// Login
-	$('.login-btn').click(function(){
+	$('.login-btn').click(function(e){
 
 		var $LoginForm = $('#Login');
 
@@ -195,16 +201,48 @@ $(document).ready(function(){
 			url: 'Login.php',
 			type: 'POST',
 			data: serializedForm,
+			dataType:"json",
 			error: function() {
 				alert('Login: Something is wrong');
 			},
 			success: function(data) {
 				if(data.location){
-					window.location.href = data.location;
+					window.location.replace(data.location);
 				}
 				
 			}
 		});
+		e.preventDefault();
 	});
+
+
+	// Forgot Password
+	$(".forgot-pass").click(function(){
+        $(".bg-modal-recover").css('display', 'flex');
+        $('body').css('overflow', 'hidden');
+
+    });
+
+	$(".close").click(function(){
+        $(".bg-modal-recover").hide();
+        $('body').css('overflow', 'auto');
+    });
+
+
+
+
+	// Submit Email for Forgot Password
+	$(".forgot-password").click(function(){
+        $(".bg-modal-recover").hide();
+		$(".bg-modal-message").css('display', 'flex');
+
+    });
+
+
+	// Ok Button
+	$(".ok-btn").click(function(){
+        $(".bg-modal-message").hide();
+        $('body').css('overflow', 'auto');
+    });
 	
 });

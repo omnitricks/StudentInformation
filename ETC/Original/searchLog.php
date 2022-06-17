@@ -17,7 +17,7 @@
     $res = mysqli_query($conn, $sql);
 
     // Sets the number of total data in a page
-    $results_per_page = 10;
+    $results_per_page = 5;
     $number_of_results = mysqli_num_rows($res);
     // Determines number of total pages available
     $number_of_pages = ceil($number_of_results/$results_per_page);
@@ -41,7 +41,7 @@
     //First Page, only shows when page number is more than 2
     if($number_of_pages >= 3){
         if($page != 1){
-            $pageLink .=  '<span><a href="indexLog.php?page=1" class="pageprev current" id="pageprev"> <i class="fa-solid fa-angles-left"></i></a></span>';
+            $pageLink .=  '<span><a href="indexLog.php?page=1" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-left"></i></a></span>';
         }
     }
     
@@ -51,7 +51,7 @@
         $prevlimit = 1;
     }
     if($page != $prevlimit){
-        $pageLink .=  '<span><a href="indexLog.php?page=' . $prevlimit . '" class="pageprev current" id="pageprev"> <i class="fa-solid fa-chevron-left"></i></a></span>';
+        $pageLink .=  '<span><a href="indexLog.php?page=' . $prevlimit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-chevron-left"></i></a></span>';
     }
 
     if($number_of_pages >= 5){
@@ -94,9 +94,9 @@
         for($pages=$lowerLimit; $pages<=$number_of_pages; $pages++){
             
             if($pages <= $upperLimit){
-                //Adds current class to the page user is currently on
+                //Adds active class to the page user is currently on
                 if($pages ==  $page){
-                    $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' current" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                    $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
                 } else{
                     $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
                 }
@@ -107,9 +107,9 @@
         }
     } else {
         for($pages=1; $pages<=$number_of_pages; $pages++){
-            //Adds current class to the page user is currently on
+            //Adds active class to the page user is currently on
             if($pages ==  $page){
-                $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' current" id="page' . $pages . '"> ' . $pages . ' </a></span>';
+                $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . ' active" id="page' . $pages . '"> ' . $pages . ' </a></span>';
             } else{
                 $pageLink .=  '<span><a href="indexLog.php?page=' . $pages . '" class="page' . $pages . '" id="page' . $pages . '"> ' . $pages . ' </a></span>';
             }
@@ -125,14 +125,14 @@
         $nextlimit = $pages - 1;
     }
     if($page != $nextlimit){
-        $pageLink .=  '<span><a href="indexLog.php?page=' . $nextlimit . '" class="pagenext current" id="pagenext"> <i class="fa-solid fa-chevron-right"></i></a></span>';
+        $pageLink .=  '<span><a href="indexLog.php?page=' . $nextlimit . '" class="pagenext active" id="pagenext"> <i class="fa-solid fa-chevron-right"></i></a></span>';
     }
 
     //Last Page, only shows when page number is more than 2
     $limit = $pages - 1;
     if($number_of_pages >= 3){
         if($page != $limit){
-            $pageLink .=  '<span><a href="indexLog.php?page=' . $limit . '" class="pageprev current" id="pageprev"> <i class="fa-solid fa-angles-right"></i></a></span>';
+            $pageLink .=  '<span><a href="indexLog.php?page=' . $limit . '" class="pageprev active" id="pageprev"> <i class="fa-solid fa-angles-right"></i></a></span>';
         }
     }
 
@@ -159,12 +159,12 @@
             <table id="tableViewLog" class="tableViewLog">
                 <thead>
                     <tr>
-                        <td></td>
-                        <td>Activity Type</td>
-                        <td>Student Number</td>
-                        <td>Student Name</td>
-                        <td>Action Date</td>
-                        <td>User</td>
+                        <th></th>
+                        <th>Activity Type</th>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Action Date</th>
+                        <th>User</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,7 +198,6 @@
         $output .= "
                 </tbody>
             </table>
-            <br>
             ";
 
         $output .= "

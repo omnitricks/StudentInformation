@@ -153,6 +153,32 @@ function redColor(){
 }
 
 $(document).ready(function(){
+    // Loads Last Toggle Class
+    if (localStorage.getItem('Toggle1') === 'true') {
+
+        $('.navigation').addClass('notransition');
+        $('.main').addClass('notransition');
+
+        $('.navigation').addClass('active');
+        $('.main').addClass('active');
+
+        setTimeout(function() {
+			$('.navigation').removeClass('notransition');
+            $('.main').removeClass('notransition');
+		}, 100);
+
+	}
+
+    // Toggles Sidebar
+    $('.toggle').click(function(){
+        $('.navigation').toggleClass('active');
+        $('.main').toggleClass('active');
+        localStorage.setItem('Toggle1', $('.navigation').hasClass('active'));
+        // localStorage.setItem('Toggle2', $('.main').hasClass('active'));
+
+    });
+
+    
     // Gets page number, alternative to $_GET method for pagination function in search.php
     function CheckPage(){
         // Gets current url
@@ -177,7 +203,6 @@ $(document).ready(function(){
     }
 
 
-
     // jQuery Version of change icon when there is input detected
     $('.data-searchbox').on('input', function() {
         if($(this).val().length) {
@@ -188,6 +213,7 @@ $(document).ready(function(){
             $('.fa-solid:first').addClass('fa-magnifying-glass');
         }
     });
+
 
     // jQuery Version of the View Pop-up Modal
     $('#result').on("click", '.view', function(){
@@ -415,7 +441,6 @@ $(document).ready(function(){
     });
 
 
-
     // jQuery Version of Search function// jQuery Version of Search function
     search_data();
 
@@ -450,6 +475,125 @@ $(document).ready(function(){
             search_data();
         }
     });
+
+
+    // jQuery Version of Graph function
+    count_data();
+    
+    function count_data(){
+
+        $.ajax({
+            url: '../CRUD/count.php',
+            method:'POST',
+            data:{chartType:'gender'},
+            dataType:"JSON",
+            error: function() {
+                alert('Count: Something is wrong');
+
+            },
+            success:function(data) {
+                $male = parseInt(data[0].total);
+                $female = parseInt(data[1].total);
+                $total = $male + $female;
+
+                $('.total').append($total);
+                $('.male').append($male);
+                $('.female').append($female);
+
+            }
+        });
+
+
+        $.ajax({
+            url: '../CRUD/count.php',
+            method:'POST',
+            data:{chartType:'city'},
+            dataType:"JSON",
+            error: function() {
+                alert('Count: Something is wrong');
+
+            },
+            success:function(data) {
+
+                var city = [];
+				var total = [];
+				var color = [];
+
+				for(var count = 0; count < data.length; count++)
+				{
+					city.push(data[count].city);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+                const ctx = document.getElementById('city').getContext('2d');
+                var graph = new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: city,
+                        datasets: [{
+                            label: 'Students',
+                            data: total,
+                            backgroundColor: color,
+                            
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+            }
+        });
+
+
+        $.ajax({
+            url: '../CRUD/count.php',
+            method:'POST',
+            data:{chartType:'province'},
+            dataType:"JSON",
+            error: function() {
+                alert('Count: Something is wrong');
+
+            },
+            success:function(data) {
+
+                var province = [];
+				var total = [];
+				var color = [];
+
+				for(var count = 0; count < data.length; count++)
+				{
+					province.push(data[count].province);
+					total.push(data[count].total);
+					color.push(data[count].color);
+				}
+
+
+                const ctx2 = document.getElementById('province').getContext('2d');
+                const graph2 = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: province,
+                        datasets: [{
+                            label: 'Students',
+                            data: total,
+                            backgroundColor: color,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+            }
+        });
+
+    }
+
 
     // jQuery Version of Restore function
     $('.restore').click(function(){
@@ -528,18 +672,18 @@ $(document).ready(function(){
 		$.ajax({
 			url: '../LoginRegister/Logout.php',
 			type: 'GET',
-            // data: {id:id},
+            dataType:"json",
 			error: function() {
 				alert('Logout: Something is wrong');
 
 			},
 			success: function(data) {
 				if(data.location){
-					window.location.href = data.location;
+					window.location.replace(data.location);
 				}
 				
 			}
 		});
-	});
+	})
  
 });

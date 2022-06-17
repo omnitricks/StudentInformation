@@ -1,5 +1,3 @@
-<?php require_once '../Controllers/authController.php'; ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +25,7 @@
 
                     <label class="label">
                         <span>Username or Email</span>
-                        <input type="text" value="<?php echo $username; ?>" name="usernamelogin" id="usernamelogin">
+                        <input type="text" name="usernamelogin" id="usernamelogin">
                     </label>
 
                     <label class="label">
@@ -39,7 +37,7 @@
                 </form>
 
                 <label class="label">
-                    <a href="forgot_password.php" class="forgot-pass">Forgot Password ?</a>
+                    <a href="#" class="forgot-pass">Forgot Password ?</a>
                 </label>
             </div>
 
@@ -96,6 +94,46 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="bg-modal-recover">
+            <div class="modal-contents-recover">
+
+                <div class="close"><i class="fa-solid fa-xmark"></i></div>
+
+                <br>
+                <h2 class="text-center">Recover your password</h2>
+                <br>
+                <!-- <form id="Recover"> -->
+
+                    <p>Please enter your email address you used to sign up on this site <br> and we will assist you in recovering your password.</p>
+
+                    <label class="label">
+                        <span>Email</span>
+                        <input type="email"  name="emailrecover" class="emailrecover">
+                    </label>
+
+                    <button type="submit" name="forgot-password" class="forgot-password">Recover your password</button>
+
+                <!-- </form> -->
+            </div>
+        </div>
+
+
+
+
+
+        <div class="bg-modal-message">
+            <div class="modal-contents-message">
+
+                <p>An email has been sent to your email address <br> with a link to reset your password.</p>
+
+                <button type="submit" name="ok-btn" class="ok-btn">OK</button>
+
+            </div>
+        </div>
+
+
 
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>

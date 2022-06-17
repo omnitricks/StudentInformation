@@ -177,9 +177,10 @@
 
             if($run_data){
                 $_SESSION['update-success'] = "Data Updated Successfully";
-                
-            }else{
 
+                header('Content-Type: application/json');
+                echo json_encode(['location'=>'index.php']);
+                
             }
         }
     }
